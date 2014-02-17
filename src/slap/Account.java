@@ -7,13 +7,13 @@ package slap;
  * @author Michael
  *
  */
-class Account {
-	private long id = -1;
-	private String firstName = "unspecified";
-	private String lastName = "unspecified";
-	private String username = "unspecified";
-	private String psw = "";
-	private Role role = null;
+class Account{
+	protected long id = -1;
+	protected String firstName = "unspecified";
+	protected String lastName = "unspecified";
+	protected String username = "unspecified";
+	protected String psw = "";
+	protected Role role = null;
 	
 	protected Account(String firstName, String lastName, String username, String password, Role name) {
 		setFirstName(firstName);

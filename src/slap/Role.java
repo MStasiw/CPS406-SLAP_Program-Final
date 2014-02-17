@@ -7,6 +7,6 @@ package slap;
  * @author Michael
  *
  */
-enum Role {
+ enum Role {
 	student, instructor, administrator;
 }
