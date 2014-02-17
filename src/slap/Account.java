@@ -26,42 +26,42 @@ class Account{
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(long id) {
+	protected void setId(long id) {
 		this.id = id;
 	}
 
 	/**
 	 * @param firstName the firstName to set
 	 */
-	public void setFirstName(String firstName) {
+	protected void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 	
 	/**
 	 * @param lastName the lastName to set
 	 */
-	public void setLastName(String lastName) {
+	protected void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 	
 	/**
 	 * @param username the username to set
 	 */
-	public void setUsername(String username) {
+	protected void setUsername(String username) {
 		this.username = username;
 	}
 	
 	/**
 	 * @param psw the password to set
 	 */
-	public void setPsw(String psw) {
+	protected void setPsw(String psw) {
 		this.psw = psw;
 	}
 	
 	/**
 	 * @param role the role to set
 	 */
-	public void setRole(Role role) {
+	protected void setRole(Role role) {
 		this.role = role;
 	}
 	
@@ -69,42 +69,42 @@ class Account{
 	/**
 	 * @return the id
 	 */
-	public long getId() {
+	protected long getId() {
 		return id;
 	}
 
 	/**
 	 * @return the firstName
 	 */
-	public String getFirstName() {
+	protected String getFirstName() {
 		return firstName;
 	}
 
 	/**
 	 * @return the lastName
 	 */
-	public String getLastName() {
+	protected String getLastName() {
 		return lastName;
 	}
 	
 	/**
 	 * @return the username
 	 */
-	public String getUsername() {
+	protected String getUsername() {
 		return username;
 	}
 	
 	/**
 	 * @return the password
 	 */
-	public String getPsw() {
+	protected String getPsw() {
 		return psw;
 	}
 	
 	/**
 	 * @return the role
 	 */
-	public Role getRole() {
+	protected Role getRole() {
 		return role;
 	}
 }

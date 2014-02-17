@@ -8,6 +8,7 @@ package slap;
  *
  */
 class Student extends Account {
+	protected int studentID = -1;
 
 	/**
 	 * @param firstName
@@ -15,10 +16,45 @@ class Student extends Account {
 	 * @param username
 	 * @param password
 	 */
-	public Student(String firstName, String lastName, String username,
+	protected Student(String firstName, String lastName, String username,
 			String password) {
 		super(firstName, lastName, username, password, Role.student);
-		// TODO Auto-generated constructor stub
+		this.generateStudentID();
+	}
+
+	/**
+	 * @param firstName
+	 * @param lastName
+	 * @param username
+	 * @param password
+	 * @param name
+	 * @param studentID
+	 */
+	protected Student(String firstName, String lastName, String username,
+			String password, int studentID) {
+		super(firstName, lastName, username, password, Role.student);
+		this.studentID = studentID;
+	}
+
+	/**
+	 * @return the studentID
+	 */
+	protected int getStudentID() {
+		return studentID;
+	}
+
+	/**
+	 * @param studentID the studentID to set
+	 */
+	protected void setStudentID(int studentID) {
+		this.studentID = studentID;
+	}
+	
+	/**
+	 * 
+	 */
+	private void generateStudentID() {
+		//this.studentID = 
 	}
 
 }
