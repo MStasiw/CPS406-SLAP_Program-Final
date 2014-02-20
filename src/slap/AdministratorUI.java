@@ -1,5 +1,10 @@
 package slap;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import slap.StudentUI.logoutListener;
+
 /**
  *
  * @author STS
@@ -39,7 +44,8 @@ public class AdministratorUI extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Administrator", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Unicode MS", 1, 12))); // NOI18N
 
         jButton1.setText("Logout");
-
+        jButton1.addActionListener(new logoutListener());
+        
         jButton2.setText("Create Course");
 
         jButton3.setText("Manage Instructor");
@@ -179,7 +185,7 @@ public class AdministratorUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void execute() {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -224,4 +230,17 @@ public class AdministratorUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration
+    
+    public class logoutListener implements ActionListener{
+		
+		 public void actionPerformed (ActionEvent e){
+			 
+			 if (e.getSource() == jButton1){
+				 		 setVisible(false);
+					}
+					
+				 }
+				 
+	}
+    
 }
