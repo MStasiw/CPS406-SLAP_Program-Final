@@ -8,6 +8,7 @@ package slap;
  *
  */
 class Account{
+	
 	protected long id = -1;
 	protected String firstName = "unspecified";
 	protected String lastName = "unspecified";
@@ -16,11 +17,13 @@ class Account{
 	protected Role role = null;
 	
 	protected Account(String firstName, String lastName, String username, String password, Role name) {
-		setFirstName(firstName);
-		setLastName(lastName);
-		setUsername(username);
-		setPsw(password);
-		setRole(name);
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.psw = password;
+		this.role = name;
+		//generateID();
 	}
 	
 	/**
@@ -106,5 +109,18 @@ class Account{
 	 */
 	protected Role getRole() {
 		return role;
+	}
+	
+	/**
+	 * Authenticates username given on login screen
+	 * Note: Temporary implementation just for testing 
+	 * @param username
+	 * @param psw
+	 */
+	protected int authenticate(String username, String psw) {
+		switch(username.toLowerCase()) {
+			case "administrator1": if (psw.equals("password3")) return 0;
+		}
+		return 1;
 	}
 }
