@@ -1,36 +1,25 @@
-<<<<<<< HEAD
 package slap;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-=======
-import java.awt.EventQueue;
->>>>>>> 65016ffac78098c4d9a409bbd60a20c35262f89d
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
-
+// Functionality in the Student menu
 public class SubmitAssign {
 
 	private JFrame frmAssignmentSubmission;
 	private JTextField textField;
 	private JTextField textField_1;
-<<<<<<< HEAD
 	private JButton btnExit;
-=======
->>>>>>> 65016ffac78098c4d9a409bbd60a20c35262f89d
 
 	/**
 	 * Launch the application.
 	 */
-<<<<<<< HEAD
 	public void execute() {
-=======
-	public static void main(String[] args) {
->>>>>>> 65016ffac78098c4d9a409bbd60a20c35262f89d
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -42,10 +31,7 @@ public class SubmitAssign {
 			}
 		});
 	}
-<<<<<<< HEAD
 	
-=======
->>>>>>> 65016ffac78098c4d9a409bbd60a20c35262f89d
 
 	/**
 	 * Create the application.
@@ -68,16 +54,10 @@ public class SubmitAssign {
 		btnSubmit.setBounds(514, 345, 89, 23);
 		frmAssignmentSubmission.getContentPane().add(btnSubmit);
 		
-<<<<<<< HEAD
 		btnExit = new JButton("Exit");
 		btnExit.setBounds(10, 345, 89, 23);
 		frmAssignmentSubmission.getContentPane().add(btnExit);
 		btnExit.addActionListener(new LogoutListener());
-=======
-		JButton btnExit = new JButton("Exit");
-		btnExit.setBounds(10, 345, 89, 23);
-		frmAssignmentSubmission.getContentPane().add(btnExit);
->>>>>>> 65016ffac78098c4d9a409bbd60a20c35262f89d
 		
 		textField = new JTextField();
 		textField.setBounds(33, 50, 86, 20);
@@ -97,7 +77,6 @@ public class SubmitAssign {
 		lblAssignment.setBounds(33, 80, 86, 14);
 		frmAssignmentSubmission.getContentPane().add(lblAssignment);
 	}
-<<<<<<< HEAD
 	
     public class LogoutListener implements ActionListener{
 		
@@ -113,6 +92,4 @@ public class SubmitAssign {
 	}
 	
 	
-=======
->>>>>>> 65016ffac78098c4d9a409bbd60a20c35262f89d
 }
