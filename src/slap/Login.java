@@ -70,13 +70,13 @@ public class Login {
 		textField.setBounds(165, 70, 86, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
-		textField.addActionListener(new logInListener());
+		textField.addActionListener(new LoginListener());
 		
 		textField_1 = new JPasswordField();
 		textField_1.setBounds(165, 108, 86, 20);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
-		textField_1.addActionListener(new logInListener());
+		textField_1.addActionListener(new LoginListener());
 		
 		JLabel lblUser = new JLabel("User:");
 		lblUser.setBounds(106, 73, 46, 14);
@@ -101,7 +101,7 @@ public class Login {
 		btnLogIn = new JButton("Log in"); 
 		btnLogIn.setBounds(162, 228, 89, 23);
 		frame.getContentPane().add(btnLogIn);
-		btnLogIn.addActionListener(new logInListener());
+		btnLogIn.addActionListener(new LoginListener());
 		
 		JLabel lblLogInScreen = new JLabel("Log in Screen");
 		lblLogInScreen.setBounds(177, 11, 86, 14);
@@ -114,7 +114,7 @@ public class Login {
 		
 	}
 	
-	public class logInListener implements ActionListener{
+	public class LoginListener implements ActionListener{
 		
 		 public void actionPerformed (ActionEvent e){
 			 
@@ -173,7 +173,7 @@ public class Login {
 					 
 					 }
 					 else {
-						 JOptionPane.showMessageDialog (null, "Incorrect login credentials, credentials are case sensitive", "Error", JOptionPane.INFORMATION_MESSAGE);
+						 JOptionPane.showMessageDialog (null, "Incorrect login credentials, credentials are case sensitive", "Error", JOptionPane.WARNING_MESSAGE);
 						 rdbtnAdmin.setSelected(false);
 						 textField_1.setText("");
 						 textField.setText("");
@@ -181,7 +181,7 @@ public class Login {
 					 
 				 }
 				 else {
-					 JOptionPane.showMessageDialog (null, "Incorrect login credentials, credentials are case sensitive", "Error", JOptionPane.INFORMATION_MESSAGE);
+					 JOptionPane.showMessageDialog (null, "Incorrect login credentials, credentials are case sensitive", "Error", JOptionPane.WARNING_MESSAGE);
 					 rdbtnStudent.setSelected(false);
 					 rdbtnAdmin.setSelected(false);
 					 rdbtnStaff.setSelected(false);

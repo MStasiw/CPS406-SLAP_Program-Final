@@ -6,8 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.SwingUtilities;
 
-import slap.Login.logInListener;
-
 /**
  *
  * @author STS
@@ -48,11 +46,12 @@ public class StudentUI extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Student", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Unicode MS", 1, 12))); // NOI18N
 
         jButton1.setText("Logout");
-        jButton1.addActionListener(new logoutListener());
+        jButton1.addActionListener(new LogoutListener());
 
         jButton2.setText("View Assignment");
 
         jButton3.setText("Submit Assignment");
+        jButton3.addActionListener(new SubmitAssignmentListener());
 
         jButton5.setText("View Grades");
 
@@ -218,7 +217,7 @@ public class StudentUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(StudentUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(StudentUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+        } 
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -249,12 +248,26 @@ public class StudentUI extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration
     
-    public class logoutListener implements ActionListener{
+    public class LogoutListener implements ActionListener{
 		
 		 public void actionPerformed (ActionEvent e){
 			 
 			 if (e.getSource() == jButton1){
 				 		 setVisible(false);
+					}
+					
+				 }
+				 
+	}
+    
+    public class SubmitAssignmentListener implements ActionListener{
+		
+		 public void actionPerformed (ActionEvent e){
+			 
+			 if (e.getSource() == jButton3){
+				 		 SubmitAssign assign = new SubmitAssign();
+				 		 assign.execute();
+				 		 
 					}
 					
 				 }

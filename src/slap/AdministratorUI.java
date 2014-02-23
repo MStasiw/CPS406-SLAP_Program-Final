@@ -3,7 +3,6 @@ package slap;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import slap.StudentUI.logoutListener;
 
 /**
  *
@@ -44,7 +43,7 @@ public class AdministratorUI extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Administrator", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Unicode MS", 1, 12))); // NOI18N
 
         jButton1.setText("Logout");
-        jButton1.addActionListener(new logoutListener());
+        jButton1.addActionListener(new LogoutListener());
         
         jButton2.setText("Create Course");
 
@@ -231,7 +230,7 @@ public class AdministratorUI extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration
     
-    public class logoutListener implements ActionListener{
+    public class LogoutListener implements ActionListener{
 		
 		 public void actionPerformed (ActionEvent e){
 			 
