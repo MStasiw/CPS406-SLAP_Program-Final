@@ -46,6 +46,10 @@ abstract class AccountManagement {
 		return null;
 	}
 	
+	protected static Account getAccountObj(String username) {
+		return userMap.getAccountObj(username);
+	}
+	
 	/**
 	 * @return
 	 */
@@ -55,16 +59,18 @@ abstract class AccountManagement {
 	
 	/**
 	 * Authenticates username given on login screen
-	 * Note: Temporary implementation just for testing
-	 * @param username
-	 * @param psw
-	 * @return
+	 * @param username inputed by user
+	 * @param psw inputed by user
+	 * @return true if successfully authenticated user, else false
 	 */
-	protected int authenticate(String username, String psw) {
-		switch(username.toLowerCase()) {
-			case "administrator1": if (psw.equals("password3")) return 0;
+	protected boolean authenticate(String username, String psw) {
+		Account temp = null;
+		temp = userMap.getAccountObj(username);
+		if (temp != null) {
+			if (psw.equals(temp.getPsw()))
+					return true;
 		}
-		return 1;
+		return false;
 	}
-
+	
 }
