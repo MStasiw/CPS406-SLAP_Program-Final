@@ -12,14 +12,14 @@ class Account{
 	protected String firstName = "unspecified";
 	protected String lastName = "unspecified";
 	protected String username = "unspecified";
-	protected String psw = "";
+	protected String password = "";
 	protected Role role = null;
 	
 	protected Account(String firstName, String lastName, String username, String password, Role name) {
 		setFirstName(firstName);
 		setLastName(lastName);
 		setUsername(username);
-		setPsw(password);
+		setPassword(password);
 		setRole(name);
 	}
 	
@@ -52,10 +52,10 @@ class Account{
 	}
 	
 	/**
-	 * @param psw the password to set
+	 * @param password the password to set
 	 */
-	protected void setPsw(String psw) {
-		this.psw = psw;
+	protected void setPassword(String password) {
+		this.password = password;
 	}
 	
 	/**
@@ -97,8 +97,8 @@ class Account{
 	/**
 	 * @return the password
 	 */
-	protected String getPsw() {
-		return psw;
+	protected String getPassword() {
+		return password;
 	}
 	
 	/**

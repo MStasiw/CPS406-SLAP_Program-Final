@@ -46,6 +46,19 @@ abstract class AccountManagement {
 		return null;
 	}
 	
+	protected static boolean changeUsername(String currentName, String newName) {
+		return userMap.changeUsername(currentName, newName);
+	}
+	
+	protected static boolean changePassword(String username, String psw) {
+		return userMap.changePassword(username, psw);
+	}
+	
+	/**
+	 * Given username return corresponding user's account object
+	 * @param username
+	 * @return Account object
+	 */
 	protected static Account getAccountObj(String username) {
 		return userMap.getAccountObj(username);
 	}
@@ -67,7 +80,7 @@ abstract class AccountManagement {
 		Account temp = null;
 		temp = userMap.getAccountObj(username);
 		if (temp != null) {
-			if (psw.equals(temp.getPsw()))
+			if (psw.equals(temp.getPassword()))
 					return true;
 		}
 		return false;

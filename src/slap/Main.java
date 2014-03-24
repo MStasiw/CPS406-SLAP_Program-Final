@@ -17,11 +17,11 @@ public class Main extends JFrame {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Account testStudent = new Student("Student1", "Test", "student", "student");
+		AccountManagement.createAccount("Student1", "Test", "student", "student", Role.student);
 		Account testStaff = new Instructor("Instructor1", "Test", "instructor", "instructor");
 		Account testAdmin = new Administrator("Administrator1", "Test", "admin", "admin");
 		
-		String[] infos = {testStudent.getUsername(), testStudent.getPsw(), testStaff.getUsername(), testStaff.getPsw(),testAdmin.getUsername(), testAdmin.getPsw()};
+		String[] infos = {AccountManagement.getAccountObj("student").getUsername(), AccountManagement.getAccountObj("student").getPassword(), testStaff.getUsername(), testStaff.getPassword(),testAdmin.getUsername(), testAdmin.getPassword()};
 		
 		Login a = new Login(infos);
 		a.execute();

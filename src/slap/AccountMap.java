@@ -31,7 +31,11 @@ public class AccountMap {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected boolean addAccount(Account userAccount) {
+	/**
+	 * @param userAccount
+	 * @return
+	 */
+	boolean addAccount(Account userAccount) {
 		if (!this.userExist(userAccount.getUsername())) {
 			try {
 				map.put(userAccount.getUsername(), userAccount);
@@ -48,26 +52,59 @@ public class AccountMap {
 		return false;
 	}
 	
-	protected boolean userExist(String username) {
+	/**
+	 * @param username
+	 * @return
+	 */
+	boolean userExist(String username) {
 		return map.containsKey(username);
 	}
 	
-	protected boolean changeUsername(Account userAccount, String newName) {
+	/**
+	 * @param currentName
+	 * @param newName
+	 * @return
+	 */
+	boolean changeUsername(String currentName, String newName) {
 		Account tempAccount = null;
-		if (this.userExist(userAccount.getUsername())) {
+		if (this.userExist(currentName)) {
 			try {
-				tempAccount = map.get(userAccount.getUsername());
-				map.remove(userAccount.getUsername());
+				tempAccount = map.get(currentName);
+				map.remove(currentName);
 				this.addAccount(tempAccount);
 			}catch(Exception e) {
-				System.err.println("Error occured: username for: " + userAccount.getUsername() + " was not changed.");
+				System.err.println("Error occured: username for: " + currentName + " was not changed.");
 				return false;
 			}
 		}
 		return true;
 	}
 	
-	protected Account getAccountObj(String username) {
+	/**
+	 * Change password 
+	 * @param username
+	 * @param psw
+	 * @return
+	 */
+	boolean changePassword(String username, String psw) {
+		Account tempAccount = null;
+		if (this.userExist(username)) {
+			try {
+				tempAccount = map.get(username);
+				tempAccount.setPassword(psw);
+			}catch(Exception e) {
+				System.err.println("Error occured: username for: " + username + " was not changed.");
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * @param username
+	 * @return
+	 */
+	Account getAccountObj(String username) {
 		if (this.userExist(username)) {
 			try {
 				return map.get(username);
@@ -110,7 +147,7 @@ public class AccountMap {
 			key = iterator.next().toString();
 			username = key.substring(0, key.indexOf('='));
 			builder.append(key + ", ");
-			builder.append(map.get(username).getPsw());
+			builder.append(map.get(username).getPassword());
 		}
 		builder.append("}]");
 		return builder.toString();
