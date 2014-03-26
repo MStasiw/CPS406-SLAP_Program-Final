@@ -13,6 +13,8 @@ public class SLAPFrame extends JFrame {
 	
 	public SLAPFrame() {
 		initialize() ;
+		
+		setVisible(true) ;
 	}	
 	
 	private void initialize() {
