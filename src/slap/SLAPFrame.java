@@ -73,11 +73,22 @@ public class SLAPFrame extends JFrame {
 	private void setupTabbedPane() {
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT) ;
 		cards.add(tabbedPane, TABS_CARD_ID) ;
-		tabbedPane.addTab("Description", null) ;
-		tabbedPane.addTab("Announcements", null) ;
-		tabbedPane.addTab("Documents", null) ;
-		tabbedPane.addTab("Assignments", null) ;
-		tabbedPane.addTab("Grades", null) ;
+		tabbedPane.addTab("Description", new SLAPTab()) ;
+		//
+		SLAPTab stab = new SLAPTab() ;
+		tabbedPane.addTab("Announcements", stab) ;
+		stab.addItem(new SLAPTabItem()) ;
+		stab.addItem(new SLAPTabItem()) ;		
+		stab.addItem(new SLAPTabItem()) ;		
+		stab.addItem(new SLAPTabItem()) ;	
+		stab.addItem(new SLAPTabItem()) ;
+		stab.addItem(new SLAPTabItem()) ;		
+		stab.addItem(new SLAPTabItem()) ;		
+		stab.addItem(new SLAPTabItem()) ;		
+		//
+		tabbedPane.addTab("Documents", new SLAPTab()) ;
+		tabbedPane.addTab("Assignments", new SLAPTab()) ;
+		tabbedPane.addTab("Grades", new SLAPTab()) ;
 	}
 	
 	private void setupMenuBar() {
