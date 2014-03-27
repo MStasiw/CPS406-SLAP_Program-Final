@@ -150,7 +150,7 @@ public class SLAPFrame extends JFrame {
 		jmb.add(logoutButton) ;
 	}
 	
-	public void login() {
+	protected void login() {
 		logoutButton.setEnabled(true) ;
 		logoutButton.setVisible(true);
 		//set information
@@ -160,7 +160,7 @@ public class SLAPFrame extends JFrame {
 		//clear username & password fields on login screen
 	}
 	
-	public void logout() {
+	protected void logout() {
 		logoutButton.setEnabled(false) ;
 		logoutButton.setVisible(false);
 		//clear information
@@ -168,4 +168,9 @@ public class SLAPFrame extends JFrame {
 		//
 		cardLayout.show(cards, LOGIN_CARD_ID) ;
 	}
+	
+	protected void displayError(String errorMessage)
+    {
+        JOptionPane.showMessageDialog(this, errorMessage, "Error", JOptionPane.ERROR_MESSAGE) ;
+    }
 }

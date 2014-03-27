@@ -78,7 +78,7 @@ public class SLAPLoginPanel extends JPanel {
 				if (AccountManagement.authenticate(getUsername(), getPassword())) {
 					frame.login() ;
 				}else{
-					//Display error message to user
+					frame.displayError("Login credentials incorrect") ;
 				}
 			}
 		}
