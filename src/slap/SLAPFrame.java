@@ -27,7 +27,8 @@ public class SLAPFrame extends JFrame {
 	}	
 	
 	private void initialize() {
-		setLookAndFeel() ;
+		//setLookAndFeel() ;
+		setDefaultLookAndFeelDecorated(true) ;
 		setTitle("SLAP") ;
         setSize(FRAME_WIDTH, FRAME_HEIGHT) ;
         setMinimumSize(new Dimension(MIN_FRAME_WIDTH, MIN_FRAME_HEIGHT)) ;
