@@ -155,9 +155,8 @@ public class SLAPFrame extends JFrame {
 		logoutButton.setVisible(true);
 		//set information
 		populateCourseMenu(new ArrayList<String>()) ;
-		//
-		cardLayout.show(cards, TABS_CARD_ID) ;
-		//clear username & password fields on login screen
+		slp.clearText();
+		cardLayout.show(cards, TABS_CARD_ID) ;		
 	}
 	
 	protected void logout() {

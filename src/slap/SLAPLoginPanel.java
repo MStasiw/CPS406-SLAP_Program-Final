@@ -93,7 +93,7 @@ public class SLAPLoginPanel extends JPanel {
 				
 				switch(code) {
 				case KeyEvent.VK_ENTER: System.out.println("enter") ; JButton button = (JButton) e.getComponent() ; button.doClick() ; break ;
-				default : System.out.println("default") ;
+				default : System.out.println("default") ; break ;
 				}
 			}
 
@@ -114,5 +114,10 @@ public class SLAPLoginPanel extends JPanel {
 	
 	protected String getPassword() {
 		return passwordField.getText() ;
+	}
+	
+	protected void clearText() {
+		usernameField.clearText() ;
+		passwordField.clearText();
 	}
 }
