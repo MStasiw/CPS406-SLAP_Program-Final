@@ -3,10 +3,9 @@
  */
 package slap;
 
+import java.io.Serializable;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -14,17 +13,13 @@ import java.util.TreeMap;
  * @author Michael
  *
  */
-public class AccountMap {
+@SuppressWarnings("serial")
+public class AccountMap implements Serializable {
 	
 	private SortedMap<String, Account> map = null;
 
 	/**
-	 * 
-	 */
-	/*private static final long serialVersionUID = 1609641885705800721L;*/
-
-	/**
-	 * 
+	 * Constructor to create an AccountMap object
 	 */
 	public AccountMap() {
 		map = new TreeMap<String, Account>();
@@ -32,14 +27,15 @@ public class AccountMap {
 	}
 
 	/**
+	 * Add a user account to the account map
 	 * @param userAccount
-	 * @return
+	 * @return true if successfully added, false on any error
 	 */
 	boolean addAccount(Account userAccount) {
-		if (!this.userExist(userAccount.getUsername())) {
+		if (!this.userExists(userAccount.getUsername())) {
 			try {
 				map.put(userAccount.getUsername(), userAccount);
-				if (this.userExist(userAccount.getUsername())) {
+				if (this.userExists(userAccount.getUsername())) {
 					return true;
 				}else{
 					System.err.println("Error occured: " + userAccount.getUsername() + "was not added to map");
@@ -53,21 +49,23 @@ public class AccountMap {
 	}
 	
 	/**
+	 * Check if user exists
 	 * @param username
-	 * @return
+	 * @return true if exists, false if does not exist
 	 */
-	boolean userExist(String username) {
+	boolean userExists(String username) {
 		return map.containsKey(username);
 	}
 	
 	/**
+	 * Change Username 
 	 * @param currentName
 	 * @param newName
-	 * @return
+	 * @return true if username successfully changed, false on any error
 	 */
 	boolean changeUsername(String currentName, String newName) {
 		Account tempAccount = null;
-		if (this.userExist(currentName)) {
+		if (this.userExists(currentName)) {
 			try {
 				tempAccount = map.get(currentName);
 				map.remove(currentName);
@@ -84,11 +82,11 @@ public class AccountMap {
 	 * Change password 
 	 * @param username
 	 * @param psw
-	 * @return
+	 * @return true if successfully changed password, false on any error
 	 */
 	boolean changePassword(String username, String psw) {
 		Account tempAccount = null;
-		if (this.userExist(username)) {
+		if (this.userExists(username)) {
 			try {
 				tempAccount = map.get(username);
 				tempAccount.setPassword(psw);
@@ -101,11 +99,12 @@ public class AccountMap {
 	}
 	
 	/**
+	 * Given username return corresponding user's account object
 	 * @param username
-	 * @return
+	 * @return Account object, else null
 	 */
 	Account getAccountObj(String username) {
-		if (this.userExist(username)) {
+		if (this.userExists(username)) {
 			try {
 				return map.get(username);
 			}catch(Exception e) {
@@ -114,27 +113,34 @@ public class AccountMap {
 		}
 		return null;
 	}
-
+	
 	/*
-	 * Internal Development and/or Testing method
-	 * DO NOT USE in final product: SECURITY RISK
 	 *  (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
+		return null;
+	}
+
+	/*
+	 * Internal Development and/or Testing method
+	 * DO NOT USE in final product: SECURITY RISK
+	 */
+	protected String DEBUG_toString() {
 		final int maxLen = 10;
 		return "AccountMap ["
-				+ (map != null ? "map=" + toString(map.entrySet(), maxLen) : "")
+				+ (map != null ? "map=" + DEBUG_toString(map.entrySet(), maxLen) : "")
 				+ "]";
 	}
 
 	/**
+	 * Help method for DEBUG_toString() method
 	 * @param collection
 	 * @param maxLen
 	 * @return
 	 */
-	private String toString(Collection<?> collection, int maxLen) {
+	private String DEBUG_toString(Collection<?> collection, int maxLen) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("[{");
 		String key = null;
