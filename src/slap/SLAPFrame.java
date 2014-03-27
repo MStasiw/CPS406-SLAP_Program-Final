@@ -27,8 +27,7 @@ public class SLAPFrame extends JFrame {
 	}	
 	
 	private void initialize() {
-		//setLookAndFeel() ;
-		setDefaultLookAndFeelDecorated(true) ;
+		setLookAndFeel() ;
 		setTitle("SLAP") ;
         setSize(FRAME_WIDTH, FRAME_HEIGHT) ;
         setMinimumSize(new Dimension(MIN_FRAME_WIDTH, MIN_FRAME_HEIGHT)) ;
@@ -38,7 +37,8 @@ public class SLAPFrame extends JFrame {
 	
 	private void setLookAndFeel() {
 		try {
-			UIManager.setLookAndFeel("javax.swing.plaf.basic.BasicLookAndFeel") ;
+			//UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel") ;
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel") ;
 		}
 		catch(Exception e) {
 			//
