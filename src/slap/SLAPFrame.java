@@ -2,6 +2,7 @@ package slap;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class SLAPFrame extends JFrame {
 	private final int FRAME_WIDTH = 900 ;
     private final int FRAME_HEIGHT = 600 ;
     private final int MIN_FRAME_WIDTH = 500 ;
-    private final int MIN_FRAME_HEIGHT = 300 ;
+    private final int MIN_FRAME_HEIGHT = 400 ;
     
     private ImageIcon coursesIcon ;
     private final String coursesIconPath = "/resources/courses.png" ;
@@ -54,6 +55,13 @@ public class SLAPFrame extends JFrame {
 	private void setupTabbedPane() {
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT) ;
 		add(tabbedPane, BorderLayout.CENTER) ;
+		JPanel panel = new JPanel() ;
+		panel.setLayout(new GridBagLayout()) ;
+		SLAPLoginPanel slp = new SLAPLoginPanel() ;
+		slp.setSize(new Dimension(300, 500));
+		panel.add(slp) ;
+		tabbedPane.addTab("Login", panel);
+		//tabbedPane.addTab("Login", new SLAPLoginPanel()) ;
 	}
 	
 	private void setupMenuBar() {
