@@ -130,7 +130,7 @@ public class AccountMap implements Serializable {
 	protected String DEBUG_toString() {
 		final int maxLen = 10;
 		return "AccountMap ["
-				+ (map != null ? "map=" + DEBUG_toString(map.entrySet(), maxLen) : "")
+				+ (map != null ? "map=" + DEBUG_toStringHelper(map.entrySet(), maxLen) : "")
 				+ "]";
 	}
 
@@ -140,7 +140,7 @@ public class AccountMap implements Serializable {
 	 * @param maxLen
 	 * @return
 	 */
-	private String DEBUG_toString(Collection<?> collection, int maxLen) {
+	private String DEBUG_toStringHelper(Collection<?> collection, int maxLen) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("[{");
 		String key = null;

@@ -90,7 +90,7 @@ abstract class AccountManagement {
 	 * @param psw inputed by user
 	 * @return true if successfully authenticated user, else false
 	 */
-	protected boolean authenticate(String username, String psw) {
+	protected static boolean authenticate(String username, String psw) {
 		Account temp = null;
 		temp = userMap.getAccountObj(username);
 		if (temp != null) {
