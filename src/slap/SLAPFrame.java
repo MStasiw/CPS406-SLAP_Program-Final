@@ -37,7 +37,7 @@ public class SLAPFrame extends JFrame {
 	
 	private void setLookAndFeel() {
 		try {
-			UIManager.setLookAndFeel("javax.swing.plaf.motif.MotifLookAndFeel") ;
+			UIManager.setLookAndFeel("javax.swing.plaf.basic.BasicLookAndFeel") ;
 		}
 		catch(Exception e) {
 			//
