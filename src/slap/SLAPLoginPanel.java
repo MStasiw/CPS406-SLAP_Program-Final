@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.* ;
 import javax.swing.border.CompoundBorder;
@@ -15,8 +17,11 @@ import javax.swing.border.TitledBorder;
 @SuppressWarnings("serial")
 public class SLAPLoginPanel extends JPanel {
 	
+	private SLAPFrame frame ;
+	
 	private final int FIELD_LENGTH = 15 ;
 	
+	private JPanel outerPanel ;
 	private JPanel panel ;
 	
 	private JHintTextField usernameField ;
@@ -27,8 +32,11 @@ public class SLAPLoginPanel extends JPanel {
 	private Dimension rigidDimension ;
 	private Font largeFont ;
 	
-	public SLAPLoginPanel() {
+	public SLAPLoginPanel(SLAPFrame frame) {
+		this.frame = frame ;
 		setLayout(new GridBagLayout()) ;
+		outerPanel = new JPanel() ;
+		outerPanel.setBorder(new EtchedBorder()) ;
 		panel = new JPanel() ;		
 		largeFont = new Font("Helvetica", Font.PLAIN, 20) ;
 		panel.setBorder(new CompoundBorder(
@@ -43,7 +51,8 @@ public class SLAPLoginPanel extends JPanel {
 		setupFields() ;
 		setupButton() ;
 		panel.add(Box.createRigidArea(rigidDimension)) ;
-		add(panel) ;
+		outerPanel.add(panel) ;
+		add(outerPanel) ;
 	}
 	
 	private void setupFields() {
@@ -61,7 +70,23 @@ public class SLAPLoginPanel extends JPanel {
 		loginButton = new JButton("Login") ;
 		loginButton.setFont(largeFont) ;
 		loginButton.setMargin(new Insets(5, 0, 5, 0)) ;
+		class LoginListener implements ActionListener {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Check login credentials
+				frame.login() ;
+			}
+		}
+		loginButton.addActionListener(new LoginListener());
 		buttonPanel.add(loginButton, BorderLayout.CENTER) ;
 		panel.add(buttonPanel) ;
+	}
+	
+	protected String getUsername() {
+		return usernameField.getText() ;
+	}
+	
+	protected String getPassword() {
+		return passwordField.getText() ;
 	}
 }

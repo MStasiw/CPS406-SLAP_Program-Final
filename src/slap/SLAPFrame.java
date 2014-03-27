@@ -1,8 +1,7 @@
 package slap;
 
-import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -17,10 +16,17 @@ public class SLAPFrame extends JFrame {
     private final int MIN_FRAME_WIDTH = 500 ;
     private final int MIN_FRAME_HEIGHT = 400 ;
     
+    private final String LOGIN_CARD_ID = "login" ;
+    private final String TABS_CARD_ID = "tabs" ;  
+    
     private ImageIcon coursesIcon ;
     private final String coursesIconPath = "/resources/courses.png" ;
-    private final int MENU_ICON_SIZE = 20 ;   
+    private final int MENU_ICON_SIZE = 20 ;  
     
+    private JPanel cards ;
+    private CardLayout cardLayout ;
+    
+    private SLAPLoginPanel slp ;
     private JTabbedPane tabbedPane ;
     
     private JMenuBar menuBar ;
@@ -28,16 +34,17 @@ public class SLAPFrame extends JFrame {
     private JButton logoutButton ;
     	
 	public SLAPFrame() {
-		initialize() ;
+		initialize() ;		
 		setupMenuBar() ;
+		setupLoginPanel() ;
 		setupTabbedPane() ;
-		
+		logout() ;
 		setVisible(true) ;
 	}	
 	
 	private void initialize() {
 		setLookAndFeel() ;
-		setLayout(new BorderLayout()) ;
+		setupLayout() ;
 		setTitle("SLAP") ;
         setSize(FRAME_WIDTH, FRAME_HEIGHT) ;
         setMinimumSize(new Dimension(MIN_FRAME_WIDTH, MIN_FRAME_HEIGHT)) ;
@@ -52,11 +59,20 @@ public class SLAPFrame extends JFrame {
 		catch(Exception e) {}
 	}
 	
+	private void setupLayout() {
+		cardLayout  = new CardLayout() ;
+		cards = new JPanel(cardLayout) ;
+		add(cards) ;
+	}
+	
+	private void setupLoginPanel() {
+		slp = new SLAPLoginPanel(this) ;
+		cards.add(slp, LOGIN_CARD_ID);
+	}
+	
 	private void setupTabbedPane() {
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT) ;
-		add(tabbedPane, BorderLayout.CENTER) ;
-		SLAPLoginPanel slp = new SLAPLoginPanel() ;
-		tabbedPane.addTab("Login", slp);
+		cards.add(tabbedPane, TABS_CARD_ID) ; 
 	}
 	
 	private void setupMenuBar() {
@@ -111,11 +127,26 @@ public class SLAPFrame extends JFrame {
 		class LogoutListener implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Logout
+				logout() ;
 			}		
 		}
 		logoutButton.addActionListener(new LogoutListener());
 		jmb.add(logoutButton) ;
 	}
 	
+	public void login() {
+		logoutButton.setEnabled(true) ;
+		//set information
+		populateCourseMenu(new ArrayList<String>()) ;
+		//
+		cardLayout.show(cards, TABS_CARD_ID) ;
+	}
+	
+	public void logout() {
+		logoutButton.setEnabled(false) ;
+		//clear information
+		removeAllCourseMenuItems() ;
+		//
+		cardLayout.show(cards, LOGIN_CARD_ID) ;
+	}
 }

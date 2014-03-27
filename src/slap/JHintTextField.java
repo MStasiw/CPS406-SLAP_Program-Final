@@ -2,6 +2,7 @@ package slap;
 
 import javax.swing.* ;
 
+import java.awt.Color;
 import java.awt.event.* ;
 
 /**
@@ -10,22 +11,29 @@ import java.awt.event.* ;
 @SuppressWarnings("serial")
 public class JHintTextField extends JTextField implements FocusListener
 {	
+	private final Color normalColour = Color.BLACK ;
+	private final Color hintColour = Color.GRAY ;
+	
 	private String hint ;
     private boolean hintEnabled ;
 
     public JHintTextField(String hint)
     {
-        super() ;
-        setupListeners() ;
+        super() ;     
         this.hint = hint ;
-        enableHint() ;
+        initialize() ;
     }
     
     public JHintTextField(String hint, int columns)
     {
         super(columns) ;
-        setupListeners() ;
         this.hint = hint ;
+        initialize() ;
+    }
+    
+    private void initialize() {
+    	setForeground(hintColour) ;
+        setupListeners() ;
         enableHint() ;
     }
     
@@ -47,12 +55,14 @@ public class JHintTextField extends JTextField implements FocusListener
     private void enableHint()
     {
         hintEnabled = true ;
+        setForeground(hintColour) ;
         setText(hint) ;
     }
     
     private void disableHint()
     {
         hintEnabled = false ;
+        setForeground(normalColour) ;
         setText("") ;
     }
     
