@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.* ;
 import javax.swing.border.CompoundBorder;
@@ -70,6 +72,7 @@ public class SLAPLoginPanel extends JPanel {
 		loginButton = new JButton("Login") ;
 		loginButton.setFont(largeFont) ;
 		loginButton.setMargin(new Insets(5, 0, 5, 0)) ;
+		//loginButton.setMnemonic(KeyEvent.VK_ENTER);
 		class LoginListener implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -83,6 +86,24 @@ public class SLAPLoginPanel extends JPanel {
 			}
 		}
 		loginButton.addActionListener(new LoginListener());
+		class EnterListener implements KeyListener {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				int code = e.getKeyCode() ;
+				
+				switch(code) {
+				case KeyEvent.VK_ENTER: System.out.println("enter") ; JButton button = (JButton) e.getComponent() ; button.doClick() ; break ;
+				default : System.out.println("default") ;
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {}
+
+			@Override
+			public void keyReleased(KeyEvent e) {}			
+		}
+		loginButton.addKeyListener(new EnterListener()) ;
 		buttonPanel.add(loginButton, BorderLayout.CENTER) ;
 		panel.add(buttonPanel) ;
 	}
