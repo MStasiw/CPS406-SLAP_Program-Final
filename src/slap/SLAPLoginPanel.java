@@ -3,6 +3,7 @@ package slap;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.* ;
@@ -16,6 +17,8 @@ public class SLAPLoginPanel extends JPanel {
 	
 	private final int FIELD_LENGTH = 15 ;
 	
+	private JPanel panel ;
+	
 	private JHintTextField usernameField ;
 	private JHintTextField passwordField ;
 	private JPanel buttonPanel ;
@@ -25,19 +28,22 @@ public class SLAPLoginPanel extends JPanel {
 	private Font largeFont ;
 	
 	public SLAPLoginPanel() {
+		setLayout(new GridBagLayout()) ;
+		panel = new JPanel() ;		
 		largeFont = new Font("Helvetica", Font.PLAIN, 20) ;
-		setBorder(new CompoundBorder(
+		panel.setBorder(new CompoundBorder(
 				new TitledBorder(new EtchedBorder(), 
 						"Enter Login Credentials", 
 						TitledBorder.CENTER, 
 						TitledBorder.CENTER, largeFont), 
 				new EmptyBorder(10, 10, 10, 10))) ;
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)) ;
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)) ;
 		rigidDimension = new Dimension(0, FIELD_LENGTH) ;
-		add(Box.createRigidArea(rigidDimension)) ;
+		panel.add(Box.createRigidArea(rigidDimension)) ;
 		setupFields() ;
 		setupButton() ;
-		add(Box.createRigidArea(rigidDimension)) ;
+		panel.add(Box.createRigidArea(rigidDimension)) ;
+		add(panel) ;
 	}
 	
 	private void setupFields() {
@@ -45,8 +51,8 @@ public class SLAPLoginPanel extends JPanel {
 		passwordField = new JHintTextField("Password", FIELD_LENGTH) ;
 		usernameField.setFont(largeFont) ;
 		passwordField.setFont(largeFont) ;
-		add(usernameField) ;
-		add(passwordField) ;
+		panel.add(usernameField) ;
+		panel.add(passwordField) ;
 	}
 	
 	private void setupButton() {
@@ -56,6 +62,6 @@ public class SLAPLoginPanel extends JPanel {
 		loginButton.setFont(largeFont) ;
 		loginButton.setMargin(new Insets(5, 0, 5, 0)) ;
 		buttonPanel.add(loginButton, BorderLayout.CENTER) ;
-		add(buttonPanel) ;
+		panel.add(buttonPanel) ;
 	}
 }

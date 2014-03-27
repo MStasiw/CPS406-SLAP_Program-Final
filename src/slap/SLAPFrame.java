@@ -55,13 +55,8 @@ public class SLAPFrame extends JFrame {
 	private void setupTabbedPane() {
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT) ;
 		add(tabbedPane, BorderLayout.CENTER) ;
-		JPanel panel = new JPanel() ;
-		panel.setLayout(new GridBagLayout()) ;
 		SLAPLoginPanel slp = new SLAPLoginPanel() ;
-		slp.setSize(new Dimension(300, 500));
-		panel.add(slp) ;
-		tabbedPane.addTab("Login", panel);
-		//tabbedPane.addTab("Login", new SLAPLoginPanel()) ;
+		tabbedPane.addTab("Login", slp);
 	}
 	
 	private void setupMenuBar() {
