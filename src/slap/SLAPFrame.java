@@ -11,15 +11,17 @@ public class SLAPFrame extends JFrame {
     private final int MIN_FRAME_WIDTH = 500 ;
     private final int MIN_FRAME_HEIGHT = 300 ;
     
+    private JTabbedPane tabbedPane ;
+    
     private JMenuBar menuBar ;
-    private JMenu accountMenu ;
     private JMenu coursesMenu ;
-    private JMenuItem signinMenuItem ;
-    private JMenuItem signoutMenuItem ;
+    //private JMenu logoutMenu ;
+    private JButton logoutButton ;
 	
 	public SLAPFrame() {
 		initialize() ;
 		setupMenuBar() ;
+		setupTabbedPane() ;
 		
 		setVisible(true) ;
 	}	
@@ -32,18 +34,19 @@ public class SLAPFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE) ;        
 	}
 	
-	private void setupMenuBar() {
-		menuBar = new JMenuBar() ;
-		setupAccountMenu(menuBar) ;
-		setupCoursesMenu(menuBar) ;
-		setJMenuBar(menuBar) ;
+	private void setupTabbedPane() {
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT) ;
+		add(tabbedPane) ;
+		tabbedPane.addTab("Text", new JLabel("Label")) ;
 	}
 	
-	private void setupAccountMenu(JMenuBar jmb) {
-		accountMenu = new JMenu("Account") ;
-		setupSigninMenuItem(accountMenu) ;
-		setupSignoutMenuItem(accountMenu) ;
-		jmb.add(accountMenu) ;
+	private void setupMenuBar() {
+		menuBar = new JMenuBar() ;
+		setupCoursesMenu(menuBar) ;
+		menuBar.add(Box.createHorizontalGlue()) ;
+		//setupLogoutMenu(menuBar) ;
+		setupLogoutButton(menuBar) ;
+		setJMenuBar(menuBar) ;
 	}
 	
 	private void setupCoursesMenu(JMenuBar jmb) {
@@ -51,13 +54,14 @@ public class SLAPFrame extends JFrame {
 		jmb.add(coursesMenu) ;
 	}
 	
-	private void setupSigninMenuItem(JMenu jm) {
-		signinMenuItem = new JMenuItem("Sign in") ;
-		jm.add(signinMenuItem) ;
+	/*private void setupLogoutMenu(JMenuBar jmb) {
+		logoutMenu = new JMenu("Logout") ;
+		jmb.add(logoutMenu) ;
+	}*/
+	
+	private void setupLogoutButton(JMenuBar jmb) {
+		logoutButton = new JButton("Logout") ;
+		jmb.add(logoutButton) ;
 	}
 	
-	private void setupSignoutMenuItem(JMenu jm) {
-		signoutMenuItem = new JMenuItem("Sign out") ;
-		jm.add(signoutMenuItem) ;
-	}
 }
