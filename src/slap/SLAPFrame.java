@@ -27,11 +27,21 @@ public class SLAPFrame extends JFrame {
 	}	
 	
 	private void initialize() {
+		setLookAndFeel() ;
 		setTitle("SLAP") ;
         setSize(FRAME_WIDTH, FRAME_HEIGHT) ;
         setMinimumSize(new Dimension(MIN_FRAME_WIDTH, MIN_FRAME_HEIGHT)) ;
-        setResizable(true) ;
+        setResizable(true) ;       
         setDefaultCloseOperation(EXIT_ON_CLOSE) ;        
+	}
+	
+	private void setLookAndFeel() {
+		try {
+			UIManager.setLookAndFeel("javax.swing.plaf.motif.MotifLookAndFeel") ;
+		}
+		catch(Exception e) {
+			//
+		}
 	}
 	
 	private void setupTabbedPane() {
