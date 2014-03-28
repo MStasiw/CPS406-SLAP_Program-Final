@@ -95,15 +95,17 @@ public class SLAPLoginPanel extends JPanel {
 				int code = e.getKeyCode() ;
 				System.out.println(code) ;
 				if(code == KeyEvent.VK_ENTER) {
-					JButton button = (JButton) e.getComponent() ; 
-					button.doClick() ;
+					loginButton.doClick() ;
 				}
 			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {}			
 		}
-		loginButton.addKeyListener(new EnterListener()) ;
+		EnterListener listener = new EnterListener() ;
+		loginButton.addKeyListener(listener) ;
+		usernameField.addKeyListener(listener) ;
+		passwordField.addKeyListener(listener) ;
 		buttonPanel.add(loginButton, BorderLayout.CENTER) ;
 		panel.add(buttonPanel) ;
 	}

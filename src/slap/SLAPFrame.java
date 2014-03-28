@@ -4,12 +4,14 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.* ;
 
 @SuppressWarnings("serial")
-public class SLAPFrame extends JFrame {
+public class SLAPFrame extends JFrame implements KeyListener {
 	
 	private final int FRAME_WIDTH = 900 ;
     private final int FRAME_HEIGHT = 600 ;
@@ -172,4 +174,19 @@ public class SLAPFrame extends JFrame {
     {
         JOptionPane.showMessageDialog(this, errorMessage, "Error", JOptionPane.ERROR_MESSAGE) ;
     }
+
+	@Override
+	public void keyTyped(KeyEvent e) {}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		int code = e.getKeyCode() ;
+		System.out.println(code) ;
+		if(code == KeyEvent.VK_ESCAPE) {
+			System.exit(0) ;
+		}	
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {}
 }
