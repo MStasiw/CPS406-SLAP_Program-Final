@@ -88,17 +88,17 @@ public class SLAPLoginPanel extends JPanel {
 		loginButton.addActionListener(new LoginListener());
 		class EnterListener implements KeyListener {
 			@Override
-			public void keyTyped(KeyEvent e) {
-				int code = e.getKeyCode() ;
-				
-				switch(code) {
-				case KeyEvent.VK_ENTER: System.out.println("enter") ; JButton button = (JButton) e.getComponent() ; button.doClick() ; break ;
-				default : System.out.println("default") ; break ;
-				}
-			}
+			public void keyTyped(KeyEvent e) {}
 
 			@Override
-			public void keyPressed(KeyEvent e) {}
+			public void keyPressed(KeyEvent e) {
+				int code = e.getKeyCode() ;
+				System.out.println(code) ;
+				if(code == KeyEvent.VK_ENTER) {
+					JButton button = (JButton) e.getComponent() ; 
+					button.doClick() ;
+				}
+			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {}			
