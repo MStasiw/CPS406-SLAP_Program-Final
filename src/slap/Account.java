@@ -4,10 +4,11 @@
 package slap;
 
 /**
+ * User Account
  * @author Michael
  *
  */
-class Account{
+class Account implements Cloneable {
 	protected long id = -1;
 	protected String firstName = "unspecified";
 	protected String lastName = "unspecified";
@@ -15,6 +16,14 @@ class Account{
 	protected String password = "";
 	protected Role role = null;
 	
+	/**
+	 * Creates new user account object
+	 * @param firstName
+	 * @param lastName
+	 * @param username
+	 * @param password
+	 * @param name
+	 */
 	protected Account(String firstName, String lastName, String username, String password, Role name) {
 		setFirstName(firstName);
 		setLastName(lastName);
@@ -31,6 +40,7 @@ class Account{
 	}
 
 	/**
+	 * Set user's First Name
 	 * @param firstName the firstName to set
 	 */
 	protected void setFirstName(String firstName) {
@@ -38,6 +48,7 @@ class Account{
 	}
 	
 	/**
+	 * Set user's Last Name
 	 * @param lastName the lastName to set
 	 */
 	protected void setLastName(String lastName) {
@@ -45,6 +56,7 @@ class Account{
 	}
 	
 	/**
+	 * Set user's Username
 	 * @param username the username to set
 	 */
 	protected void setUsername(String username) {
@@ -52,6 +64,7 @@ class Account{
 	}
 	
 	/**
+	 * Set user's Password
 	 * @param password the password to set
 	 */
 	protected void setPassword(String password) {
@@ -59,6 +72,7 @@ class Account{
 	}
 	
 	/**
+	 * Sets user's Role
 	 * @param role the role to set
 	 */
 	protected void setRole(Role role) {
@@ -74,6 +88,7 @@ class Account{
 	}
 
 	/**
+	 * Gets user's First Name
 	 * @return the firstName
 	 */
 	protected String getFirstName() {
@@ -81,6 +96,7 @@ class Account{
 	}
 
 	/**
+	 * Gets user's Last Name
 	 * @return the lastName
 	 */
 	protected String getLastName() {
@@ -88,6 +104,7 @@ class Account{
 	}
 	
 	/**
+	 * Gets user's username
 	 * @return the username
 	 */
 	protected String getUsername() {
@@ -95,6 +112,7 @@ class Account{
 	}
 	
 	/**
+	 * Gets user's password
 	 * @return the password
 	 */
 	protected String getPassword() {
@@ -102,9 +120,17 @@ class Account{
 	}
 	
 	/**
+	 * Gets user's Role
 	 * @return the role
 	 */
 	protected Role getRole() {
 		return role;
 	}
+	
+	/**
+	 * Implementation of Cloneable  
+	 */
+	protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

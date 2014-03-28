@@ -64,12 +64,16 @@ public class AccountMap implements Serializable {
 	 * @return true if username successfully changed, false on any error
 	 */
 	boolean changeUsername(String currentName, String newName) {
-		Account tempAccount = null;
+		Account oldAccount = null;
+		Account newAccount = null;
+		
 		if (this.userExists(currentName)) {
 			try {
-				tempAccount = map.get(currentName);
+				oldAccount = map.get(currentName);
+				newAccount = (Account) oldAccount.clone();
+				newAccount.setUsername(newName);
 				map.remove(currentName);
-				this.addAccount(tempAccount);
+				this.addAccount(newAccount);
 			}catch(Exception e) {
 				System.err.println("Error occured: username for: " + currentName + " was not changed.");
 				return false;
