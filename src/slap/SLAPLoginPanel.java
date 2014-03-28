@@ -20,6 +20,7 @@ import javax.swing.border.TitledBorder;
 public class SLAPLoginPanel extends JPanel {
 	
 	private SLAPFrame frame ;
+	private SLAP slap ;
 	
 	private final int FIELD_LENGTH = 15 ;
 	
@@ -34,8 +35,9 @@ public class SLAPLoginPanel extends JPanel {
 	private Dimension rigidDimension ;
 	private Font largeFont ;
 	
-	public SLAPLoginPanel(SLAPFrame frame) {
+	public SLAPLoginPanel(SLAPFrame frame, SLAP slap) {
 		this.frame = frame ;
+		this.slap = slap ;
 		setLayout(new GridBagLayout()) ;
 		outerPanel = new JPanel() ;
 		outerPanel.setBorder(new EtchedBorder()) ;
@@ -120,7 +122,9 @@ public class SLAPLoginPanel extends JPanel {
 	}
 	
 	private void login() {
-		if (AccountManager.authenticate(getUsername(), getPassword()) != null) {
+		Account user = AccountManager.authenticate(getUsername(), getPassword()) ;
+		if (user != null) {
+			slap.setCurrentUser(user);
 			frame.login() ;
 		}
 		else {

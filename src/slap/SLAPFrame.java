@@ -57,6 +57,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE) ;        
 	}
 	
+	@SuppressWarnings("unused")
 	private void setLookAndFeel() {
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel") ;
@@ -71,7 +72,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
 	}
 	
 	private void setupLoginPanel() {
-		slp = new SLAPLoginPanel(this) ;
+		slp = new SLAPLoginPanel(this, slap) ;
 		cards.add(slp, LOGIN_CARD_ID);
 	}
 	
@@ -92,10 +93,10 @@ public class SLAPFrame extends JFrame implements KeyListener {
 	
 	private void setupMenuBar() {
 		menuBar = new JMenuBar() ;
-		setupCoursesMenu(menuBar) ;
 		userLabel = new JLabel() ;
-		menuBar.add(userLabel) ;
+		setupCoursesMenu(menuBar) ;		
 		menuBar.add(Box.createHorizontalGlue()) ;
+		menuBar.add(userLabel) ;
 		setupLogoutButton(menuBar) ;
 		setJMenuBar(menuBar) ;
 	}
@@ -169,6 +170,8 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		logoutButton.setEnabled(true) ;
 		logoutButton.setVisible(true);
 		//set information
+		userLabel.setText(slap.getCurrentUser().getUsername()) ;
+		userLabel.setVisible(true) ;
 		//TESTING ONLY
 		@SuppressWarnings("rawtypes")
 		Comparable[] courseCodes =  slap.getCourseManager().getIDArray() ;
@@ -188,6 +191,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		logoutButton.setVisible(false);
 		//clear information
 		userLabel.setText("") ;
+		userLabel.setVisible(false) ;
 		removeAllCourseMenuItems() ;
 		//
 		cardLayout.show(cards, LOGIN_CARD_ID) ;

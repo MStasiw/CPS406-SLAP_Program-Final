@@ -4,6 +4,7 @@ public class SLAP {
 	
 	@SuppressWarnings("unused")
 	private SLAPFrame frame ;
+	private Account currentUser = null ;
 	private Manager<String, Course> courseManager ;
 	
 	public SLAP() {
@@ -41,6 +42,14 @@ public class SLAP {
 		AccountManager.createAccount("z", "z", "z", "z", Role.administrator) ;
 		
 		frame = new SLAPFrame(this) ;
+	}
+	
+	public void setCurrentUser(Account user) {
+		currentUser = user ;
+	}
+	
+	protected Account getCurrentUser() {
+		return currentUser ;
 	}
 	
 	protected Manager<String, Course> getCourseManager() {
