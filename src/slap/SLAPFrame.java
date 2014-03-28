@@ -86,11 +86,12 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		stab.addItem(new SLAPTabItem()) ;
 		stab.addItem(new SLAPTabItem()) ;		
 		stab.addItem(new SLAPTabItem()) ;		
-		stab.addItem(new SLAPTabItem()) ;		
+		stab.addItem(new SLAPTabItem()) ;
 		//
 		tabbedPane.addTab("Documents", new SLAPTab()) ;
 		tabbedPane.addTab("Assignments", new SLAPTab()) ;
 		tabbedPane.addTab("Grades", new SLAPTab()) ;
+		tabbedPane.addTab("Email", new Email()) ;
 	}
 	
 	private void setupMenuBar() {

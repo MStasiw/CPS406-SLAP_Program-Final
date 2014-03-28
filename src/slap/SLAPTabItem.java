@@ -1,6 +1,8 @@
 package slap;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.* ;
 import javax.swing.border.EmptyBorder;
@@ -23,6 +25,8 @@ public class SLAPTabItem extends JPanel {
 		panel = new JPanel() ;		
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)) ;
 		textArea = new JTextArea(longString) ;
+		textArea.setEditable(false) ;
+		textArea.setEnabled(false) ;
 		textArea.setLineWrap(true) ;
 		textArea.setWrapStyleWord(true) ;
 		textArea.setBorder(new EmptyBorder(5, 5, 5, 5)) ;
@@ -30,15 +34,41 @@ public class SLAPTabItem extends JPanel {
 		textPanel.setLayout(new BorderLayout()) ;
 		textPanel.add(textArea) ;
         panel.add(textPanel) ;
+        setupButtons() ;
+		add(panel, BorderLayout.CENTER) ;
+	}
+	
+	private void setupButtons() {
 		buttonPanel = new JPanel() ;
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS)) ;
 		saveButton = new JButton("Save") ;
 		editButton = new JButton("Edit") ;
 		deleteButton = new JButton("Delete") ;
+		class ButtonListener implements ActionListener {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JButton button = (JButton) e.getSource() ;
+				if(button.equals(saveButton)) {
+					textArea.setEditable(false);
+					textArea.setEnabled(false) ;
+					//save values
+				}
+				else if(button.equals(editButton)) {
+					textArea.setEditable(true) ;
+					textArea.setEnabled(true) ;
+				}
+				else if(button.equals(deleteButton)) {
+					//delete this item
+				}
+			}	
+		}
+		ButtonListener listener = new ButtonListener() ;
+ 		saveButton.addActionListener(listener) ;
+ 		editButton.addActionListener(listener) ;
+ 		deleteButton.addActionListener(listener) ;
 		buttonPanel.add(saveButton) ;
 		buttonPanel.add(editButton) ;
 		buttonPanel.add(deleteButton) ;
 		panel.add(buttonPanel) ;
-		add(panel, BorderLayout.CENTER) ;
 	}
 }
