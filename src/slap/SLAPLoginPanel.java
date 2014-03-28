@@ -77,10 +77,11 @@ public class SLAPLoginPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Check login credentials
-				//System.out.println(AccountManagement.DEBUG_listAccounts()); //Test if user accounts are accessible
+				//System.out.println(AccountManagemer.DEBUG_listAccounts()); //Test if user accounts are accessible
 				if (AccountManagement.authenticate(getUsername(), getPassword())) {
 					frame.login() ;
-				}else{
+				}
+				else {
 					frame.displayError("Login credentials incorrect") ;
 				}
 			}
