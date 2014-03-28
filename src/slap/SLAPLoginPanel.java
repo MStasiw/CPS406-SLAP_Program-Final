@@ -35,6 +35,11 @@ public class SLAPLoginPanel extends JPanel {
 	private Dimension rigidDimension ;
 	private Font largeFont ;
 	
+	/**
+	 * Make a new login panel
+	 * @param frame the frame to display the login panel on
+	 * @param slap the slap from which to control login
+	 */
 	public SLAPLoginPanel(SLAPFrame frame, SLAP slap) {
 		this.frame = frame ;
 		this.slap = slap ;
@@ -59,6 +64,9 @@ public class SLAPLoginPanel extends JPanel {
 		add(outerPanel) ;
 	}
 	
+	/**
+	 * Setup the username and password fields
+	 */
 	private void setupFields() {
 		usernameField = new JHintTextField("Username", FIELD_LENGTH) ;
 		passwordField = new JHintTextField("Password", FIELD_LENGTH) ;
@@ -68,6 +76,9 @@ public class SLAPLoginPanel extends JPanel {
 		panel.add(passwordField) ;
 	}
 	
+	/**
+	 * Setup the login button
+	 */
 	private void setupButton() {
 		buttonPanel = new JPanel() ;
 		buttonPanel.setLayout(new BorderLayout());
@@ -108,19 +119,33 @@ public class SLAPLoginPanel extends JPanel {
 		panel.add(buttonPanel) ;
 	}
 	
+	/**
+	 * Get the value from the username field
+	 * @return the username entered
+	 */
 	protected String getUsername() {
 		return usernameField.getText() ;
 	}
 	
+	/**
+	 * Get the value from the password field
+	 * @return the password entered
+	 */
 	protected String getPassword() {
 		return passwordField.getText() ;
 	}
 	
+	/**
+	 * Clear the text from the username and password fields
+	 */
 	protected void clearText() {
 		usernameField.clearText() ;
 		passwordField.clearText();
 	}
 	
+	/**
+	 * Login if the values from the username and password fields are valid
+	 */
 	private void login() {
 		Account user = AccountManager.authenticate(getUsername(), getPassword()) ;
 		if (user != null) {
