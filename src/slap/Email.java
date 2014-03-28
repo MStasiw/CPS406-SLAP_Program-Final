@@ -1,11 +1,12 @@
-package s.l.a.p.ui;
+package slap;
 
+import javax.swing.* ;
 
 /**
  *
  * @author Sujeethan
  */
-public class Email extends javax.swing.JPanel {
+public class Email extends JPanel {
 
     /**
      * Creates new form Email
