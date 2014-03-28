@@ -94,7 +94,6 @@ public class SLAPLoginPanel extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				int code = e.getKeyCode() ;
-				System.out.println(code) ;
 				if(code == KeyEvent.VK_ENTER) {
 					loginButton.doClick() ;
 				}

@@ -149,6 +149,20 @@ public class SLAPFrame extends JFrame implements KeyListener {
 			}		
 		}
 		logoutButton.addActionListener(new LogoutListener());
+		class EnterListener implements KeyListener {
+
+			@Override
+			public void keyTyped(KeyEvent e) {}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				//logout() ;
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {}
+		}
+		logoutButton.addKeyListener(new EnterListener()) ;
 		jmb.add(logoutButton) ;
 	}
 	
