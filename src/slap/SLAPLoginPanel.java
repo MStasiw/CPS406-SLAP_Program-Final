@@ -120,7 +120,7 @@ public class SLAPLoginPanel extends JPanel {
 	}
 	
 	private void login() {
-		if (AccountManager.authenticate(getUsername(), getPassword())) {
+		if (AccountManager.authenticate(getUsername(), getPassword()) != null) {
 			frame.login() ;
 		}
 		else {

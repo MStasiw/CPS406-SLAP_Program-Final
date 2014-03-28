@@ -88,16 +88,16 @@ abstract class AccountManager {
 	 * Authenticates username given on login screen
 	 * @param username inputed by user
 	 * @param psw inputed by user
-	 * @return true if successfully authenticated user, else false
+	 * @return Account object if successfully authenticated user, else null
 	 */
-	protected static boolean authenticate(String username, String psw) {
+	protected static Account authenticate(String username, String psw) {
 		Account temp = null;
 		temp = userMap.getAccountObj(username);
 		if (temp != null) {
 			if (psw.equals(temp.getPassword()))
-					return true;
+					return temp;
 		}
-		return false;
+		return null;
 	}
 	
 }
