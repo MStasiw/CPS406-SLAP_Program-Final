@@ -37,6 +37,10 @@ public class SLAPFrame extends JFrame implements KeyListener {
     private JMenu coursesMenu ;
     private JButton logoutButton ;
     	
+    /**
+     * Makes a new frame
+     * @param slap the slap from which to control the frame
+     */
 	public SLAPFrame(SLAP slap) {
 		this.slap = slap ;
 		initialize() ;		
@@ -47,6 +51,9 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		setVisible(true) ;
 	}	
 	
+	/**
+	 * Runs the setup methods and instantiates basic values
+	 */
 	private void initialize() {
 		//setLookAndFeel() ;
 		setupLayout() ;
@@ -57,6 +64,10 @@ public class SLAPFrame extends JFrame implements KeyListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE) ;        
 	}
 	
+	/**
+	 * Sets the look and feel
+	 * Note, do not use on windows, there are known bugs!
+	 */
 	@SuppressWarnings("unused")
 	private void setLookAndFeel() {
 		try {
@@ -65,17 +76,26 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		catch(Exception e) {}
 	}
 	
+	/**
+	 * Setup a card layout to switch panels
+	 */
 	private void setupLayout() {
 		cardLayout  = new CardLayout() ;
 		cards = new JPanel(cardLayout) ;
 		add(cards) ;
 	}
 	
+	/**
+	 * Setup the login panel
+	 */
 	private void setupLoginPanel() {
 		slp = new SLAPLoginPanel(this, slap) ;
 		cards.add(slp, LOGIN_CARD_ID);
 	}
 	
+	/**
+	 * Setup the tabbed pane
+	 */
 	private void setupTabbedPane() {
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT) ;
 		cards.add(tabbedPane, TABS_CARD_ID) ;
@@ -91,6 +111,9 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		tabbedPane.addTab("Email", new Email()) ;
 	}
 	
+	/**
+	 * Setup the menubar
+	 */
 	private void setupMenuBar() {
 		menuBar = new JMenuBar() ;
 		userLabel = new JLabel() ;
@@ -101,6 +124,10 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		setJMenuBar(menuBar) ;
 	}
 	
+	/**
+	 * Setup the course menu
+	 * @param jmb the menubar to which the menu is to be added
+	 */
 	private void setupCoursesMenu(JMenuBar jmb) {
 		coursesMenu = new JMenu("Courses") ;
 		try {
@@ -112,6 +139,10 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		jmb.add(coursesMenu) ;
 	}
 	
+	/**
+	 * populate the course menu with course codes
+	 * @param codes the course codes to display in the menu
+	 */
 	public void populateCourseMenu(String[] codes)
     {
         removeAllCourseMenuItems() ;
@@ -134,12 +165,19 @@ public class SLAPFrame extends JFrame implements KeyListener {
         coursesMenu.setEnabled(true) ;
     }
 	
+	/**
+	 * Removes all course codes from the course menu
+	 */
 	public void removeAllCourseMenuItems()
     {
         coursesMenu.setEnabled(false) ;
         coursesMenu.removeAll() ;
     }
 	
+	/**
+	 * Setup the logout button
+	 * @param jmb the menubar to which the logout button is added
+	 */
 	private void setupLogoutButton(JMenuBar jmb) {
 		logoutButton = new JButton("Logout") ;
 		class LogoutListener implements ActionListener {
@@ -166,6 +204,9 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		jmb.add(logoutButton) ;
 	}
 	
+	/**
+	 * Run the login setup
+	 */
 	protected void login() {
 		logoutButton.setEnabled(true) ;
 		logoutButton.setVisible(true);
@@ -186,6 +227,9 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		cardLayout.show(cards, TABS_CARD_ID) ;		
 	}
 	
+	/**
+	 * Run the logout takedown
+	 */
 	protected void logout() {
 		logoutButton.setEnabled(false) ;
 		logoutButton.setVisible(false);
@@ -197,10 +241,10 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		cardLayout.show(cards, LOGIN_CARD_ID) ;
 	}
 	
-	protected void setUserLabel(String username) {
-		
-	}
-	
+	/**
+	 * Display an error message
+	 * @param errorMessage the message to display
+	 */
 	protected void displayError(String errorMessage)
     {
         JOptionPane.showMessageDialog(this, errorMessage, "Error", JOptionPane.ERROR_MESSAGE) ;

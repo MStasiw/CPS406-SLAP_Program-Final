@@ -13,6 +13,9 @@ public class SLAPTab extends JPanel {
 	
 	private ArrayList<SLAPTabItem> items ;
 	
+	/*
+	 * Make a new tab
+	 */
 	public SLAPTab() {
 		items = new ArrayList<SLAPTabItem>() ;
 		setLayout(new BorderLayout()) ;
@@ -24,11 +27,18 @@ public class SLAPTab extends JPanel {
 		add(scrollPane) ;
 	}
 	
+	/**
+	 * Add an item to the tab
+	 * @param item the component to added to the tab
+	 */
 	public void addItem(SLAPTabItem item) {
 		items.add(item) ;
 		refresh() ;
 	}
 	
+	/**
+	 * Refresh the items in the tab
+	 */
 	private void refresh() {
 		panel.removeAll() ;
 		for(SLAPTabItem item : items) {

@@ -7,6 +7,9 @@ public class SLAP {
 	private Account currentUser = null ;
 	private Manager<String, Course> courseManager ;
 	
+	/**
+	 * Makes a new SLAP
+	 */
 	public SLAP() {
 		
 		courseManager = new Manager<String, Course>() ;
@@ -44,14 +47,26 @@ public class SLAP {
 		frame = new SLAPFrame(this) ;
 	}
 	
-	public void setCurrentUser(Account user) {
+	/**
+	 * Set the current user
+	 * @param user the new current user
+	 */
+	protected void setCurrentUser(Account user) {
 		currentUser = user ;
 	}
 	
+	/**
+	 * Get the current user
+	 * @return the current user
+	 */
 	protected Account getCurrentUser() {
 		return currentUser ;
 	}
 	
+	/**
+	 * Get the course manager
+	 * @return the course manager
+	 */
 	protected Manager<String, Course> getCourseManager() {
 		return courseManager ;
 	}

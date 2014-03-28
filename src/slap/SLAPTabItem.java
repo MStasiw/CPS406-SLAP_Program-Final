@@ -20,6 +20,9 @@ public class SLAPTabItem extends JPanel {
 	
 	private String longString = "This is some text and some more and some more\nhere is some more here ya go here ya go you like it don't you\nhere ya go hey where are you going you think you can escape from me you'll never get away!" ;
 	
+	/**
+	 * Makes a new item to add to a tab
+	 */
 	public SLAPTabItem() {
 		setLayout(new BorderLayout()) ;
 		panel = new JPanel() ;		
@@ -38,6 +41,9 @@ public class SLAPTabItem extends JPanel {
 		add(panel, BorderLayout.CENTER) ;
 	}
 	
+	/*
+	 * Setup the save, edit, and delete buttons
+	 */
 	private void setupButtons() {
 		buttonPanel = new JPanel() ;
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS)) ;
