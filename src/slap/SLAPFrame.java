@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 import javax.swing.* ;
 
@@ -80,16 +79,9 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		cards.add(tabbedPane, TABS_CARD_ID) ;
 		tabbedPane.addTab("Description", new SLAPTab()) ;
 		//
-		SLAPTab stab = new SLAPTab() ;
-		tabbedPane.addTab("Announcements", stab) ;
-		stab.addItem(new SLAPTabItem()) ;
-		stab.addItem(new SLAPTabItem()) ;		
-		stab.addItem(new SLAPTabItem()) ;		
-		stab.addItem(new SLAPTabItem()) ;	
-		stab.addItem(new SLAPTabItem()) ;
-		stab.addItem(new SLAPTabItem()) ;		
-		stab.addItem(new SLAPTabItem()) ;		
-		stab.addItem(new SLAPTabItem()) ;
+		SLAPTab announcementTab = new SLAPTab() ;
+		tabbedPane.addTab("Announcements", announcementTab) ;
+		announcementTab.addItem(new SLAPTabItem()) ;
 		//
 		tabbedPane.addTab("Documents", new SLAPTab()) ;
 		tabbedPane.addTab("Assignments", new SLAPTab()) ;
@@ -175,10 +167,11 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		logoutButton.setVisible(true);
 		//set information
 		//TESTING ONLY
+		@SuppressWarnings("rawtypes")
 		Comparable[] courseCodes =  slap.getCourseManager().getIDArray() ;
 		String[] codes = new String[courseCodes.length] ;
 		int count = 0 ;
-		for(Comparable comp : courseCodes) {
+		for(@SuppressWarnings("rawtypes") Comparable comp : courseCodes) {
 			codes[count++] = (String) comp ;
 		}
 		populateCourseMenu(codes) ;

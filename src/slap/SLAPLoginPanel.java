@@ -78,12 +78,7 @@ public class SLAPLoginPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				//Check login credentials
 				//System.out.println(AccountManagemer.DEBUG_listAccounts()); //Test if user accounts are accessible
-				if (AccountManager.authenticate(getUsername(), getPassword())) {
-					frame.login() ;
-				}
-				else {
-					frame.displayError("Login credentials incorrect") ;
-				}
+				login() ;
 			}
 		}
 		loginButton.addActionListener(new LoginListener());
@@ -95,7 +90,8 @@ public class SLAPLoginPanel extends JPanel {
 			public void keyPressed(KeyEvent e) {
 				int code = e.getKeyCode() ;
 				if(code == KeyEvent.VK_ENTER) {
-					loginButton.doClick() ;
+					//loginButton.doClick() ;
+					login() ;
 				}
 			}
 
@@ -121,5 +117,14 @@ public class SLAPLoginPanel extends JPanel {
 	protected void clearText() {
 		usernameField.clearText() ;
 		passwordField.clearText();
+	}
+	
+	private void login() {
+		if (AccountManager.authenticate(getUsername(), getPassword())) {
+			frame.login() ;
+		}
+		else {
+			frame.displayError("Login credentials incorrect") ;
+		}
 	}
 }
