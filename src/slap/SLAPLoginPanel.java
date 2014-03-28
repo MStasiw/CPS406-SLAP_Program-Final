@@ -129,6 +129,7 @@ public class SLAPLoginPanel extends JPanel {
 		}
 		else {
 			frame.displayError("Login credentials incorrect") ;
+			passwordField.clearText() ;
 		}
 	}
 }
