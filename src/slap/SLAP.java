@@ -4,10 +4,11 @@ public class SLAP {
 	
 	@SuppressWarnings("unused")
 	private SLAPFrame frame ;
+	private Manager<String, Course> courseManager ;
 	
 	public SLAP() {
 		
-		Manager<String, Course> courseManager = new Manager<String, Course>() ;
+		courseManager = new Manager<String, Course>() ;
 		
 		Announcement a1 = new Announcement("Class this week", "There will be no class this week.") ;
         Announcement a2 = new Announcement("Upcoming midterm", "Study for your midterms that are thursday next week.") ;
@@ -39,6 +40,10 @@ public class SLAP {
 		AccountManager.createAccount("Administrator1", "Test", "admin", "admin", Role.administrator);
 		AccountManager.createAccount("z", "z", "z", "z", Role.administrator) ;
 		
-		frame = new SLAPFrame() ;
+		frame = new SLAPFrame(this) ;
+	}
+	
+	protected Manager<String, Course> getCourseManager() {
+		return courseManager ;
 	}
 }

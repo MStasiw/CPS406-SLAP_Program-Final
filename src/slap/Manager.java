@@ -51,10 +51,17 @@ public class Manager<C extends Comparable, M extends Managable> implements Seria
         return items.size() ;
     }
 
-    public ArrayList<Comparable> getIDArray()
+    public Comparable[] getIDArray()
     {
-		ArrayList<Comparable> idArray = new ArrayList<Comparable>() ;
+		/*ArrayList<Comparable> idArray = new ArrayList<Comparable>() ;
         idArray.addAll(items.keySet()) ;
+        return idArray ;*/
+    	Comparable[] idArray = new Comparable[size()] ;
+        int count = 0 ;
+        for(Map.Entry<C, M> entry : items.entrySet()) 
+        {
+            idArray[count++] = (Comparable) entry.getKey() ;
+        }
         return idArray ;
     }
 

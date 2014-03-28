@@ -13,6 +13,8 @@ import javax.swing.* ;
 @SuppressWarnings("serial")
 public class SLAPFrame extends JFrame implements KeyListener {
 	
+	private SLAP slap ;
+	
 	private final int FRAME_WIDTH = 900 ;
     private final int FRAME_HEIGHT = 600 ;
     private final int MIN_FRAME_WIDTH = 500 ;
@@ -35,7 +37,8 @@ public class SLAPFrame extends JFrame implements KeyListener {
     private JMenu coursesMenu ;
     private JButton logoutButton ;
     	
-	public SLAPFrame() {
+	public SLAPFrame(SLAP slap) {
+		this.slap = slap ;
 		initialize() ;		
 		setupMenuBar() ;
 		setupLoginPanel() ;
@@ -113,7 +116,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		jmb.add(coursesMenu) ;
 	}
 	
-	public void populateCourseMenu(ArrayList<String> codes)
+	public void populateCourseMenu(String[] codes)
     {
         removeAllCourseMenuItems() ;
         class CourseMenuItemListener implements ActionListener
@@ -171,7 +174,15 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		logoutButton.setEnabled(true) ;
 		logoutButton.setVisible(true);
 		//set information
-		populateCourseMenu(new ArrayList<String>()) ;
+		//TESTING ONLY
+		Comparable[] courseCodes =  slap.getCourseManager().getIDArray() ;
+		String[] codes = new String[courseCodes.length] ;
+		int count = 0 ;
+		for(Comparable comp : courseCodes) {
+			codes[count++] = (String) comp ;
+		}
+		populateCourseMenu(codes) ;
+		//
 		slp.clearText();
 		cardLayout.show(cards, TABS_CARD_ID) ;		
 	}
