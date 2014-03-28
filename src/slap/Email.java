@@ -1,12 +1,11 @@
-package slap;
+package s.l.a.p.ui;
 
-import javax.swing.* ;
 
 /**
  *
  * @author Sujeethan
  */
-public class Email extends JPanel {
+public class Email extends javax.swing.JPanel {
 
     /**
      * Creates new form Email
@@ -99,15 +98,14 @@ public class Email extends JPanel {
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)))
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                         .addGap(11, 11, 11))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
                         .addComponent(jLabel3)
-                        .addContainerGap(116, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
