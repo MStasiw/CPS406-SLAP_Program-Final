@@ -22,6 +22,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
     private final String LOGIN_CARD_ID = "login" ;
     private final String TABS_CARD_ID = "tabs" ;  
     
+    private JLabel userLabel ;
     private ImageIcon coursesIcon ;
     private final String coursesIconPath = "/resources/courses.png" ;
     private final int MENU_ICON_SIZE = 20 ;  
@@ -92,6 +93,8 @@ public class SLAPFrame extends JFrame implements KeyListener {
 	private void setupMenuBar() {
 		menuBar = new JMenuBar() ;
 		setupCoursesMenu(menuBar) ;
+		userLabel = new JLabel() ;
+		menuBar.add(userLabel) ;
 		menuBar.add(Box.createHorizontalGlue()) ;
 		setupLogoutButton(menuBar) ;
 		setJMenuBar(menuBar) ;
@@ -184,9 +187,14 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		logoutButton.setEnabled(false) ;
 		logoutButton.setVisible(false);
 		//clear information
+		userLabel.setText("") ;
 		removeAllCourseMenuItems() ;
 		//
 		cardLayout.show(cards, LOGIN_CARD_ID) ;
+	}
+	
+	protected void setUserLabel(String username) {
+		
 	}
 	
 	protected void displayError(String errorMessage)
