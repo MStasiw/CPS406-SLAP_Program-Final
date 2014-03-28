@@ -47,7 +47,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
 	}	
 	
 	private void initialize() {
-		setLookAndFeel() ;
+		//setLookAndFeel() ;
 		setupLayout() ;
 		setTitle("SLAP") ;
         setSize(FRAME_WIDTH, FRAME_HEIGHT) ;
