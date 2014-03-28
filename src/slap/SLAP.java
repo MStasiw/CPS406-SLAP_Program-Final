@@ -7,6 +7,8 @@ public class SLAP {
 	
 	public SLAP() {
 		
+		Manager<String, Course> courseManager = new Manager<String, Course>() ;
+		
 		/*
 		 * FOR USE IN DEVELOPMENT/TESTING ONLY
 		 * Create user accounts 
