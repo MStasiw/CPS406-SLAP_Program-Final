@@ -78,7 +78,7 @@ public class SLAPLoginPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				//Check login credentials
 				//System.out.println(AccountManagemer.DEBUG_listAccounts()); //Test if user accounts are accessible
-				if (AccountManagement.authenticate(getUsername(), getPassword())) {
+				if (AccountManager.authenticate(getUsername(), getPassword())) {
 					frame.login() ;
 				}
 				else {

@@ -7,14 +7,14 @@ package slap;
  * @author Michael
  *
  */
-abstract class AccountManagement {
+abstract class AccountManager {
 	
 	private static AccountMap userMap = new AccountMap();
 
 	/**
 	 * Workaround to prevent abstract class from being created a a new object
 	 */
-	private AccountManagement() {
+	private AccountManager() {
 		//super();
 		// TODO Auto-generated constructor stub
 	}
