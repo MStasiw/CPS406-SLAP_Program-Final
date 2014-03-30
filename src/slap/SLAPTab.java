@@ -8,6 +8,8 @@ import javax.swing.* ;
 @SuppressWarnings("serial")
 public class SLAPTab extends JPanel {
 	
+	private SLAP slap ;
+	
 	private JScrollPane scrollPane ;
 	private VerticalScrollPanel panel ;
 	
@@ -16,7 +18,8 @@ public class SLAPTab extends JPanel {
 	/*
 	 * Make a new tab
 	 */
-	public SLAPTab() {
+	public SLAPTab(SLAP slap) {
+		this.slap = slap ;
 		items = new ArrayList<SLAPTabItem>() ;
 		setLayout(new BorderLayout()) ;
 		panel = new VerticalScrollPanel() ;
