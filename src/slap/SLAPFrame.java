@@ -39,6 +39,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
     private JButton logoutButton ;
     
     //Tab panels
+    private SLAPDescriptionTab descriptionTab ;
     private SLAPAnnouncementTab announcementTab ;
     private SLAPAssignmentTab assignmentTab;
     	
@@ -104,7 +105,9 @@ public class SLAPFrame extends JFrame implements KeyListener {
 	private void setupTabbedPane() {
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT) ;
 		cards.add(tabbedPane, TABS_CARD_ID) ;
-		tabbedPane.addTab("Description", new SLAPTab(slap)) ;
+		//
+		descriptionTab = new SLAPDescriptionTab(slap, this) ;
+		tabbedPane.addTab("Description", descriptionTab) ;
 		//
 		announcementTab = new SLAPAnnouncementTab(slap, this) ;
 		tabbedPane.addTab("Announcements", announcementTab) ;
@@ -169,6 +172,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
                 slap.setCurrentCourse(course) ;
                 courseLabel.setText(courseCode) ;
                 //Put tab refreshes that are course dependent here
+                descriptionTab.refresh() ;
                 announcementTab.refresh() ;
                 
                 //
@@ -263,6 +267,13 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		courseLabel.setText("") ;
 		courseLabel.setVisible(false) ;
 		removeAllCourseMenuItems() ;
+		slap.setCurrentCourse(null) ;
+		//
+		descriptionTab.refresh() ;
+		announcementTab.refresh() ;
+
+		//
+		tabbedPane.setSelectedComponent(descriptionTab);
 		//
 		cardLayout.show(cards, LOGIN_CARD_ID) ;
 	}

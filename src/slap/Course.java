@@ -104,6 +104,6 @@ public class Course implements Managable, Serializable
     @Override
     public String toString()
     {
-        return "Name: " + getName() + "\nCode: " + getCode() + "\nProfessor: " + getProfessor() ;
+        return "Code: " + getCode() + "\nName: " + getName() + "\nProfessor: " + getProfessor() ;
     }
 }

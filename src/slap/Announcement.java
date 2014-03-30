@@ -16,13 +16,16 @@ public class Announcement implements Managable, Serializable
     private Date datePosted ;
     private String content ;
     
+    private String id ;
+    
     private ArrayList<File> files ;
 
     public Announcement(String title, String content)
     {
-        datePosted = Calendar.getInstance().getTime() ;
+        datePosted = Calendar.getInstance().getTime() ;     
         this.title = title ;
         this.content = content ;
+        id = Long.toString(datePosted.getTime()) + " " + getTitle() ;
         setFiles(new ArrayList<File>()) ;
     }
     
@@ -36,7 +39,8 @@ public class Announcement implements Managable, Serializable
     
     public String getID()
     {
-        return Long.toString(datePosted.getTime()) + " " + getTitle() ;
+        //return Long.toString(datePosted.getTime()) + " " + getTitle() ; //removed to stop title updates interrupting item removal
+    	return id ;
     }
     
     public String getDatePosted()

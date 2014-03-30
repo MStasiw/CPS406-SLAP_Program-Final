@@ -15,25 +15,25 @@ public class SLAP {
 		
 		courseManager = new Manager<String, Course>() ;
 		
-		Announcement a1 = new Announcement("Class this week", "There will be no class this week.") ;
-        Announcement a2 = new Announcement("Upcoming midterm", "Study for your midterms that are thursday next week.") ;
-        Announcement a3 = new Announcement("Cheating Policy", "Any students found cheating will be sorry.") ;
+		Announcement a1 = new Announcement("CPS310 Class this week", "There will be no class this week.") ;
+        Announcement a2 = new Announcement("CPS310 Upcoming midterm", "Study for your midterms that are thursday next week.") ;
+        Announcement a3 = new Announcement("CPS310 Cheating Policy", "Any students found cheating will be sorry.") ;
         
-        Announcement a4 = new Announcement("Class this week", "There will be no class this week.") ;
-        Announcement a5 = new Announcement("Upcoming midterm", "Study for your midterms that are thursday next week.") ;
-        Announcement a6 = new Announcement("Cheating Policy", "Any students found cheating will be sorry.") ;
+        Announcement a4 = new Announcement("CPS406 Class this week", "There will be no class this week.") ;
+        Announcement a5 = new Announcement("CPS406 Upcoming midterm", "Study for your midterms that are thursday next week.") ;
+        Announcement a6 = new Announcement("CPS406 Cheating Policy", "Any students found cheating will be sorry.") ;
         
-        Announcement a7 = new Announcement("Class this week", "There will be no class this week.") ;
-        Announcement a8 = new Announcement("Upcoming midterm", "Study for your midterms that are thursday next week.") ;
-        Announcement a9 = new Announcement("Cheating Policy", "Any students found cheating will be sorry.") ;
+        Announcement a7 = new Announcement("CPS590 Class this week", "There will be no class this week.") ;
+        Announcement a8 = new Announcement("CPS590 Upcoming midterm", "Study for your midterms that are thursday next week.") ;
+        Announcement a9 = new Announcement("CPS590 Cheating Policy", "Any students found cheating will be sorry.") ;
         
-        Announcement a10 = new Announcement("Class this week", "There will be no class this week.") ;
-        Announcement a11 = new Announcement("Upcoming midterm", "Study for your midterms that are thursday next week.") ;
-        Announcement a12 = new Announcement("Cheating Policy", "Any students found cheating will be sorry.") ;
+        Announcement a10 = new Announcement("GMS200 Class this week", "There will be no class this week.") ;
+        Announcement a11 = new Announcement("GMS200 Upcoming midterm", "Study for your midterms that are thursday next week.") ;
+        Announcement a12 = new Announcement("GMS200 Cheating Policy", "Any students found cheating will be sorry.") ;
         
-        Announcement a13 = new Announcement("Class this week", "There will be no class this week.") ;
-        Announcement a14 = new Announcement("Upcoming midterm", "Study for your midterms that are thursday next week.") ;
-        Announcement a15 = new Announcement("Cheating Policy", "Any students found cheating will be sorry.") ;
+        Announcement a13 = new Announcement("MTH304 Class this week", "There will be no class this week.") ;
+        Announcement a14 = new Announcement("MTH304 Upcoming midterm", "Study for your midterms that are thursday next week.") ;
+        Announcement a15 = new Announcement("MTH304 Cheating Policy", "Any students found cheating will be sorry.") ;
 
         Manager<String, Announcement> an1 = new Manager<String, Announcement>() ;
         an1.add(a1.getID(), a1) ;
@@ -41,24 +41,24 @@ public class SLAP {
         an1.add(a3.getID(), a3) ;
         
         Manager<String, Announcement> an2 = new Manager<String, Announcement>() ;
-        an2.add(a1.getID(), a4) ;
-        an2.add(a2.getID(), a5) ;
-        an2.add(a3.getID(), a6) ;
+        an2.add(a4.getID(), a4) ;
+        an2.add(a5.getID(), a5) ;
+        an2.add(a6.getID(), a6) ;
         
         Manager<String, Announcement> an3 = new Manager<String, Announcement>() ;
-        an3.add(a1.getID(), a7) ;
-        an3.add(a2.getID(), a8) ;
-        an3.add(a3.getID(), a9) ;
+        an3.add(a7.getID(), a7) ;
+        an3.add(a8.getID(), a8) ;
+        an3.add(a9.getID(), a9) ;
         
         Manager<String, Announcement> an4 = new Manager<String, Announcement>() ;
-        an4.add(a1.getID(), a10) ;
-        an4.add(a2.getID(), a11) ;
-        an4.add(a3.getID(), a12) ;
+        an4.add(a10.getID(), a10) ;
+        an4.add(a11.getID(), a11) ;
+        an4.add(a12.getID(), a12) ;
         
         Manager<String, Announcement> an5 = new Manager<String, Announcement>() ;
-        an5.add(a1.getID(), a13) ;
-        an5.add(a2.getID(), a14) ;
-        an5.add(a3.getID(), a15) ;
+        an5.add(a13.getID(), a13) ;
+        an5.add(a14.getID(), a14) ;
+        an5.add(a15.getID(), a15) ;
 		
 		Course c1 = new Course("CPS310", "Computer Organization II", "Timorabadi, Hamid", "This course provides an introduction to assembly language and computer architecture. Students are taught programming skills in assembly language. Assembly language is the link between a high level language and machine language. CPS310 follows CPS213 and connects state machines that form the machine language to processors.", an1) ;
         Course c2 = new Course("CPS406", "Introduction to Software Engineering", "Misic, Vojislav", "This course introduces the study of software engineering. A major portion of the course is a team project, taking a system from the initial requirements definition stage through implementation and maintenance.", an2) ;

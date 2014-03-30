@@ -10,53 +10,42 @@ import javax.swing.* ;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
-public class SLAPAnnouncementTabItem extends JPanel {
+public class SLAPDescriptionTabItem extends JPanel {
 	
 	private JPanel panel ;
-	private JTextField textField ;
 	private JPanel textPanel ;
+	private JTextArea infoArea ;
 	private JTextArea textArea ;
 	private JPanel buttonPanel ;
 	private JButton saveButton ;
 	private JButton editButton ;
-	private JButton deleteButton ;
 	
 	private SLAP slap ;
-	private SLAPAnnouncementTab sat ;
-	private Announcement a ;
+	private SLAPDescriptionTab sdt ;
 	
 	private final Color SAVE_COLOUR = Color.WHITE ;
 	private final Color EDIT_COLOUR = Color.PINK ;
+	private final Color FIELD_COLOUR = Color.LIGHT_GRAY ;
 	private final Font FIELD_FONT = new Font("Helvetica", Font.BOLD, 22) ;
-		
-	/**
-	 * Makes a new item to add to a tab
-	 */
-	/*public SLAPAnnouncementTabItem() {
-		initialize() ;
-	}*/
 	
-	/**
-	 * Makes a new item to add to a tab with a specified String
-	 * @param text the text to initialize
-	 */
-	public SLAPAnnouncementTabItem(SLAP slap, SLAPAnnouncementTab sat, Announcement a) {
+	public SLAPDescriptionTabItem(SLAP slap, SLAPDescriptionTab sdt) {
 		this.slap = slap ;
-		this.sat = sat ;
-		this.a = a ;
+		this.sdt = sdt ;
 		initialize() ;
-		textField.setText(a.getTitle()) ;
-		textArea.setText(a.getContent()) ;
 	}
 	
 	private void initialize() {
 		setLayout(new BorderLayout()) ;
 		panel = new JPanel() ;		
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)) ;
-		textField = new JTextField() ;
-		textField.setFont(FIELD_FONT) ;
-		textField.setEditable(false) ;
-		//textField.setEnabled(false) ;
+		infoArea = new JTextArea() ;
+		infoArea.setBackground(FIELD_COLOUR) ;
+		infoArea.setFont(FIELD_FONT) ;
+		infoArea.setLineWrap(true) ;
+		infoArea.setWrapStyleWord(true) ;
+		infoArea.setBorder(new EmptyBorder(5, 5, 5, 5)) ;
+		//
+		infoArea.setEditable(false) ;
 		textArea = new JTextArea() ;
 		textArea.setEditable(false) ;
 		//textArea.setEnabled(false) ;
@@ -65,7 +54,7 @@ public class SLAPAnnouncementTabItem extends JPanel {
 		textArea.setBorder(new EmptyBorder(5, 5, 5, 5)) ;
 		textPanel = new JPanel() ;
 		textPanel.setLayout(new BorderLayout()) ;
-		textPanel.add(textField, BorderLayout.NORTH) ;
+		textPanel.add(infoArea, BorderLayout.NORTH) ;
 		textPanel.add(textArea, BorderLayout.CENTER) ;
         panel.add(textPanel) ;
         setupButtons() ;
@@ -80,40 +69,47 @@ public class SLAPAnnouncementTabItem extends JPanel {
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS)) ;
 		saveButton = new JButton("Save") ;
 		editButton = new JButton("Edit") ;
-		deleteButton = new JButton("Delete") ;
 		class ButtonListener implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JButton button = (JButton) e.getSource() ;
 				if(button.equals(saveButton)) {
-					textField.setEditable(false) ;
+					//textField.setEditable(false) ;
 					textArea.setEditable(false) ;
 					//textArea.setEnabled(false) ;
 					//save values
-					a.setTitle(textField.getText()) ;
-					a.setContent(textArea.getText()) ;
-					sat.refresh() ;
+					Course course = slap.getCurrentCourse() ;
+					if(course != null) course.setDescription(textArea.getText()) ;
+					sdt.refresh() ;
 				}
 				else if(button.equals(editButton)) {
-					textField.setEditable(true) ;
+					//textField.setEditable(true) ;
 					textArea.setEditable(true) ;
 					textArea.setBackground(EDIT_COLOUR) ;
 					//textArea.setEnabled(true) ;
-				}
-				else if(button.equals(deleteButton)) {
-					//delete this item
-					slap.getCurrentCourse().getAnnouncements().remove(a.getID()) ;
-					sat.refresh() ;
 				}
 			}	
 		}
 		ButtonListener listener = new ButtonListener() ;
  		saveButton.addActionListener(listener) ;
  		editButton.addActionListener(listener) ;
- 		deleteButton.addActionListener(listener) ;
 		buttonPanel.add(saveButton) ;
 		buttonPanel.add(editButton) ;
-		buttonPanel.add(deleteButton) ;
 		panel.add(buttonPanel) ;
+	}
+	
+	protected void refresh() {
+		Course course = slap.getCurrentCourse() ;
+		if(course != null) {
+			//textField.setText(course.getCode()) ; //Show just the code?
+			infoArea.setText(course.toString()) ;
+			textArea.setText(course.getDescription()) ;
+			textArea.setBackground(SAVE_COLOUR) ;
+		}
+		else {
+			infoArea.setText("Select a Course") ;
+			textArea.setText("") ;
+			textArea.setBackground(SAVE_COLOUR) ;
+		}
 	}
 }

@@ -18,7 +18,7 @@ public class SLAPAnnouncementTab extends JPanel {
 	private VerticalScrollPanel panel ;
 	
 	private JButton addButton ;
-	private final Font addButtonFont = new Font("Helvetica", Font.BOLD, 30) ;
+	private final Font ADD_BUTTON_FONT = new Font("Helvetica", Font.BOLD, 22) ;
 	
 	private ArrayList<SLAPAnnouncementTabItem> items ;
 	
@@ -45,7 +45,7 @@ public class SLAPAnnouncementTab extends JPanel {
 	
 	private void setupAddButton(JPanel panel) {
 		addButton = new JButton("+") ;
-		addButton.setFont(addButtonFont) ;
+		addButton.setFont(ADD_BUTTON_FONT) ;
 		class AddListener implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
