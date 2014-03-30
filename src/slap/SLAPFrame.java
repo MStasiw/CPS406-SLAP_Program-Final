@@ -14,6 +14,8 @@ public class SLAPFrame extends JFrame implements KeyListener {
 	
 	private SLAP slap ;
 	
+	private boolean userLoggedIn = false;
+	
 	private final int FRAME_WIDTH = 900 ;
     private final int FRAME_HEIGHT = 600 ;
     private final int MIN_FRAME_WIDTH = 500 ;
@@ -36,6 +38,10 @@ public class SLAPFrame extends JFrame implements KeyListener {
     private JMenuBar menuBar ;
     private JMenu coursesMenu ;
     private JButton logoutButton ;
+    
+    //Tab panels
+    private SLAPTab announcementTab ;
+    private SLAPAssignmentTab assignmentTab;
     	
     /**
      * Makes a new frame
@@ -99,15 +105,19 @@ public class SLAPFrame extends JFrame implements KeyListener {
 	private void setupTabbedPane() {
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT) ;
 		cards.add(tabbedPane, TABS_CARD_ID) ;
-		tabbedPane.addTab("Description", new SLAPTab()) ;
+		tabbedPane.addTab("Description", new SLAPTab(slap)) ;
 		//
-		SLAPTab announcementTab = new SLAPTab() ;
+		announcementTab = new SLAPTab(slap) ;
 		tabbedPane.addTab("Announcements", announcementTab) ;
 		announcementTab.addItem(new SLAPTabItem()) ;
 		//
-		tabbedPane.addTab("Documents", new SLAPTab()) ;
-		tabbedPane.addTab("Assignments", new SLAPTab()) ;
-		tabbedPane.addTab("Grades", new SLAPTab()) ;
+		tabbedPane.addTab("Documents", new SLAPTab(slap)) ;
+		
+		assignmentTab = new SLAPAssignmentTab(this, slap);
+		tabbedPane.addTab("Assignments", assignmentTab) ;
+		
+		tabbedPane.addTab("Grades", new SLAPTab(slap)) ;
+		
 		tabbedPane.addTab("Email", new Email()) ;
 	}
 	
@@ -224,7 +234,8 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		populateCourseMenu(codes) ;
 		//
 		slp.clearText();
-		cardLayout.show(cards, TABS_CARD_ID) ;		
+		cardLayout.show(cards, TABS_CARD_ID) ;
+		userLoggedIn = true;
 	}
 	
 	/**
@@ -239,6 +250,14 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		removeAllCourseMenuItems() ;
 		//
 		cardLayout.show(cards, LOGIN_CARD_ID) ;
+		userLoggedIn = false;
+	}
+	
+	/**
+	 * Refresh the information
+	 */
+	private void refresh() {
+		//announcementTab.refresh(slap.getCurrentCourse()) ;
 	}
 	
 	/**
@@ -264,4 +283,8 @@ public class SLAPFrame extends JFrame implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {}
+	
+	public boolean userLoggedIn() {
+		return userLoggedIn;
+	}
 }

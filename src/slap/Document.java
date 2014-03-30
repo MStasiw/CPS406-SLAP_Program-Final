@@ -17,7 +17,6 @@ import java.nio.file.StandardCopyOption;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  * @author Kevin
@@ -34,7 +33,6 @@ public class Document {
 		//Select a document and save it only if a document was actually selected
 		if(selectDocument() == JFileChooser.APPROVE_OPTION) {
 			saveDocument();
-			open(); //testing
 		}
 		
 		fileName = "file name not specified";
@@ -47,7 +45,7 @@ public class Document {
 	private int selectDocument() {
 		JFileChooser fileChooser = new JFileChooser();
 		
-		int fcReturn = fileChooser.showOpenDialog(new JPanel());
+		int fcReturn = fileChooser.showOpenDialog(null);
 		
 		if (fcReturn == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
