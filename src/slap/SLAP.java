@@ -71,4 +71,20 @@ public class SLAP {
 	protected Manager<String, Course> getCourseManager() {
 		return courseManager ;
 	}
+	
+	/**
+	 * Set the current course
+	 * @param course the new current course
+	 */
+	protected void setCurrentCourse(Course course) {
+		currentCourse = course ;
+	}
+	
+	/**
+	 * Get the current course
+	 * @return the current course
+	 */
+	protected Course getCurrentCourse() {
+		return currentCourse ;
+	}
 }
