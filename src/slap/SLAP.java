@@ -5,6 +5,7 @@ public class SLAP {
 	@SuppressWarnings("unused")
 	private SLAPFrame frame ;
 	private Account currentUser = null ;
+	private Course currentCourse = null ;
 	private Manager<String, Course> courseManager ;
 	
 	/**
