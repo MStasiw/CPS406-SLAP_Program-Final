@@ -37,7 +37,6 @@ public class SLAPAssignmentTab extends JPanel{
 			}
 		} catch ( NullPointerException e) {
 			System.out.println("Null pointer exception. No user logged in.");
-			
 		}
 		//}
 	}
