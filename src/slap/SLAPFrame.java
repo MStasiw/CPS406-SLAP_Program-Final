@@ -25,6 +25,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
     private final String TABS_CARD_ID = "tabs" ;  
     
     private JLabel userLabel ;
+    private JLabel courseLabel ;
     private ImageIcon coursesIcon ;
     private final String coursesIconPath = "/resources/courses.png" ;
     private final int MENU_ICON_SIZE = 20 ;  
@@ -127,9 +128,13 @@ public class SLAPFrame extends JFrame implements KeyListener {
 	private void setupMenuBar() {
 		menuBar = new JMenuBar() ;
 		userLabel = new JLabel() ;
-		setupCoursesMenu(menuBar) ;		
+		courseLabel = new JLabel() ;
+		setupCoursesMenu(menuBar) ;
+		menuBar.add(Box.createHorizontalStrut(10)) ;
+		menuBar.add(courseLabel) ;
 		menuBar.add(Box.createHorizontalGlue()) ;
 		menuBar.add(userLabel) ;
+		menuBar.add(Box.createHorizontalStrut(10)) ;
 		setupLogoutButton(menuBar) ;
 		setJMenuBar(menuBar) ;
 	}
@@ -161,7 +166,10 @@ public class SLAPFrame extends JFrame implements KeyListener {
             public void actionPerformed(ActionEvent event)
             {
 				JMenuItem courseMenuItem = (JMenuItem) event.getSource() ;
-                //Get course based on courseMenuItem text
+                String courseCode = courseMenuItem.getText() ;
+                Course course = (Course) slap.getCourseManager().get(courseCode) ;
+                slap.setCurrentCourse(course) ;
+                courseLabel.setText(courseCode) ;
             }
         }
         CourseMenuItemListener listener = new CourseMenuItemListener() ;
@@ -223,6 +231,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		//set information
 		userLabel.setText(slap.getCurrentUser().getUsername()) ;
 		userLabel.setVisible(true) ;
+		courseLabel.setVisible(true) ;
 		//TESTING ONLY
 		@SuppressWarnings("rawtypes")
 		Comparable[] courseCodes =  slap.getCourseManager().getIDArray() ;
@@ -248,6 +257,8 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		slap.setCurrentUser(null) ;
 		userLabel.setText("") ;
 		userLabel.setVisible(false) ;
+		courseLabel.setText("") ;
+		courseLabel.setVisible(false) ;
 		removeAllCourseMenuItems() ;
 		//
 		cardLayout.show(cards, LOGIN_CARD_ID) ;
