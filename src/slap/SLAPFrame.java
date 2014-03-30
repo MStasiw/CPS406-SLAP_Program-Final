@@ -106,7 +106,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		cards.add(tabbedPane, TABS_CARD_ID) ;
 		tabbedPane.addTab("Description", new SLAPTab(slap)) ;
 		//
-		announcementTab = new SLAPAnnouncementTab(slap) ;
+		announcementTab = new SLAPAnnouncementTab(slap, this) ;
 		tabbedPane.addTab("Announcements", announcementTab) ;
 		//announcementTab.addItem(new SLAPTabItem()) ;
 		//
@@ -270,8 +270,9 @@ public class SLAPFrame extends JFrame implements KeyListener {
 	/**
 	 * Refresh the information
 	 */
-	private void refresh() {
+	protected void refresh() {
 		//announcementTab.refresh(slap.getCurrentCourse()) ;
+		tabbedPane.validate() ;
 	}
 	
 	/**

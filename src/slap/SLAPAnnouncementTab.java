@@ -1,32 +1,63 @@
 package slap;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.* ;
 
+@SuppressWarnings("serial")
 public class SLAPAnnouncementTab extends JPanel {
 	
-private SLAP slap ;
+	private SLAP slap ;
+	private SLAPFrame frame ;
 	
 	private JScrollPane scrollPane ;
 	private VerticalScrollPanel panel ;
+	
+	private JButton addButton ;
+	private final Font addButtonFont = new Font("Helvetica", Font.BOLD, 30) ;
 	
 	private ArrayList<SLAPAnnouncementTabItem> items ;
 	
 	/*
 	 * Make a new tab
 	 */
-	public SLAPAnnouncementTab(SLAP slap) {
+	public SLAPAnnouncementTab(SLAP slap, SLAPFrame frame) {
 		this.slap = slap ;
+		this.frame = frame ;
+		initialize() ;
+	}
+	
+	private void initialize() {
 		items = new ArrayList<SLAPAnnouncementTabItem>() ;
 		setLayout(new BorderLayout()) ;
+		setupAddButton(this) ;
 		panel = new VerticalScrollPanel() ;
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)) ;
 		scrollPane = new JScrollPane() ;
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER) ;
 		scrollPane.setViewportView(panel);
 		add(scrollPane) ;
+	}
+	
+	private void setupAddButton(JPanel panel) {
+		addButton = new JButton("+") ;
+		addButton.setFont(addButtonFont) ;
+		class AddListener implements ActionListener {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(slap.getCurrentCourse() != null) {
+					Announcement temp = new Announcement("title", "content") ;
+					slap.getCurrentCourse().getAnnouncements().add(temp.getID(), temp) ;
+					refresh() ;
+				}
+			}	
+		}
+		addButton.addActionListener(new AddListener()) ;
+		panel.add(addButton, BorderLayout.NORTH) ;
 	}
 	
 	/**
@@ -46,13 +77,15 @@ private SLAP slap ;
 		items.clear() ;
 		Course course = slap.getCurrentCourse() ;
 		if(course != null) {
-			for(Managable m : course.getAnnouncements()) {
+			for(Managable m : course.getAnnouncementsArray()) {
 				Announcement a = (Announcement) m ;
-				items.add(new SLAPAnnouncementTabItem(a)) ;
+				items.add(new SLAPAnnouncementTabItem(slap, this, a)) ;
 			}				
 		}
 		for(SLAPAnnouncementTabItem item : items) {
 			panel.add(item) ;
 		}
+		panel.validate() ;
+		frame.refresh() ;
 	}
 }

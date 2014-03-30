@@ -72,7 +72,11 @@ public class Course implements Managable, Serializable
         return description ;
     }
     
-    public Managable[] getAnnouncements()
+    public Manager<String, Announcement> getAnnouncements() {
+    	return announcements ;
+    }
+    
+    public Managable[] getAnnouncementsArray()
     {
         return announcements.getItemArray() ;
     }

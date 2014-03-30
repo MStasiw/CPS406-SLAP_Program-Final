@@ -67,7 +67,7 @@ public class Announcement implements Managable, Serializable
     
     public void setContent(String content)
     {
-        setDatePosted() ;
+        //setDatePosted() ; //Removed for now since it update the key value without updating the key
         this.content = content ;
     }
     

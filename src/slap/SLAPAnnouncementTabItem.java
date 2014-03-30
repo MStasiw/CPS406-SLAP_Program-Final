@@ -18,6 +18,8 @@ public class SLAPAnnouncementTabItem extends JPanel {
 	private JButton editButton ;
 	private JButton deleteButton ;
 	
+	private SLAP slap ;
+	private SLAPAnnouncementTab sat ;
 	private Announcement a ;
 		
 	/**
@@ -31,7 +33,9 @@ public class SLAPAnnouncementTabItem extends JPanel {
 	 * Makes a new item to add to a tab with a specified String
 	 * @param text the text to initialize
 	 */
-	public SLAPAnnouncementTabItem(Announcement a) {
+	public SLAPAnnouncementTabItem(SLAP slap, SLAPAnnouncementTab sat, Announcement a) {
+		this.slap = slap ;
+		this.sat = sat ;
 		this.a = a ;
 		initialize() ;
 		textArea.setText(a.getContent()) ;
@@ -73,6 +77,7 @@ public class SLAPAnnouncementTabItem extends JPanel {
 					textArea.setEnabled(false) ;
 					//save values
 					a.setContent(textArea.getText()) ;
+					sat.refresh() ;
 				}
 				else if(button.equals(editButton)) {
 					textArea.setEditable(true) ;
@@ -80,6 +85,8 @@ public class SLAPAnnouncementTabItem extends JPanel {
 				}
 				else if(button.equals(deleteButton)) {
 					//delete this item
+					slap.getCurrentCourse().getAnnouncements().remove(a.getID()) ;
+					sat.refresh() ;
 				}
 			}	
 		}
