@@ -82,9 +82,16 @@ public class SLAPAnnouncementTab extends JPanel {
 				items.add(new SLAPAnnouncementTabItem(slap, this, a)) ;
 			}				
 		}
+		//Trying instead to add them in reverse
+		/*
 		for(SLAPAnnouncementTabItem item : items) {
 			panel.add(item) ;
+		}*/
+		//Add items in reverse
+		for(int i = items.size() -1 ; i >= 0 ; i--) {
+			panel.add(items.get(i)) ;
 		}
+		//
 		panel.validate() ;
 		frame.refresh() ;
 	}
