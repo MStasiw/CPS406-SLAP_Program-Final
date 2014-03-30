@@ -245,6 +245,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		logoutButton.setEnabled(false) ;
 		logoutButton.setVisible(false);
 		//clear information
+		slap.setCurrentUser(null) ;
 		userLabel.setText("") ;
 		userLabel.setVisible(false) ;
 		removeAllCourseMenuItems() ;
