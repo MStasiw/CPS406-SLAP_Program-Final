@@ -168,7 +168,10 @@ public class SLAPFrame extends JFrame implements KeyListener {
                 Course course = (Course) slap.getCourseManager().get(courseCode) ;
                 slap.setCurrentCourse(course) ;
                 courseLabel.setText(courseCode) ;
+                //Put tab refreshes that are course dependent here
                 announcementTab.refresh() ;
+                
+                //
             }
         }
         CourseMenuItemListener listener = new CourseMenuItemListener() ;
@@ -240,6 +243,8 @@ public class SLAPFrame extends JFrame implements KeyListener {
 			codes[count++] = (String) comp ;
 		}
 		populateCourseMenu(codes) ;
+		//Put refresh call to tabs that are user dependent here
+		
 		//
 		slp.clearText();
 		cardLayout.show(cards, TABS_CARD_ID) ;
