@@ -1,4 +1,4 @@
-package s.l.a.p.ui;
+package slap;
 
 
 /**
