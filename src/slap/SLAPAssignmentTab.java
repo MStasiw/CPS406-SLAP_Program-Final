@@ -28,17 +28,13 @@ public class SLAPAssignmentTab extends JPanel{
 		scrollPane.setViewportView(panel);
 		add(scrollPane);
 		
-		//if(frame.userLoggedIn() == true) { check if user is null, if so, there isn't anyone logged in
-		try {
+		if(slap.getCurrentUser() != null) { //check if user is null, if so, there isn't anyone logged in
 			if(slap.getCurrentUser().getRole() == Role.student) {
 				setupStudentAssignmentGUI();
 				JHintTextField passwordField = new JHintTextField("Password", 15) ;
 				this.add(passwordField);
 			}
-		} catch ( NullPointerException e) {
-			System.out.println("Null pointer exception. No user logged in.");
 		}
-		//}
 	}
 	
 	private void setupStudentAssignmentGUI() {

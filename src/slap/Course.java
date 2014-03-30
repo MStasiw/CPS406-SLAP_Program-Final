@@ -72,18 +72,9 @@ public class Course implements Managable, Serializable
         return description ;
     }
     
-    public String getAnnouncements()
+    public Managable[] getAnnouncements()
     {
-        String temp = "" ;
-        int count = 0 ;
-        for(Managable m : announcements.getItemArray())
-        {
-            Announcement a = (Announcement) m ;
-            if(count > 0) temp += "\n----------\n" ;
-            temp += "\n" + a + "\n" ;
-            count++ ;
-        }
-        return temp ;
+        return announcements.getItemArray() ;
     }
     
     protected void setCode(String code)

@@ -13,9 +13,7 @@ import javax.swing.* ;
 public class SLAPFrame extends JFrame implements KeyListener {
 	
 	private SLAP slap ;
-	
-	private boolean userLoggedIn = false;
-	
+		
 	private final int FRAME_WIDTH = 900 ;
     private final int FRAME_HEIGHT = 600 ;
     private final int MIN_FRAME_WIDTH = 500 ;
@@ -41,7 +39,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
     private JButton logoutButton ;
     
     //Tab panels
-    private SLAPTab announcementTab ;
+    private SLAPAnnouncementTab announcementTab ;
     private SLAPAssignmentTab assignmentTab;
     	
     /**
@@ -108,9 +106,9 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		cards.add(tabbedPane, TABS_CARD_ID) ;
 		tabbedPane.addTab("Description", new SLAPTab(slap)) ;
 		//
-		announcementTab = new SLAPTab(slap) ;
+		announcementTab = new SLAPAnnouncementTab(slap) ;
 		tabbedPane.addTab("Announcements", announcementTab) ;
-		announcementTab.addItem(new SLAPTabItem()) ;
+		//announcementTab.addItem(new SLAPTabItem()) ;
 		//
 		tabbedPane.addTab("Documents", new SLAPTab(slap)) ;
 		
@@ -170,6 +168,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
                 Course course = (Course) slap.getCourseManager().get(courseCode) ;
                 slap.setCurrentCourse(course) ;
                 courseLabel.setText(courseCode) ;
+                announcementTab.refresh() ;
             }
         }
         CourseMenuItemListener listener = new CourseMenuItemListener() ;
@@ -244,7 +243,6 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		//
 		slp.clearText();
 		cardLayout.show(cards, TABS_CARD_ID) ;
-		userLoggedIn = true;
 	}
 	
 	/**
@@ -262,7 +260,6 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		removeAllCourseMenuItems() ;
 		//
 		cardLayout.show(cards, LOGIN_CARD_ID) ;
-		userLoggedIn = false;
 	}
 	
 	/**
@@ -295,8 +292,4 @@ public class SLAPFrame extends JFrame implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {}
-	
-	public boolean userLoggedIn() {
-		return userLoggedIn;
-	}
 }

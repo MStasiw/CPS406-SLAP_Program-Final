@@ -8,7 +8,7 @@ import javax.swing.* ;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
-public class SLAPTabItem extends JPanel {
+public class SLAPAnnouncementTabItem extends JPanel {
 	
 	private JPanel panel ;
 	private JPanel textPanel ;
@@ -17,21 +17,24 @@ public class SLAPTabItem extends JPanel {
 	private JButton saveButton ;
 	private JButton editButton ;
 	private JButton deleteButton ;
+	
+	private Announcement a ;
 		
 	/**
 	 * Makes a new item to add to a tab
 	 */
-	public SLAPTabItem() {
+	/*public SLAPAnnouncementTabItem() {
 		initialize() ;
-	}
+	}*/
 	
 	/**
 	 * Makes a new item to add to a tab with a specified String
 	 * @param text the text to initialize
 	 */
-	public SLAPTabItem(String text) {
+	public SLAPAnnouncementTabItem(Announcement a) {
+		this.a = a ;
 		initialize() ;
-		textArea.setText(text) ;
+		textArea.setText(a.getContent()) ;
 	}
 	
 	private void initialize() {
@@ -69,7 +72,7 @@ public class SLAPTabItem extends JPanel {
 					textArea.setEditable(false);
 					textArea.setEnabled(false) ;
 					//save values
-					
+					a.setContent(textArea.getText()) ;
 				}
 				else if(button.equals(editButton)) {
 					textArea.setEditable(true) ;
