@@ -8,6 +8,7 @@ import javax.swing.* ;
 @SuppressWarnings("serial")
 public class SLAPTab extends JPanel {
 	
+	@SuppressWarnings("unused")
 	private SLAP slap ;
 	
 	private JScrollPane scrollPane ;

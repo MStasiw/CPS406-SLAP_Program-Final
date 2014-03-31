@@ -25,7 +25,6 @@ public class SLAPAnnouncementTabItem extends JPanel {
 	private SLAPAnnouncementTab sat ;
 	private Announcement a ;
 	
-	private final Color SAVE_COLOUR = Color.WHITE ;
 	private final Color EDIT_COLOUR = Color.PINK ;
 	private final Font FIELD_FONT = new Font("Helvetica", Font.BOLD, 22) ;
 		

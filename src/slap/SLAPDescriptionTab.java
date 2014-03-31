@@ -1,14 +1,15 @@
 package slap;
 
 import java.awt.BorderLayout;
-import java.util.ArrayList;
 
 import javax.swing.* ;
 
 @SuppressWarnings("serial")
 public class SLAPDescriptionTab extends JPanel {
 
+	@SuppressWarnings("unused")
 	private SLAP slap ;
+	@SuppressWarnings("unused")
 	private SLAPFrame frame ;
 	
 	private JScrollPane scrollPane ;
