@@ -46,6 +46,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
     private SLAPDescriptionTab descriptionTab ;
     private SLAPAnnouncementTab announcementTab ;
     private SLAPAssignmentTab assignmentTab;
+    private Email emailTab ;
     	
     /**
      * Makes a new frame
@@ -143,7 +144,8 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		
 		tabbedPane.addTab("Grades", new SLAPTab(slap)) ;
 		
-		tabbedPane.addTab("Email", new Email()) ;
+		emailTab = new Email(slap) ;
+		tabbedPane.addTab("Email", emailTab) ;
 	}
 	
 	/**
@@ -197,7 +199,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
                 //Put tab refreshes that are course dependent here
                 descriptionTab.refresh() ;
                 announcementTab.refresh() ;
-                
+                emailTab.refresh() ;
                 //
             }
         }
@@ -271,7 +273,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		}
 		populateCourseMenu(codes) ;
 		//Put refresh call to tabs that are user dependent here
-		
+		emailTab.refresh() ;
 		//
 		slp.clearText();
 		cardLayout.show(cards, TABS_CARD_ID) ;
@@ -294,7 +296,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		//
 		descriptionTab.refresh() ;
 		announcementTab.refresh() ;
-
+		emailTab.refresh() ;
 		//
 		tabbedPane.setSelectedComponent(descriptionTab);
 		//

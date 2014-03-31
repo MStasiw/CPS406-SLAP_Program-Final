@@ -92,7 +92,7 @@ public class SLAPAnnouncementTab extends JPanel {
 			panel.add(items.get(i)) ;
 		}
 		//
-		panel.validate() ;
+		//panel.validate() ;
 		frame.refresh() ;
 	}
 }
