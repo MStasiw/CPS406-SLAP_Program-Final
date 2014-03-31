@@ -15,7 +15,7 @@ public class SLAPAnnouncementTab extends JPanel {
 	private SLAPFrame frame ;
 	
 	private JScrollPane scrollPane ;
-	private VerticalScrollPanel panel ;
+	private VerticalScrollPanel vs_panel ;
 	
 	private JButton addButton ;
 	private final Font ADD_BUTTON_FONT = new Font("Helvetica", Font.BOLD, 22) ;
@@ -35,11 +35,11 @@ public class SLAPAnnouncementTab extends JPanel {
 		items = new ArrayList<SLAPAnnouncementTabItem>() ;
 		setLayout(new BorderLayout()) ;
 		setupAddButton(this) ;
-		panel = new VerticalScrollPanel() ;
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)) ;
+		vs_panel = new VerticalScrollPanel() ;
+		vs_panel.setLayout(new BoxLayout(vs_panel, BoxLayout.Y_AXIS)) ;
 		scrollPane = new JScrollPane() ;
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER) ;
-		scrollPane.setViewportView(panel);
+		scrollPane.setViewportView(vs_panel);
 		add(scrollPane) ;
 	}
 	
@@ -73,7 +73,7 @@ public class SLAPAnnouncementTab extends JPanel {
 	 * Refresh the items in the tab
 	 */
 	protected void refresh() {
-		panel.removeAll() ;
+		vs_panel.removeAll() ;
 		items.clear() ;
 		Course course = slap.getCurrentCourse() ;
 		if(course != null) {
@@ -89,7 +89,7 @@ public class SLAPAnnouncementTab extends JPanel {
 		}*/
 		//Add items in reverse
 		for(int i = items.size() -1 ; i >= 0 ; i--) {
-			panel.add(items.get(i)) ;
+			vs_panel.add(items.get(i)) ;
 		}
 		//
 		//panel.validate() ;
