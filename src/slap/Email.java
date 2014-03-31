@@ -29,7 +29,7 @@ public class Email extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextField1 = new JHintTextField("Subject") ;
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
@@ -46,7 +46,7 @@ public class Email extends javax.swing.JPanel {
 
         jLabel2.setText("Subject:");
 
-        jTextField1.setText("Subject");
+        //jTextField1.setText("Subject");
 
         jTextArea1.setColumns(20);
         jTextArea1.setLineWrap(true);

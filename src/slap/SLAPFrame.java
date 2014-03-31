@@ -141,6 +141,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		
 		assignmentTab = new SLAPAssignmentTab(this, slap);
 		tabbedPane.addTab("Assignments", assignmentTab) ;
+		tabbedPane.addTab("Submit Assignments", new SubmitAssignUI2()) ;
 		
 		tabbedPane.addTab("Grades", new SLAPTab(slap)) ;
 		
