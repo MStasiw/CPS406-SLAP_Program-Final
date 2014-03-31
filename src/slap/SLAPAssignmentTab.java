@@ -4,10 +4,6 @@
 package slap;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.*;
 
 /**
@@ -33,54 +29,39 @@ public class SLAPAssignmentTab extends JPanel{
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER) ;
 		scrollPane.setViewportView(vs_panel);
 		add(scrollPane);
-		
-		//setupAddButton(this) ;
-		if(slap.getCurrentUser() != null) { //check if user is null, if so, there isn't anyone logged in
-			if(slap.getCurrentUser().getRole() == Role.administrator) {
-				setupStudentAssignmentGUI();
-				refresh();
-			}
-		}
 	}
 	
 	private void setupStudentAssignmentGUI() {
 		//if(slap.getCurrentUser().getRole() == Role.administrator) {
 		JButton test = new JButton("I'm a button");
-		this.add(test);
+		vs_panel.add(test);
 		//}
 	}
-
-	/*
-	private void setupAddButton(JPanel panel) {
-		addButton = new JButton("+") ;
-		addButton.setFont(ADD_BUTTON_FONT) ;
-		class AddListener implements ActionListener {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if(slap.getCurrentCourse() != null) {
-					Announcement temp = new Announcement("title", "content") ;
-					slap.getCurrentCourse().getAnnouncements().add(temp.getID(), temp) ;
-					refresh() ;
-				}
-			}	
-		}
-		addButton.addActionListener(new AddListener()) ;
-		panel.add(addButton, BorderLayout.NORTH) ;
+	
+	private void setupInstructorAssignmentGUI() {
+		
 	}
-	*/
+	
+	private void setupAdministratorAssignmentGUI() {
+		setupInstructorAssignmentGUI();
+	}
+
 	/**
 	 * Refresh the items in the tab
 	 */
 	protected void refresh() {
-		//panel.removeAll() ;
+		vs_panel.removeAll() ;
 		
 		if(slap.getCurrentUser() != null) { //check if user is null, if so, there isn't anyone logged in
-			if(slap.getCurrentUser().getRole() == Role.administrator) {
+			if(slap.getCurrentUser().getRole() == Role.student) {
 				setupStudentAssignmentGUI();
+			} else if(slap.getCurrentUser().getRole() == Role.instructor) {
+				setupInstructorAssignmentGUI();
+			} else if(slap.getCurrentUser().getRole() == Role.administrator) {
+				setupAdministratorAssignmentGUI();
 			}
 		}
 		
 		frame.refresh() ;
 	}
-
 }
