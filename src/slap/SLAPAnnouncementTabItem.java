@@ -115,4 +115,13 @@ public class SLAPAnnouncementTabItem extends JPanel {
 		buttonPanel.add(deleteButton) ;
 		panel.add(buttonPanel) ;
 	}
+	
+	protected void setEditVisibility(Boolean visibility) {
+		saveButton.setVisible(visibility) ;
+		editButton.setVisible(visibility) ;
+		deleteButton.setVisible(visibility) ;
+		saveButton.setEnabled(visibility) ;
+		editButton.setEnabled(visibility) ;
+		deleteButton.setEnabled(visibility) ;
+	}
 }

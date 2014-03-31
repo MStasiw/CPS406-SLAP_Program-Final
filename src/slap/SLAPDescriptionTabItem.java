@@ -28,6 +28,8 @@ public class SLAPDescriptionTabItem extends JPanel {
 	private final Color FIELD_COLOUR = Color.LIGHT_GRAY ;
 	private final Font FIELD_FONT = new Font("Helvetica", Font.BOLD, 22) ;
 	
+	private boolean itemVisibility = false ;
+	
 	public SLAPDescriptionTabItem(SLAP slap, SLAPDescriptionTab sdt) {
 		this.slap = slap ;
 		this.sdt = sdt ;
@@ -99,6 +101,19 @@ public class SLAPDescriptionTabItem extends JPanel {
 	}
 	
 	protected void refresh() {
+		Account user = slap.getCurrentUser() ;
+		if(user != null) {
+			switch(user.getRole()) {
+				case student: itemVisibility = false ; break ;
+				case instructor: itemVisibility = true ; break ;
+				case administrator: itemVisibility = true ; break ;
+				default: itemVisibility = false ; break ;
+			}
+		}
+		else {
+			itemVisibility = false ;
+		}
+		setEditVisibility(itemVisibility) ;
 		Course course = slap.getCurrentCourse() ;
 		if(course != null) {
 			//textField.setText(course.getCode()) ; //Show just the code?
@@ -111,5 +126,12 @@ public class SLAPDescriptionTabItem extends JPanel {
 			textArea.setText("") ;
 			textArea.setBackground(SAVE_COLOUR) ;
 		}
+	}
+	
+	protected void setEditVisibility(Boolean visibility) {
+		saveButton.setVisible(visibility) ;
+		editButton.setVisible(visibility) ;
+		saveButton.setEnabled(visibility) ;
+		editButton.setEnabled(visibility) ;
 	}
 }

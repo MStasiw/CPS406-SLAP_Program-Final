@@ -22,6 +22,8 @@ public class SLAPAnnouncementTab extends JPanel {
 	
 	private ArrayList<SLAPAnnouncementTabItem> items ;
 	
+	private boolean itemVisibility = false ;
+	
 	/*
 	 * Make a new tab
 	 */
@@ -75,6 +77,20 @@ public class SLAPAnnouncementTab extends JPanel {
 	protected void refresh() {
 		vs_panel.removeAll() ;
 		items.clear() ;
+		//
+		Account user = slap.getCurrentUser() ;
+		if(user != null) {
+			switch(user.getRole()) {
+				case student: addButton.setVisible(false) ; itemVisibility = false ; break ;
+				case instructor: addButton.setVisible(true) ; itemVisibility = true ; break ;
+				case administrator: addButton.setVisible(false) ; itemVisibility = true ; break ;
+				default: addButton.setVisible(false) ; itemVisibility = false ; break ;
+			}
+		}
+		else {
+			itemVisibility = false ;
+		}
+		//
 		Course course = slap.getCurrentCourse() ;
 		if(course != null) {
 			for(Managable m : course.getAnnouncementsArray()) {
@@ -82,13 +98,9 @@ public class SLAPAnnouncementTab extends JPanel {
 				items.add(new SLAPAnnouncementTabItem(slap, this, a)) ;
 			}				
 		}
-		//Trying instead to add them in reverse
-		/*
-		for(SLAPAnnouncementTabItem item : items) {
-			panel.add(item) ;
-		}*/
 		//Add items in reverse
 		for(int i = items.size() -1 ; i >= 0 ; i--) {
+			items.get(i).setEditVisibility(itemVisibility) ;
 			vs_panel.add(items.get(i)) ;
 		}
 		//
