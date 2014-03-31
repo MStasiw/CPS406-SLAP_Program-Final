@@ -20,7 +20,7 @@ public class SubmitAssignUI2 extends javax.swing.JPanel {
     /**
      * Creates new form SubmitAssignUI2
      */
-    public SubmitAssignUI3() {
+    public SubmitAssignUI2() {
         initComponents();
         initComponents2();
     }
