@@ -24,6 +24,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
     
     private ImageIcon logoIcon ;
     private final String logoIconPath = "/resources/SLAP_LOGO.png" ;
+    private final int LOGO_ICON_SIZE = 64 ;
     
     private JLabel userLabel ;
     private JLabel courseLabel ;
@@ -80,6 +81,11 @@ public class SLAPFrame extends JFrame implements KeyListener {
 	private void setLogo() {
 		try{
 			logoIcon = new ImageIcon(getClass().getResource(logoIconPath)) ;
+			logoIcon = new ImageIcon(
+					logoIcon.getImage().getScaledInstance(
+							LOGO_ICON_SIZE, 
+							LOGO_ICON_SIZE, 
+							java.awt.Image.SCALE_SMOOTH));
 			setIconImage(logoIcon.getImage()) ;
 		}
 		catch(Exception e) {
