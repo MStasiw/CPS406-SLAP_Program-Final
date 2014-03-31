@@ -42,6 +42,7 @@ abstract class AccountManager {
 			break;
 		}
 		if (userMap.addAccount(newAccount)) { //add to AccountMap
+			//System.err.println(newAccount.toString());
 			return newAccount;
 		}
 		return null;

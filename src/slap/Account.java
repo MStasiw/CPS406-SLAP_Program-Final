@@ -133,4 +133,18 @@ class Account implements Cloneable {
 	protected Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		if (this.equals(null)) return null;
+		String retVal = null;
+		retVal = "Username: " + this.getUsername() + "\n"
+				+ "Name: " + this.getLastName() + ", " + this.getFirstName() + "\n"
+				+ "Role: " + this.getRole();
+		return retVal;
+	}
 }
