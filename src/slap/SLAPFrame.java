@@ -16,15 +16,15 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		
 	private final int FRAME_WIDTH = 900 ;
     private final int FRAME_HEIGHT = 600 ;
-    private final int MIN_FRAME_WIDTH = 500 ;
-    private final int MIN_FRAME_HEIGHT = 400 ;
+    private final int MIN_FRAME_WIDTH = 600 ;
+    private final int MIN_FRAME_HEIGHT = 500 ;
     
     private final String LOGIN_CARD_ID = "login" ;
     private final String TABS_CARD_ID = "tabs" ;  
     
     private ImageIcon logoIcon ;
-    private final String logoIconPath = "/resources/SLAP_LOGO.png" ;
-    private final int LOGO_ICON_SIZE = 64 ;
+    protected final String logoIconPath = "/resources/SLAP_LOGO.png" ;
+    private final int LOGO_ICON_SIZE = 32 ;
     
     private JLabel userLabel ;
     private JLabel courseLabel ;

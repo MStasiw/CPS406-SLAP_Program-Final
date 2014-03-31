@@ -22,6 +22,9 @@ public class SLAPLoginPanel extends JPanel {
 	private SLAPFrame frame ;
 	private SLAP slap ;
 	
+	private ImageIcon logoIcon ;
+	private final int LOGO_ICON_SIZE = 128 ;
+	
 	private final int FIELD_LENGTH = 15 ;
 	
 	private JPanel outerPanel ;
@@ -33,6 +36,7 @@ public class SLAPLoginPanel extends JPanel {
 	private JButton loginButton ;
 	
 	private Dimension rigidDimension ;
+	private Dimension smallDimension ;
 	private Font largeFont ;
 	
 	/**
@@ -56,12 +60,35 @@ public class SLAPLoginPanel extends JPanel {
 				new EmptyBorder(10, 10, 10, 10))) ;
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)) ;
 		rigidDimension = new Dimension(0, FIELD_LENGTH) ;
-		panel.add(Box.createRigidArea(rigidDimension)) ;
+		smallDimension = new Dimension(0, FIELD_LENGTH / 2) ;
+		//panel.add(Box.createRigidArea(smallDimension)) ;
+		setLogo() ;
+		panel.add(Box.createRigidArea(smallDimension)) ;
 		setupFields() ;
 		setupButton() ;
 		panel.add(Box.createRigidArea(rigidDimension)) ;
 		outerPanel.add(panel) ;
 		add(outerPanel) ;
+	}
+	
+	/**
+	 * Sets the logo
+	 */
+	private void setLogo() {
+		try{
+			logoIcon = new ImageIcon(getClass().getResource(frame.logoIconPath)) ;
+			logoIcon = new ImageIcon(
+					logoIcon.getImage().getScaledInstance(
+							LOGO_ICON_SIZE, 
+							LOGO_ICON_SIZE, 
+							java.awt.Image.SCALE_SMOOTH));
+			JPanel logoPanel = new JPanel() ;
+			logoPanel.add(new JLabel(logoIcon, JLabel.RIGHT)) ;
+			panel.add(logoPanel) ;
+		}
+		catch(Exception e) {
+			//
+		}
 	}
 	
 	/**
