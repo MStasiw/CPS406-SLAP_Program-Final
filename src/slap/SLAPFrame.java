@@ -22,6 +22,9 @@ public class SLAPFrame extends JFrame implements KeyListener {
     private final String LOGIN_CARD_ID = "login" ;
     private final String TABS_CARD_ID = "tabs" ;  
     
+    private ImageIcon logoIcon ;
+    private final String logoIconPath = "/resources/SLAP_LOGO.png" ;
+    
     private JLabel userLabel ;
     private JLabel courseLabel ;
     private ImageIcon coursesIcon ;
@@ -62,12 +65,26 @@ public class SLAPFrame extends JFrame implements KeyListener {
 	 */
 	private void initialize() {
 		//setLookAndFeel() ;
+		setLogo() ;
 		setupLayout() ;
 		setTitle("SLAP") ;
         setSize(FRAME_WIDTH, FRAME_HEIGHT) ;
         setMinimumSize(new Dimension(MIN_FRAME_WIDTH, MIN_FRAME_HEIGHT)) ;
         setResizable(true) ;    
         setDefaultCloseOperation(EXIT_ON_CLOSE) ;        
+	}
+	
+	/**
+	 * Sets the logo
+	 */
+	private void setLogo() {
+		try{
+			logoIcon = new ImageIcon(getClass().getResource(logoIconPath)) ;
+			setIconImage(logoIcon.getImage()) ;
+		}
+		catch(Exception e) {
+			//
+		}
 	}
 	
 	/**
