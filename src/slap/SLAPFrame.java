@@ -198,9 +198,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
                 slap.setCurrentCourse(course) ;
                 courseLabel.setText(courseCode) ;
                 //Put tab refreshes that are course dependent here
-                descriptionTab.refresh() ;
-                announcementTab.refresh() ;
-                emailTab.refresh() ;
+                couresRefresh() ;
                 //
             }
         }
@@ -274,7 +272,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		}
 		populateCourseMenu(codes) ;
 		//Put refresh call to tabs that are user dependent here
-		emailTab.refresh() ;
+		userRefresh() ;
 		//
 		slp.clearText();
 		cardLayout.show(cards, TABS_CARD_ID) ;
@@ -295,9 +293,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		removeAllCourseMenuItems() ;
 		slap.setCurrentCourse(null) ;
 		//
-		descriptionTab.refresh() ;
-		announcementTab.refresh() ;
-		emailTab.refresh() ;
+		userRefresh() ;
 		//
 		tabbedPane.setSelectedComponent(descriptionTab);
 		//
@@ -335,4 +331,19 @@ public class SLAPFrame extends JFrame implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {}
+	
+	private void userRefresh() {
+		descriptionTab.refresh() ;
+		announcementTab.refresh() ;
+		assignmentTab.refresh() ;
+		emailTab.refresh() ;
+	}
+	
+	private void couresRefresh() {
+		descriptionTab.refresh() ;
+        announcementTab.refresh() ;
+        assignmentTab.refresh() ;
+        emailTab.refresh() ;
+        
+	}
 }
