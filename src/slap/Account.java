@@ -3,12 +3,16 @@
  */
 package slap;
 
+import java.io.Serializable;
+
 /**
  * User Account
  * @author Michael
  *
  */
-class Account implements Cloneable {
+class Account implements Cloneable, Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	protected long id = -1;
 	protected String firstName = "unspecified";
 	protected String lastName = "unspecified";
