@@ -32,7 +32,9 @@ public class SLAP {
 		AccountManager.createAccount("Student1", "Test", "student", "student", Role.student);
 		AccountManager.createAccount("Instructor1", "Test", "instructor", "instructor", Role.instructor);
 		AccountManager.createAccount("Administrator1", "Test", "admin", "admin", Role.administrator);
-		AccountManager.createAccount("z", "z", "z", "z", Role.administrator) ;
+		AccountManager.createAccount("xavier", "xats", "x", "x", Role.administrator) ;
+		AccountManager.createAccount("yolanda", "yantee", "y", "y", Role.administrator) ;
+		AccountManager.createAccount("zoolander", "zebadia", "z", "z", Role.administrator) ;
 		
 		frame = new SLAPFrame(this) ;
 	}
