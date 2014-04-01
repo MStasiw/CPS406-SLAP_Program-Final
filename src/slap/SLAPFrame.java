@@ -6,11 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.* ;
 
 @SuppressWarnings("serial")
-public class SLAPFrame extends JFrame implements KeyListener {
+public class SLAPFrame extends JFrame implements KeyListener, WindowListener {
 	
 	private SLAP slap ;
 		
@@ -69,6 +71,7 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		//setLookAndFeel() ;
 		setLogo() ;
 		setupLayout() ;
+		setupListeners() ;
 		setTitle("SLAP") ;
         setSize(FRAME_WIDTH, FRAME_HEIGHT) ;
         setMinimumSize(new Dimension(MIN_FRAME_WIDTH, MIN_FRAME_HEIGHT)) ;
@@ -113,6 +116,13 @@ public class SLAPFrame extends JFrame implements KeyListener {
 		cardLayout  = new CardLayout() ;
 		cards = new JPanel(cardLayout) ;
 		add(cards) ;
+	}
+	
+	/**
+	 * Setup the listeners
+	 */
+	private void setupListeners() {
+		addWindowListener(this) ;
 	}
 	
 	/**
@@ -346,4 +356,29 @@ public class SLAPFrame extends JFrame implements KeyListener {
         emailTab.refresh() ;
         
 	}
+	
+	@Override
+	public void windowOpened(WindowEvent e) {}
+
+	@Override
+    public void windowClosed(WindowEvent e) {}
+
+	@Override
+    public void windowClosing(WindowEvent e)
+    {
+		logout() ;
+        ObjectIO.objectOut(slap.DIR_NAME, slap.CM_FILE_NAME, slap.getCourseManager()) ;
+    }
+
+	@Override
+    public void windowActivated(WindowEvent e) {}
+
+	@Override
+    public void windowDeactivated(WindowEvent e) {}
+
+	@Override
+    public void windowIconified(WindowEvent e) {}
+
+	@Override
+    public void windowDeiconified(WindowEvent e) {}
 }

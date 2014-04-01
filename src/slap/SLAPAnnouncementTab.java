@@ -103,8 +103,8 @@ public class SLAPAnnouncementTab extends JPanel {
 			items.get(i).setEditVisibility(itemVisibility) ;
 			vs_panel.add(items.get(i)) ;
 		}
-		//
-		//panel.validate() ;
-		frame.refresh() ;
+		
+		//slap.getFrame().refresh() ; //Error on because refresh is called before frame creation
+		frame.refresh();
 	}
 }
