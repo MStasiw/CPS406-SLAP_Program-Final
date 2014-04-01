@@ -8,7 +8,11 @@ package slap;
 public class Email extends javax.swing.JPanel {
 
 	private SLAP slap ;
-	
+	private String to;
+        private String from="";
+        private String subject;
+        private String body;
+        private String instructor;
     /**
      * Creates new form Email
      */
@@ -37,7 +41,7 @@ public class Email extends javax.swing.JPanel {
 
         jLabel1.setText("To:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Instructor", "Students", "Admin" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Instructor-"+instructor, "Students", "Admin" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -114,12 +118,32 @@ public class Email extends javax.swing.JPanel {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        subject=jTextField1.getText();
+        body=jTextArea1.getText();
+        from= (String)jComboBox1.getSelectedItem(); 
     }//GEN-LAST:event_jButton1ActionPerformed
-
+//getter functions
+public String getBody(){
+    return body;
+}
+public String getSubject(){
+    return subject; 
+}
+public String getTo(){
+    return to;
+}
+public String getFrom(){
+    return from;
+}
+public void clearEmail(){
+    jTextArea1.setText("");
+    jTextField1.setText("");
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -135,17 +159,17 @@ public class Email extends javax.swing.JPanel {
     protected void refresh() {
     	Account user = slap.getCurrentUser() ;
     	if(user != null) {
-    		String username = user.getUsername() ;
+    		from = user.getUsername() ;
     	}
     	else {
-    		
+    		clearEmail();
     	}
     	Course course = slap.getCurrentCourse() ;
     	if(course != null) {
-    		String prof = course.getProfessor() ;
+    		to = course.getProfessor() ;
     	}
     	else {
-    		
+    		clearEmail();
     	}
     }
 }
