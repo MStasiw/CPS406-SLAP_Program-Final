@@ -36,7 +36,7 @@ public class ObjectIO
         try
         {
         	new File(dir).mkdir() ;
-            fos = new FileOutputStream(dir + determineOS() + file) ;
+            fos = new FileOutputStream(dir + System.getProperty("file.separator")  + file) ;
             oos = new ObjectOutputStream(fos) ;
             oos.writeObject(obj) ;
             oos.close() ;
@@ -48,18 +48,5 @@ public class ObjectIO
             System.out.println(e) ;
             return false ;
         }
-    }
-    
-    private static String determineOS() {
-    	if(System.getProperty("os.name").contains("Windows")) {
-    		return "\\" ;
-    	}
-    	else if(System.getProperty("os.name").contains("Mac")) {
-    		return "/" ;
-    	}
-    	else if(System.getProperty("os.name").contains("Mac")) {
-    		return "/" ;
-    	}
-    	else return "/" ;
     }
 }
