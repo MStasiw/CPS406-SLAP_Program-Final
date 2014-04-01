@@ -22,7 +22,8 @@ import javax.swing.JOptionPane;
  * @author Kevin
  *
  */
-public class Document {
+@SuppressWarnings("serial")
+public class Document implements Serializable{
 	private File file;
 	private File copiedFile;
 	private String fileName;
