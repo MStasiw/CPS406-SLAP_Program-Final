@@ -41,7 +41,7 @@ public class Email extends javax.swing.JPanel {
 
         jLabel1.setText("To:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Instructor-"+instructor, "Students", "Admin" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Instructor", "Administrators" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
