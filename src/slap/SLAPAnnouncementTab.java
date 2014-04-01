@@ -81,10 +81,10 @@ public class SLAPAnnouncementTab extends JPanel {
 		Account user = slap.getCurrentUser() ;
 		if(user != null) {
 			switch(user.getRole()) {
-				case student: addButton.setVisible(false) ; itemVisibility = false ; break ;
-				case instructor: addButton.setVisible(true) ; itemVisibility = true ; break ;
-				case administrator: addButton.setVisible(false) ; itemVisibility = true ; break ;
-				default: addButton.setVisible(false) ; itemVisibility = false ; break ;
+				case student: itemVisibility = false ; addButton.setVisible(itemVisibility) ; break ;
+				case instructor: itemVisibility = true ; addButton.setVisible(itemVisibility) ; break ;
+				case administrator: itemVisibility = true ; addButton.setVisible(itemVisibility) ; break ;
+				default: itemVisibility = false ; addButton.setVisible(itemVisibility) ; break ;
 			}
 		}
 		else {
