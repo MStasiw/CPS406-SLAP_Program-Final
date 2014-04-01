@@ -26,7 +26,9 @@ public class ObjectIO
         }
         catch(Exception e)
         {
-        	System.out.println(e) ;
+        	System.err.println(e) ;
+        	System.err.println("Stack Trace:");
+        	e.printStackTrace();
             return null ;
         }
     }
@@ -45,7 +47,9 @@ public class ObjectIO
         }
         catch(Exception e)
         {
-            System.out.println(e) ;
+        	System.err.println(e) ;
+        	System.err.println("Stack Trace:");
+        	e.printStackTrace();
             return false ;
         }
     }
