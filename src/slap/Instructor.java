@@ -15,7 +15,7 @@ class Instructor extends Account {
 	 * @param username
 	 * @param password
 	 */
-	public Instructor(String firstName, String lastName, String username,
+	protected Instructor(String firstName, String lastName, String username,
 			String password) {
 		super(firstName, lastName, username, password, Role.instructor);
 		// TODO Auto-generated constructor stub

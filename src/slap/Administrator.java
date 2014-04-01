@@ -15,7 +15,7 @@ class Administrator extends Account {
 	 * @param username
 	 * @param password
 	 */
-	public Administrator(String firstName, String lastName, String username,
+	protected Administrator(String firstName, String lastName, String username,
 			String password) {
 		super(firstName, lastName, username, password, Role.administrator);
 		// TODO Auto-generated constructor stub
