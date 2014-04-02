@@ -155,7 +155,7 @@ public void clearEmail(){
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
-    
+
     protected void refresh() {
     	Account user = slap.getCurrentUser() ;
     	if(user != null) {
