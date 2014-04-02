@@ -162,14 +162,13 @@ public void clearEmail(){
     		from = user.getUsername() ;
     	}
     	else {
-    		clearEmail();
     	}
     	Course course = slap.getCurrentCourse() ;
     	if(course != null) {
     		to = course.getProfessor() ;
     	}
     	else {
-    		clearEmail();
     	}
+            		clearEmail();
     }
 }
