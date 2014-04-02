@@ -12,11 +12,27 @@ abstract class AccountManager {
 	private static AccountMap userMap = new AccountMap();
 
 	/**
-	 * Workaround to prevent abstract class from being created a a new object
+	 * Workaround to prevent abstract class from being instantiated as a new object
 	 */
 	private AccountManager() {
 		//super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * Clears user account database,
+	 * deleting all user Account objects stored in database
+	 */
+	protected static void deleteAllUsers() {
+		userMap.reset();
+	}
+	
+	/**
+	 * Gets the AccountMap object
+	 * @return userMap the AccountMap object
+	 */
+	protected AccountMap getAccountMap() {
+		return userMap;
 	}
 	
 	/**
@@ -75,6 +91,14 @@ abstract class AccountManager {
 	 */
 	protected static Account getAccountObj(String username) {
 		return userMap.getAccountObj(username);
+	}
+	
+	/**
+	 * Display String representation of AccountMap; usernames it contains
+	 * @return String representation of AccountMap
+	 */
+	protected static String listAccounts() {
+		return userMap.toString();
 	}
 	
 	/**
