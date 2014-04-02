@@ -36,6 +36,8 @@ public class SLAP {
 		AccountManager.createAccount("yolanda", "yantee", "y", "y", Role.instructor) ;
 		AccountManager.createAccount("zoolander", "zebadia", "z", "z", Role.administrator) ;
 		
+		//System.out.println(AccountManager.listAccounts());
+		
 		frame = new SLAPFrame(this) ;
 	}
 	

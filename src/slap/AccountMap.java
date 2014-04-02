@@ -13,9 +13,10 @@ import java.util.TreeMap;
  * @author Michael
  *
  */
-@SuppressWarnings("serial")
+
 public class AccountMap implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private SortedMap<String, Account> map = null;
 
 	/**
@@ -118,13 +119,48 @@ public class AccountMap implements Serializable {
 		return null;
 	}
 	
+	/**
+	 * Removes all key-value pair mappings; resets AccountMap state
+	 */
+	void reset() {
+		if (!map.isEmpty())
+			map.clear();
+	}
+	
 	/*
 	 *  (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return null;
+		final int maxLen = 10;
+		return this.getClass().getName() + " ["
+				+ (map != null ? "map=" + toStringHelper(map.entrySet(), maxLen) : "")
+				+ "]";
+	}
+	
+	/**
+	 * Help method for toString() method
+	 * @param collection
+	 * @param maxLen
+	 * @return
+	 */
+	private String toStringHelper(Collection<?> collection, int maxLen) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("(");
+		String key = null;
+		String username = "";
+		int i = 0;
+		for (Iterator<?> iterator = collection.iterator(); iterator.hasNext()
+				&& i < maxLen; i++) {
+			if (i > 0)
+				builder.append(", ");
+			key = iterator.next().toString();
+			username = key.substring(0, key.indexOf('='));
+			builder.append(username);
+		}
+		builder.append(")");
+		return builder.toString();
 	}
 
 	/*
