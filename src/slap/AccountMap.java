@@ -20,7 +20,7 @@ public class AccountMap implements Serializable {
 	private SortedMap<String, Account> map = null;
 
 	/**
-	 * Constructor to create an AccountMap object
+	 * Constructor to create new instance of an AccountMap object
 	 */
 	public AccountMap() {
 		map = new TreeMap<String, Account>();
@@ -28,11 +28,13 @@ public class AccountMap implements Serializable {
 	}
 
 	/**
-	 * Add a user account to the account map
-	 * @param userAccount
+	 * Adds a user account to the account map
+	 * @param userAccount Account object
 	 * @return true if successfully added, false on any error
 	 */
-	boolean addAccount(Account userAccount) {
+	protected boolean addAccount(Account userAccount) {
+		if (userAccount == null) return false;
+		
 		if (!this.userExists(userAccount.getUsername())) {
 			try {
 				map.put(userAccount.getUsername(), userAccount);
@@ -54,7 +56,8 @@ public class AccountMap implements Serializable {
 	 * @param username
 	 * @return true if exists, false if does not exist
 	 */
-	boolean userExists(String username) {
+	private boolean userExists(String username) {
+		if (username.equals(null) || username.isEmpty()) return false;
 		return map.containsKey(username);
 	}
 	
@@ -64,11 +67,11 @@ public class AccountMap implements Serializable {
 	 * @param newName
 	 * @return true if username successfully changed, false on any error
 	 */
-	boolean changeUsername(String currentName, String newName) {
+	protected boolean changeUsername(String currentName, String newName) {
 		Account oldAccount = null;
 		Account newAccount = null;
 		
-		if (this.userExists(currentName)) {
+		if (this.userExists(currentName) && !this.userExists(newName)) {
 			try {
 				oldAccount = map.get(currentName);
 				newAccount = (Account) oldAccount.clone();
@@ -79,6 +82,9 @@ public class AccountMap implements Serializable {
 				System.err.println("Error occured: username for: " + currentName + " was not changed.");
 				return false;
 			}
+		}else{
+			System.err.println("Error occured: username for: " + currentName + " was not changed.");
+			return false;
 		}
 		return true;
 	}
@@ -89,7 +95,9 @@ public class AccountMap implements Serializable {
 	 * @param psw
 	 * @return true if successfully changed password, false on any error
 	 */
-	boolean changePassword(String username, String psw) {
+	protected boolean changePassword(String username, String psw) {
+		if (psw.equals(null) || psw.isEmpty()) return false;
+		
 		Account tempAccount = null;
 		if (this.userExists(username)) {
 			try {
@@ -99,6 +107,9 @@ public class AccountMap implements Serializable {
 				System.err.println("Error occured: username for: " + username + " was not changed.");
 				return false;
 			}
+		}else{
+			System.err.println("Error occured: username for: " + username + " was not changed.");
+			return false;
 		}
 		return true;
 	}
@@ -108,13 +119,15 @@ public class AccountMap implements Serializable {
 	 * @param username
 	 * @return Account object, else null
 	 */
-	Account getAccountObj(String username) {
+	protected Account getAccountObj(String username) {
 		if (this.userExists(username)) {
 			try {
 				return map.get(username);
 			}catch(Exception e) {
 				System.err.println("Error occured retrieving user account for username: " + username + ".");
 			}
+		}else{
+			System.err.println("Error occured retrieving user account for username: " + username + ".");
 		}
 		return null;
 	}
@@ -122,7 +135,7 @@ public class AccountMap implements Serializable {
 	/**
 	 * Removes all key-value pair mappings; resets AccountMap state
 	 */
-	void reset() {
+	protected void reset() {
 		if (!map.isEmpty())
 			map.clear();
 	}
