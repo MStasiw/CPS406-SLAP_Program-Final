@@ -1,4 +1,5 @@
 package slap;
+import javax.swing.JOptionPane; 
 
 
 /**
@@ -29,7 +30,7 @@ public class Email extends javax.swing.JPanel {
  //   @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+        
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
@@ -125,7 +126,9 @@ public class Email extends javax.swing.JPanel {
         // TODO add your handling code here:
         subject=jTextField1.getText();
         body=jTextArea1.getText();
-        from= (String)jComboBox1.getSelectedItem(); 
+        from= (String)jComboBox1.getSelectedItem();
+        JOptionPane.showMessageDialog(null, "Email sent.");
+        clearEmail();
     }//GEN-LAST:event_jButton1ActionPerformed
 //getter functions
 public String getBody(){
@@ -155,7 +158,7 @@ public void clearEmail(){
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
-
+    
     protected void refresh() {
     	Account user = slap.getCurrentUser() ;
     	if(user != null) {
