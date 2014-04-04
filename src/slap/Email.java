@@ -10,10 +10,12 @@ public class Email extends javax.swing.JPanel {
 
 	private SLAP slap ;
 	private String to;
+	private String username;
         private String from="";
         private String subject;
         private String body;
-        private String instructor;
+	private String prof;       
+	 private String instructor;
     /**
      * Creates new form Email
      */
@@ -126,7 +128,11 @@ public class Email extends javax.swing.JPanel {
         // TODO add your handling code here:
         subject=jTextField1.getText();
         body=jTextArea1.getText();
-        from= (String)jComboBox1.getSelectedItem();
+	from=username;
+         if((String)jComboBox1.getSelectedItem()=="Administrators")
+	to=(String)jComboBox1.getSelectedItem();
+	 else 
+	to=(String)jComboBox1.getSelectedItem()+"-"+prof;
         JOptionPane.showMessageDialog(null, "Email sent.");
         clearEmail();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -162,13 +168,13 @@ public void clearEmail(){
     protected void refresh() {
     	Account user = slap.getCurrentUser() ;
     	if(user != null) {
-    		from = user.getUsername() ;
+    		username = user.getUsername() ;
     	}
     	else {
     	}
-    	Course course = slap.getCurrentCourse() ;
+    	Course course = slap.getCurrentCourse() ;z  
     	if(course != null) {
-    		to = course.getProfessor() ;
+    		prof = course.getProfessor() ;
     	}
     	else {
     	}
