@@ -172,7 +172,7 @@ public void clearEmail(){
     	}
     	else {
     	}
-    	Course course = slap.getCurrentCourse() ;z  
+    	Course course = slap.getCurrentCourse() ;
     	if(course != null) {
     		prof = course.getProfessor() ;
     	}
