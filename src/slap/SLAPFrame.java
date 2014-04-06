@@ -353,8 +353,7 @@ public class SLAPFrame extends JFrame implements KeyListener, WindowListener {
 		descriptionTab.refresh() ;
         announcementTab.refresh() ;
         assignmentTab.refresh() ;
-        emailTab.refresh() ;
-        
+        emailTab.refresh() ;    
 	}
 	
 	@Override

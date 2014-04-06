@@ -16,6 +16,8 @@ public class Course implements Managable, Serializable
 
     public ArrayList<String> students ;
     public Manager<String, Announcement> announcements ;
+    public Manager<String, SLAPDocument> assignments ;
+    public Manager<String, SLAPDocument> document ;
 
     public Course()
     {
