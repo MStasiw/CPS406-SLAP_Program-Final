@@ -124,10 +124,10 @@ public class AccountMap implements Serializable {
 			try {
 				return map.get(username);
 			}catch(Exception e) {
-				System.err.println("Error occured retrieving user account for username: " + username + ".");
+				System.err.println("Error occured: could not retrieve user account for username: " + username + ".");
 			}
 		}else{
-			System.err.println("Error occured retrieving user account for username: " + username + ".");
+			System.err.println("Error occured: user account for username: " + (username.isEmpty() ? "\"\"" : username)+ " could not be found.");
 		}
 		return null;
 	}
