@@ -9,7 +9,7 @@ package slap;
  */
 abstract class AccountManager {
 	
-	private static AccountMap userMap = new AccountMap();
+	private static AccountMap userMap = null;
 
 	/**
 	 * Workaround to prevent abstract class from being instantiated as a new object
@@ -19,20 +19,39 @@ abstract class AccountManager {
 		// TODO Auto-generated constructor stub
 	}
 	
+	private static boolean initialize() {
+		if (userMap == null) {
+			userMap = new AccountMap();
+			return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * Clears user account database,
 	 * deleting all user Account objects stored in database
 	 */
 	protected static void deleteAllUsers() {
+		initialize();
 		userMap.reset();
 	}
 	
 	/**
-	 * Gets the AccountMap object
+	 * Gets the AccountMap object, database of user accounts
 	 * @return userMap the AccountMap object
 	 */
 	protected AccountMap getAccountMap() {
+		initialize();
 		return userMap;
+	}
+	
+	protected static boolean setAccountMap(AccountMap savedMap) {
+		if (savedMap == null) {
+			initialize();
+			return false;
+		}
+		userMap = savedMap;
+		return true;
 	}
 	
 	/**
@@ -45,6 +64,7 @@ abstract class AccountManager {
 	 * @return Account object which was created, if successful, else null
 	 */
 	protected static Account createAccount(String firstName, String lastName, String username, String password, Role role) {
+		initialize();
 		Account newAccount = null;
 		
 		switch(role) {
@@ -71,6 +91,7 @@ abstract class AccountManager {
 	 * @return true if username successfully changed, false on any error
 	 */
 	protected static boolean changeUsername(String currentName, String newName) {
+		initialize();
 		return userMap.changeUsername(currentName, newName);
 	}
 	
@@ -81,7 +102,11 @@ abstract class AccountManager {
 	 * @return true if successfully changed password, false on any error
 	 */
 	protected static boolean changePassword(String username, String psw) {
-		return userMap.changePassword(username, psw);
+		initialize();
+		if (!psw.isEmpty()) {
+			return userMap.changePassword(username, psw);
+		}
+		return false;
 	}
 	
 	/**
@@ -90,6 +115,7 @@ abstract class AccountManager {
 	 * @return Account object, else null
 	 */
 	protected static Account getAccountObj(String username) {
+		initialize();
 		return userMap.getAccountObj(username);
 	}
 	
@@ -98,6 +124,7 @@ abstract class AccountManager {
 	 * @return String representation of AccountMap
 	 */
 	protected static String listAccounts() {
+		initialize();
 		return userMap.toString();
 	}
 	
@@ -106,6 +133,7 @@ abstract class AccountManager {
 	 * @return String representation of AccountMap
 	 */
 	protected static String DEBUG_listAccounts() {
+		initialize();
 		return userMap.DEBUG_toString();
 	}
 	
@@ -116,6 +144,7 @@ abstract class AccountManager {
 	 * @return Account object if successfully authenticated user, else null
 	 */
 	protected static Account authenticate(String username, String psw) {
+		initialize();
 		Account temp = null;
 		temp = userMap.getAccountObj(username);
 		if (temp != null) {
