@@ -57,7 +57,10 @@ public class AccountMap implements Serializable {
 	 * @return true if exists, false if does not exist
 	 */
 	private boolean userExists(String username) {
-		if (username.equals(null) || username.isEmpty()) return false;
+		if (username.equals(null) || username.isEmpty()) {
+			System.err.println("Error: username cannot be blank");
+			return false;
+		}
 		return map.containsKey(username);
 	}
 	
@@ -68,13 +71,18 @@ public class AccountMap implements Serializable {
 	 * @return true if username successfully changed, false on any error
 	 */
 	protected boolean changeUsername(String currentName, String newName) {
+		if (newName.equals(null) || newName.isEmpty()) {
+			System.err.println("Error: username cannot be blank");
+			System.err.println("Error occured: username for: " + currentName + " was not changed.");
+			return false;
+		}
 		Account oldAccount = null;
 		Account newAccount = null;
 		
 		if (this.userExists(currentName) && !this.userExists(newName)) {
 			try {
 				oldAccount = map.get(currentName);
-				newAccount = (Account) oldAccount.clone();
+				newAccount = (Account)oldAccount.clone();
 				newAccount.setUsername(newName);
 				map.remove(currentName);
 				this.addAccount(newAccount);
@@ -96,7 +104,11 @@ public class AccountMap implements Serializable {
 	 * @return true if successfully changed password, false on any error
 	 */
 	protected boolean changePassword(String username, String psw) {
-		if (psw.equals(null) || psw.isEmpty()) return false;
+		if (psw.equals(null) || psw.isEmpty()) {
+			System.err.println("Error: password cannot be blank");
+			System.err.println("Error occured: username for: " + username + " was not changed.");
+			return false;
+		}
 		
 		Account tempAccount = null;
 		if (this.userExists(username)) {
