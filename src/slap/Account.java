@@ -19,6 +19,7 @@ class Account implements Cloneable, Serializable {
 	protected String username = "unspecified";
 	protected String password = "";
 	protected Role role = null;
+	protected Manager<String, SLAPEmail> email = null;
 	
 	/**
 	 * Creates new user account object
