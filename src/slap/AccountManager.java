@@ -40,7 +40,7 @@ abstract class AccountManager {
 	 * Gets the AccountMap object, database of user accounts
 	 * @return userMap the AccountMap object
 	 */
-	protected AccountMap getAccountMap() {
+	protected static AccountMap getAccountMap() {
 		initialize();
 		return userMap;
 	}

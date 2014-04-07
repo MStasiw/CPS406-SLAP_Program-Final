@@ -151,7 +151,7 @@ public class SLAPFrame extends JFrame implements KeyListener, WindowListener {
 		
 		assignmentTab = new SLAPAssignmentTab(this, slap);
 		tabbedPane.addTab("Assignments", assignmentTab) ;
-		tabbedPane.addTab("Submit Assignments", new SubmitAssignUI2()) ;
+		tabbedPane.addTab("Submit Assignments", new SubmitAssignUI(slap)) ;
 		
 		tabbedPane.addTab("Grades", new SLAPTab(slap)) ;
 		
@@ -366,6 +366,7 @@ public class SLAPFrame extends JFrame implements KeyListener, WindowListener {
     public void windowClosing(WindowEvent e)
     {
 		logout() ;
+		ObjectIO.objectOut(slap.DIR_NAME, slap.USER_FILE_NAME, slap.getAccountMap()) ;
         ObjectIO.objectOut(slap.DIR_NAME, slap.CM_FILE_NAME, slap.getCourseManager()) ;
     }
 

@@ -8,7 +8,20 @@ public class DefaultData {
 		this.slap = slap ;
 	}
 	
-	protected void loadData() {
+	protected void loadUserData() {
+		/*
+		 * FOR USE IN DEVELOPMENT/TESTING ONLY
+		 * Create user accounts 
+		 */
+		AccountManager.createAccount("Student1", "Test", "student", "student", Role.student);
+		AccountManager.createAccount("Instructor1", "Test", "instructor", "instructor", Role.instructor);
+		AccountManager.createAccount("Administrator1", "Test", "admin", "admin", Role.administrator);
+		AccountManager.createAccount("xavier", "xats", "x", "x", Role.student) ;
+		AccountManager.createAccount("yolanda", "yantee", "y", "y", Role.instructor) ;
+		AccountManager.createAccount("zoolander", "zebadia", "z", "z", Role.administrator) ;
+	}
+	
+	protected void loadCourseData() {
 		Manager<String, Course> cm = new Manager<String, Course>() ;
 		
 		Announcement a1 = new Announcement("CPS310 Class this week", "There will be no class this week.") ;
