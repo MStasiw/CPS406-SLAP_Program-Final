@@ -12,6 +12,7 @@ public class SLAP {
 	
 	protected final String DIR_NAME = "res" ;
 	protected final String CM_FILE_NAME = "cm" ;
+	protected final String USER_FILE_NAME = "um" ;
 	
 	/**
 	 * Makes a new SLAP
@@ -22,19 +23,11 @@ public class SLAP {
 		dd = new DefaultData(this) ;
 		courseManager = (Manager<String, Course>) ObjectIO.objectIn(DIR_NAME, CM_FILE_NAME) ;
 		if(courseManager == null) {
-			dd.loadData() ;
+			dd.loadCourseData() ;
 		}
-        
-		/*
-		 * FOR USE IN DEVELOPMENT/TESTING ONLY
-		 * Create user accounts 
-		 */
-		AccountManager.createAccount("Student1", "Test", "student", "student", Role.student);
-		AccountManager.createAccount("Instructor1", "Test", "instructor", "instructor", Role.instructor);
-		AccountManager.createAccount("Administrator1", "Test", "admin", "admin", Role.administrator);
-		AccountManager.createAccount("xavier", "xats", "x", "x", Role.student) ;
-		AccountManager.createAccount("yolanda", "yantee", "y", "y", Role.instructor) ;
-		AccountManager.createAccount("zoolander", "zebadia", "z", "z", Role.administrator) ;
+		if(! AccountManager.setAccountMap((AccountMap) ObjectIO.objectIn(DIR_NAME, USER_FILE_NAME))) {
+			dd.loadUserData() ;
+		}
 		
 		//System.out.println(AccountManager.listAccounts());
 		
@@ -91,5 +84,13 @@ public class SLAP {
 	
 	protected SLAPFrame getFrame() {
 		return frame ;
+	}
+	
+	protected void setAccountMap(AccountMap savedMap) {
+		AccountManager.setAccountMap(savedMap) ;
+	}
+	
+	protected AccountMap getAccountMap() {
+		return AccountManager.getAccountMap() ;
 	}
 }
