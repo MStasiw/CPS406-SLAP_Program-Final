@@ -13,13 +13,13 @@ import java.io.Serializable;
 class Account implements Cloneable, Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	protected long id = -1;
-	protected String firstName = "unspecified";
-	protected String lastName = "unspecified";
-	protected String username = "unspecified";
-	protected String password = "";
-	protected Role role = null;
-	protected Manager<String, SLAPEmail> email = null;
+	private long id = -1;
+	private String firstName = "unspecified";
+	private String lastName = "unspecified";
+	private String username = "unspecified";
+	private String password = "";
+	private Role role = null;
+	private Manager<String, SLAPEmail> email = null;
 	
 	/**
 	 * Creates new user account object
@@ -49,7 +49,9 @@ class Account implements Cloneable, Serializable {
 	 * @param firstName the firstName to set
 	 */
 	protected void setFirstName(String firstName) {
-		this.firstName = firstName;
+		if (!AccountManager.isBlank(firstName)) {
+			this.firstName = firstName;
+		}
 	}
 	
 	/**
@@ -57,7 +59,9 @@ class Account implements Cloneable, Serializable {
 	 * @param lastName the lastName to set
 	 */
 	protected void setLastName(String lastName) {
-		this.lastName = lastName;
+		if (!AccountManager.isBlank(lastName)) {
+			this.lastName = lastName;
+		}
 	}
 	
 	/**
@@ -65,7 +69,9 @@ class Account implements Cloneable, Serializable {
 	 * @param username the username to set
 	 */
 	protected void setUsername(String username) {
-		this.username = username;
+		if (!AccountManager.isBlank(username)) {
+			this.username = username;
+		}
 	}
 	
 	/**
@@ -73,7 +79,9 @@ class Account implements Cloneable, Serializable {
 	 * @param password the password to set
 	 */
 	protected void setPassword(String password) {
-		this.password = password;
+		if (!AccountManager.isBlank(password)) {
+			this.password = password;
+		}
 	}
 	
 	/**
