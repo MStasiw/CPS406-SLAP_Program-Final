@@ -74,8 +74,7 @@ abstract class AccountManager {
 			break;
 		case administrator: newAccount = new Administrator(firstName, lastName, username, password);
 			break;
-		default:
-			break;
+		default: return null;
 		}
 		if (userMap.addAccount(newAccount)) { //add to AccountMap
 			//System.err.println(newAccount.toString());
@@ -103,10 +102,7 @@ abstract class AccountManager {
 	 */
 	protected static boolean changePassword(String username, String psw) {
 		initialize();
-		if (!psw.isEmpty()) {
-			return userMap.changePassword(username, psw);
-		}
-		return false;
+		return userMap.changePassword(username, psw);
 	}
 	
 	/**
@@ -152,6 +148,18 @@ abstract class AccountManager {
 					return temp;
 		}
 		return null;
+	}
+	
+	/**
+	 * Check if variable is null or empty.
+	 * @param field
+	 * @return true blank, else false
+	 */
+	protected static boolean isBlank(String field) {
+		if (field.equals(null) || field.isEmpty()) {
+			return true;
+		}
+		return false;
 	}
 	
 }
