@@ -25,12 +25,8 @@ public class SLAP {
 		if(courseManager == null) {
 			dd.loadCourseData() ;
 		}
-		AccountMap map = (AccountMap) ObjectIO.objectIn(DIR_NAME, USER_FILE_NAME) ;
-		if(map == null) {
+		if(! AccountManager.setAccountMap((AccountMap) ObjectIO.objectIn(DIR_NAME, USER_FILE_NAME))) {
 			dd.loadUserData() ;
-		}
-		else {
-			AccountManager.setAccountMap(map) ;
 		}
 		
 		//System.out.println(AccountManager.listAccounts());
