@@ -10,17 +10,36 @@ public class SLAPDocument implements Managable, Serializable {
 
 	private Date time ;
 	private String id ;
+	private String title ;
+	private String info ;
 	private String filename ;
 	private File file ;
 	
-	public SLAPDocument(String filename) {
+	public SLAPDocument(String title, String info) {
 		time = Calendar.getInstance().getTime() ;
-		id = Long.toString(time.getTime()) + " " + getFilename() ;
-		file = new File(filename) ;
+		this.title = title ;
+		this.info = info ;
+		id = getTitle() + " " + Long.toString(time.getTime()) ;		
 	}
 	
 	public String getID() {
 		return id ;
+	}
+	
+	public void setTitle(String title) {
+		this.title = title ;
+	}
+	
+	public String getTitle() {
+		return title ;
+	}
+	
+	public void setInfo(String info) {
+		this.info = info ;
+	}
+	
+	public String getInfo() {
+		return info ;
 	}
 	
 	public String getFilename() {
