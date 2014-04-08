@@ -1,4 +1,18 @@
 /bin
-.DS_Store
-/src/.DS_Store
-/src/resources/.DS_Store
+#.DS_Store
+#/src/.DS_Store
+#/src/resources/.DS_Store
+
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Mac OS
+*.DS_Store
+
+# Windows OS
+*.Thumbs.db
