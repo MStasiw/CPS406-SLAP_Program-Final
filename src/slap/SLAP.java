@@ -82,14 +82,26 @@ public class SLAP {
 		return currentCourse ;
 	}
 	
+	/**
+	 * Get the SLAP frame
+	 * @return frame the SLAP frame
+	 */
 	protected SLAPFrame getFrame() {
 		return frame ;
 	}
 	
+	/**
+	 * Set the account map
+	 * @param savedMap
+	 */
 	protected void setAccountMap(AccountMap savedMap) {
 		AccountManager.setAccountMap(savedMap) ;
 	}
 	
+	/**
+	 * Get the account map
+	 * @return the account map
+	 */
 	protected AccountMap getAccountMap() {
 		return AccountManager.getAccountMap() ;
 	}
