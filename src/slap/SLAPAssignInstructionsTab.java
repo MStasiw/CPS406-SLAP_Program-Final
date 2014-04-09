@@ -28,10 +28,12 @@ public class SLAPAssignInstructionsTab extends JPanel{
 	private JTextArea instructionText;
 	private JScrollPane sp;
 	
+	private JPanel buttonPanel;
 	private JButton saveButton;
+	private JButton editButton;
 	
 	private final Color FIELD_COLOUR = Color.WHITE ;
-	private final Font FIELD_FONT = new Font("Helvetica", Font.BOLD, 22) ;
+	//private final Font FIELD_FONT = new Font("Helvetica", Font.BOLD, 22) ;
 	
 	public SLAPAssignInstructionsTab(SLAP slap, SLAPFrame frame, SLAPAssignmentTab sat) {
 		this.slap = slap;
@@ -50,14 +52,14 @@ public class SLAPAssignInstructionsTab extends JPanel{
 		
 		instructionText = new JTextArea() ;
 		instructionText.setBackground(FIELD_COLOUR) ;
-		instructionText.setFont(FIELD_FONT) ;
+		//instructionText.setFont(FIELD_FONT) ;
 		instructionText.setLineWrap(true) ;
 		instructionText.setWrapStyleWord(true) ;
 		//instructionText.setBorder(new EmptyBorder(5, 5, 5, 5)) ;
 		
 		sp = new JScrollPane(instructionText);
 		
-		saveButton = new JButton("Save");
+		setUpButtons(this);
 	}
 	
 	private void setUp() {
@@ -75,6 +77,17 @@ public class SLAPAssignInstructionsTab extends JPanel{
 		//mainPanel.add(Box.createVerticalStrut(10));
 		//mainPanel.add(Box.createVerticalGlue());
 		add(mainPanel);
+	}
+	
+	private void setUpButtons(JPanel panel) {
+		JPanel main = new JPanel() ;
+		main.setLayout(new BorderLayout()) ;
+		buttonPanel = new JPanel() ;
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS)) ;				
+		saveButton = new JButton("Save") ;		
+		editButton = new JButton("Edit") ;	
+		
+		
 	}
 	
 	/**

@@ -23,6 +23,7 @@ public class SLAPAssignmentTab extends JPanel{
 	private JTabbedPane selectDisplay;
 	
 	private SLAPAssignInstructionsTab instruct;
+	private ViewSubmissionTab viewsubs;
 	
 	public SLAPAssignmentTab(SLAPFrame sframe, SLAP s) {
 		this.slap = s;
@@ -30,6 +31,7 @@ public class SLAPAssignmentTab extends JPanel{
 		
 		mainPanel = new JPanel();
 		instruct = new SLAPAssignInstructionsTab(slap, frame, this);
+		viewsubs = new ViewSubmissionTab(slap, frame);
 		
 		setLayout(new BorderLayout());
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -69,8 +71,8 @@ public class SLAPAssignmentTab extends JPanel{
 	}
 	
 	private void setupInstructorAssignmentGUI() {
-		SLAPAdminUserTab userTab = new SLAPAdminUserTab(slap, frame) ;
 		selectDisplay.addTab("Instructions", instruct);
+		selectDisplay.addTab("View Submissions", viewsubs);
 		
 		mainPanel.add(Box.createVerticalStrut(10));
 		mainPanel.add(selectAssign);
