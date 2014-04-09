@@ -9,13 +9,12 @@ import javax.swing.JOptionPane;
 public class Email extends javax.swing.JPanel {
 
 	private SLAP slap ;
-	private String to;
+	//private SLAPEmail email;
+	private Role to;
 	private String username;
-        private String from="";
         private String subject;
         private String body;
 	private String prof;       
-	 private String instructor;
     /**
      * Creates new form Email
      */
@@ -126,29 +125,29 @@ public class Email extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        //puts body and subject into variable
         subject=jTextField1.getText();
         body=jTextArea1.getText();
-	from=username;
-         if((String)jComboBox1.getSelectedItem()=="Administrators")
-	to=(String)jComboBox1.getSelectedItem();
-	 else 
-	to=(String)jComboBox1.getSelectedItem()+"-"+prof;
-        JOptionPane.showMessageDialog(null, "Email sent.");
-        clearEmail();
+	//check if emails blank
+	if(jTextArea1.getText().trim().length() == 0) 
+            JOptionPane.showMessageDialog(null, "EMAIL NOT SENT! Body is blank!","EMAIL ERROR",JOptionPane.WARNING_MESSAGE);
+	//emails not blank so lets store everything
+        else{
+            //assign role to constructor
+            if((String)jComboBox1.getSelectedItem()=="Administrators")
+                to=Role.administrator;
+            else 
+                to=Role.instructor;
+         
+            SLAPEmail mail = new SLAPEmail(slap.getCurrentUser(),slap.getCurrentUser().getRole(), subject, body) ;
+            if(slap.getCurrentUser() != null) {
+                slap.getCurrentUser().emails.add(mail.getID(), mail) ;
+            }
+            JOptionPane.showMessageDialog(null, "Email sent.");
+            clearEmail();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
-//getter functions
-public String getBody(){
-    return body;
-}
-public String getSubject(){
-    return subject; 
-}
-public String getTo(){
-    return to;
-}
-public String getFrom(){
-    return from;
-}
+//clears the fields in the email
 public void clearEmail(){
     jTextArea1.setText("");
     jTextField1.setText("");
