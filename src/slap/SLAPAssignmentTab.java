@@ -5,7 +5,6 @@ package slap;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 
 import javax.swing.*;
 
@@ -16,22 +15,22 @@ import javax.swing.*;
 public class SLAPAssignmentTab extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	private JScrollPane scrollPane ;
-	private VerticalScrollPanel vs_panel ;
+
 	private SLAP slap ;
 	private SLAPFrame frame;
+	private JPanel mainPanel;
+	
+	private SLAPAssignInstructionsStudent studentInstruct;
 	
 	public SLAPAssignmentTab(SLAPFrame sframe, SLAP s) {
 		this.slap = s;
 		this.frame = sframe;
 		
-		setLayout(new BorderLayout()) ;
-		vs_panel = new VerticalScrollPanel() ;
-		vs_panel.setLayout(new BoxLayout(vs_panel, BoxLayout.Y_AXIS)) ;
-		scrollPane = new JScrollPane() ;
-		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER) ;
-		scrollPane.setViewportView(vs_panel);
-		add(scrollPane);
+		mainPanel = new JPanel();
+		studentInstruct = new SLAPAssignInstructionsStudent(slap, frame);
+		
+		setLayout(new BorderLayout());
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 	}
 	
 	private void setupStudentAssignmentGUI() {
@@ -49,15 +48,16 @@ public class SLAPAssignmentTab extends JPanel{
 		selectAssign.add(selectCombo);
 		selectAssign.add(Box.createHorizontalGlue()) ;
 		
-		JTabbedPane selectDisplay = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
-		selectDisplay.addTab("Instructions", new JPanel()) ;
-		selectDisplay.addTab("Submit", new JPanel());
-		vs_panel.add(Box.createVerticalStrut(10));
-		vs_panel.add(selectAssign);
-		vs_panel.add(Box.createVerticalStrut(10));
-		vs_panel.add(new JSeparator());
-		vs_panel.add(Box.createVerticalStrut(5));
-		vs_panel.add(selectDisplay);
+		//Set up the JTabbedPane to the left
+		JTabbedPane selectDisplay = new JTabbedPane(JTabbedPane.LEFT, JTabbedPane.SCROLL_TAB_LAYOUT);
+		SLAPAdminUserTab userTab = new SLAPAdminUserTab(slap, frame) ;
+		selectDisplay.addTab("Instructions", userTab);
+		selectDisplay.addTab("Submit", studentInstruct);
+		mainPanel.add(Box.createVerticalStrut(10));
+		mainPanel.add(selectAssign);
+		mainPanel.add(Box.createVerticalStrut(10));
+		mainPanel.add(selectDisplay);
+		add(mainPanel, BorderLayout.CENTER);
 	}
 	
 	private void setupInstructorAssignmentGUI() {
@@ -72,7 +72,7 @@ public class SLAPAssignmentTab extends JPanel{
 	 * Refresh the items in the tab
 	 */
 	protected void refresh() {
-		vs_panel.removeAll() ;
+		removeAll() ;
 		
 		if(slap.getCurrentUser() != null) { //check if user is null, if so, there isn't anyone logged in
 			if(slap.getCurrentUser().getRole() == Role.student) {
@@ -84,6 +84,7 @@ public class SLAPAssignmentTab extends JPanel{
 			}
 		}
 		
+		this.validate();
 		frame.refresh() ;
 	}
 }
