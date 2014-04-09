@@ -52,7 +52,7 @@ public class SLAPAnnouncementTab extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if(slap.getCurrentCourse() != null) {
-					Announcement temp = new Announcement("title", "content") ;
+					Announcement temp = new Announcement("", "") ;
 					slap.getCurrentCourse().getAnnouncements().add(temp.getID(), temp) ;
 					refresh() ;
 				}

@@ -56,19 +56,26 @@ public class JHintTextField extends JTextField implements FocusListener
     {
         hintEnabled = true ;
         setForeground(hintColour) ;
-        setText(hint) ;
+        super.setText(hint) ;
     }
     
     private void disableHint()
     {
         hintEnabled = false ;
         setForeground(normalColour) ;
-        setText("") ;
+        super.setText("") ;
     }
     
     public void clearText()
     {
         enableHint() ;
+    }
+    
+    public void setText(String text) {
+    	if(hintEnabled) {
+    		disableHint() ;
+    	}
+    	super.setText(text) ;
     }
     
     public String getText()

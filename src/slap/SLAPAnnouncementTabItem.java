@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 public class SLAPAnnouncementTabItem extends JPanel {
 	
 	private JPanel panel ;
-	private JTextField textField ;
+	private JHintTextField textField ;
 	private JPanel textPanel ;
 	private JTextArea textArea ;
 	private JPanel buttonPanel ;
@@ -52,7 +52,7 @@ public class SLAPAnnouncementTabItem extends JPanel {
 		setLayout(new BorderLayout()) ;
 		panel = new JPanel() ;		
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)) ;
-		textField = new JTextField() ;
+		textField = new JHintTextField("Title") ;
 		textField.setFont(FIELD_FONT) ;
 		textField.setEditable(false) ;
 		//textField.setEnabled(false) ;

@@ -41,6 +41,8 @@ public class SLAPAdminTab extends JPanel {
 	private JButton editButton ;
 	private JButton removeButton ;
 	
+	private boolean isEditable ;
+	
 	//private Course selectedCourse ;
 	
 	public SLAPAdminTab(SLAP slap, SLAPFrame frame) {
@@ -147,15 +149,23 @@ public class SLAPAdminTab extends JPanel {
 				if(button.equals(addButton)) {
 					if(! codeField.getText().equals("")) {
 						String code = codeField.getText() ;
-						Course course = new Course(code) ;
-						slap.getCourseManager().add(course.getID(), course) ;
-						refresh() ;
-						courseList.setSelectedValue(code, true) ;
-						setInfoEnabled(true) ;
+						if(! slap.getCourseManager().contains(code)) {
+							Course course = new Course(code) ;
+							slap.getCourseManager().add(course.getID(), course) ;
+							refresh() ;
+							courseList.setSelectedValue(code, true) ;
+							setInfoEnabled(true) ;
+						}
+						else {
+							frame.displayError("Course code " + code + " is already registered.") ;
+						}
+					}
+					else {
+						frame.displayError("Please enter the code for the course to be added.") ;
 					}
 				}
 				else if(button.equals(saveButton)) {
-					if(courseList.getSelectedIndex() != -1) {
+					if(courseList.getSelectedIndex() != -1 && isEditable) {
 						Course course = (Course) slap.getCourseManager().get(courseList.getSelectedValue()) ;
 						course.setName(nameField.getText()) ;
 						course.setProfessor(profField.getText()) ;
@@ -166,7 +176,7 @@ public class SLAPAdminTab extends JPanel {
 					setInfoEnabled(false) ;
 				}
 				else if(button.equals(editButton)) {
-					if(courseList.getSelectedIndex() != -1) {
+					if(courseList.getSelectedIndex() != -1 && ! isEditable) {
 						setInfoEnabled(true) ;
 					}
 				}
@@ -221,7 +231,8 @@ public class SLAPAdminTab extends JPanel {
 		}
 		else {
 			setFieldBackgrounds(SAVE_COLOUR) ;
-		}		
+		}
+		isEditable = enabled ;
 	}
 	
 	private void setFieldBackgrounds(Color colour) {
