@@ -4,6 +4,9 @@
 package slap;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+
 import javax.swing.*;
 
 /**
@@ -32,10 +35,29 @@ public class SLAPAssignmentTab extends JPanel{
 	}
 	
 	private void setupStudentAssignmentGUI() {
-		//if(slap.getCurrentUser().getRole() == Role.administrator) {
-		JButton test = new JButton("I'm a button");
-		vs_panel.add(test);
-		//}
+		//Set up the JComboBox used to select a course
+		JPanel selectAssign = new JPanel();
+		selectAssign.setLayout(new BoxLayout(selectAssign, BoxLayout.X_AXIS));
+		JLabel comboLabel = new JLabel();
+		comboLabel.setText("Select an assignment: ");
+		JComboBox selectCombo = new JComboBox();
+		
+		selectCombo.setPreferredSize(new Dimension(300, 25));
+		selectCombo.setMaximumSize(selectCombo.getPreferredSize());
+		selectAssign.add(Box.createHorizontalGlue()) ;
+		selectAssign.add(comboLabel);
+		selectAssign.add(selectCombo);
+		selectAssign.add(Box.createHorizontalGlue()) ;
+		
+		JTabbedPane selectDisplay = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
+		selectDisplay.addTab("Instructions", new JPanel()) ;
+		selectDisplay.addTab("Submit", new JPanel());
+		vs_panel.add(Box.createVerticalStrut(10));
+		vs_panel.add(selectAssign);
+		vs_panel.add(Box.createVerticalStrut(10));
+		vs_panel.add(new JSeparator());
+		vs_panel.add(Box.createVerticalStrut(5));
+		vs_panel.add(selectDisplay);
 	}
 	
 	private void setupInstructorAssignmentGUI() {
