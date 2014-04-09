@@ -282,6 +282,16 @@ public class SLAPFrame extends JFrame implements KeyListener, WindowListener {
 		//
 		slp.clearText();
 		cardLayout.show(cards, TABS_CARD_ID) ;
+		if(slap.getCurrentUser() != null && tabbedPane.getTabCount() > 0) {
+			if(tabbedPane.getComponent(tabbedPane.getTabCount() - 1).equals(adminTab)) {
+				if(slap.getCurrentUser().getRole() != Role.administrator) {			
+					tabbedPane.remove(adminTab) ;
+				}
+			}
+			else if(slap.getCurrentUser().getRole() == Role.administrator) {
+				tabbedPane.addTab("Action", adminTab) ;
+			}
+		}
 	}
 	
 	/**
