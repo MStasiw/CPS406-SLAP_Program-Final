@@ -49,7 +49,7 @@ public class SLAPFrame extends JFrame implements KeyListener, WindowListener {
     private SLAPAnnouncementTab announcementTab ;
     private SLAPAssignmentTab assignmentTab;
     private Email emailTab ;
-    private SLAPAdminCourseTab adminTab ;
+    private SLAPAdminTab adminTab ;
     	
     /**
      * Makes a new frame
@@ -154,12 +154,12 @@ public class SLAPFrame extends JFrame implements KeyListener, WindowListener {
 		tabbedPane.addTab("Assignments", assignmentTab) ;
 		tabbedPane.addTab("Submit Assignments", new SubmitAssignUI(slap)) ;
 		
-		tabbedPane.addTab("Grades", new SLAPTab(slap)) ;
+		//tabbedPane.addTab("Grades", new SLAPTab(slap)) ;
 		
 		emailTab = new Email(slap) ;
 		tabbedPane.addTab("Email", emailTab) ;
 		
-		adminTab = new SLAPAdminCourseTab(slap, this) ;
+		adminTab = new SLAPAdminTab(slap, this) ;
 		tabbedPane.addTab("Actions", adminTab);
 	}
 	
