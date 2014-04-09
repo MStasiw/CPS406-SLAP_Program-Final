@@ -49,6 +49,7 @@ public class SLAPFrame extends JFrame implements KeyListener, WindowListener {
     private SLAPAnnouncementTab announcementTab ;
     private SLAPAssignmentTab assignmentTab;
     private Email emailTab ;
+    private SLAPAdminTab adminTab ;
     	
     /**
      * Makes a new frame
@@ -157,6 +158,9 @@ public class SLAPFrame extends JFrame implements KeyListener, WindowListener {
 		
 		emailTab = new Email(slap) ;
 		tabbedPane.addTab("Email", emailTab) ;
+		
+		adminTab = new SLAPAdminTab(slap, this) ;
+		tabbedPane.addTab("Actions", adminTab);
 	}
 	
 	/**
@@ -208,7 +212,7 @@ public class SLAPFrame extends JFrame implements KeyListener, WindowListener {
                 slap.setCurrentCourse(course) ;
                 courseLabel.setText(courseCode) ;
                 //Put tab refreshes that are course dependent here
-                couresRefresh() ;
+                coursesRefresh() ;
                 //
             }
         }
@@ -271,16 +275,8 @@ public class SLAPFrame extends JFrame implements KeyListener, WindowListener {
 		//set information
 		userLabel.setText(slap.getCurrentUser().getUsername()) ;
 		userLabel.setVisible(true) ;
-		courseLabel.setVisible(true) ;
-		//TESTING ONLY
-		@SuppressWarnings("rawtypes")
-		Comparable[] courseCodes =  slap.getCourseManager().getIDArray() ;
-		String[] codes = new String[courseCodes.length] ;
-		int count = 0 ;
-		for(@SuppressWarnings("rawtypes") Comparable comp : courseCodes) {
-			codes[count++] = (String) comp ;
-		}
-		populateCourseMenu(codes) ;
+		courseLabel.setVisible(true) ;		
+		populateCourseMenu(getCodesArray()) ;
 		//Put refresh call to tabs that are user dependent here
 		userRefresh() ;
 		//
@@ -315,7 +311,31 @@ public class SLAPFrame extends JFrame implements KeyListener, WindowListener {
 	 */
 	protected void refresh() {
 		//announcementTab.refresh(slap.getCurrentCourse()) ;
+		if(slap.getCurrentUser() != null) {
+			populateCourseMenu(getCodesArray()) ;
+		}
+		if(slap.getCurrentCourse() != null) {
+			if(slap.getCourseManager() != null) {
+				if(!slap.getCourseManager().contains(slap.getCurrentCourse().getID())) {
+					slap.setCurrentCourse(null) ;
+					coursesRefresh() ;
+				}
+			}
+		}	
 		tabbedPane.validate() ;
+	}
+
+	
+	@SuppressWarnings("rawtypes")
+	private String[] getCodesArray() {
+		//TESTING ONLY	
+		Comparable[] courseCodes =  slap.getCourseManager().getIDArray() ;
+		String[] codes = new String[courseCodes.length] ;
+		int count = 0 ;
+		for(Comparable comp : courseCodes) {
+			codes[count++] = comp.toString() ;
+		}
+		return codes ;
 	}
 	
 	/**
@@ -342,14 +362,27 @@ public class SLAPFrame extends JFrame implements KeyListener, WindowListener {
 	@Override
 	public void keyReleased(KeyEvent e) {}
 	
-	private void userRefresh() {
+	protected void userRefresh() {
+		if(slap.getCurrentUser() != null) {
+			userLabel.setText(slap.getCurrentUser().getUsername()) ;
+		}
+		else {
+			userLabel.setText("") ;
+		}
 		descriptionTab.refresh() ;
 		announcementTab.refresh() ;
 		assignmentTab.refresh() ;
 		emailTab.refresh() ;
+		adminTab.refresh() ;
 	}
 	
-	private void couresRefresh() {
+	protected void coursesRefresh() {
+		if(slap.getCurrentCourse() != null) {
+			courseLabel.setText(slap.getCurrentCourse().getCode()) ;
+		}
+		else {
+			courseLabel.setText("") ;
+		}
 		descriptionTab.refresh() ;
         announcementTab.refresh() ;
         assignmentTab.refresh() ;

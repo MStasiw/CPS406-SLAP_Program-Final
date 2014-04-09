@@ -100,7 +100,7 @@ public class SubmitAssignUI extends javax.swing.JPanel {
 
         jTextField1.setMinimumSize(new java.awt.Dimension(40, 20));
         jTextField1.setPreferredSize(new java.awt.Dimension(90, 20));
-        jTextField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        //jTextField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);

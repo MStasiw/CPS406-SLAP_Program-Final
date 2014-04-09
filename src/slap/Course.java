@@ -1,4 +1,5 @@
 package slap;
+
 import java.util.ArrayList ;
 import java.io.Serializable ;
 
@@ -27,6 +28,14 @@ public class Course implements Managable, Serializable
         this.description = "description" ;
         announcements = new Manager<String, Announcement>() ;
         //students = new ArrayList<String>() ; 
+    }
+    
+    public Course(String code) {
+    	this.code = code ;
+        this.name = "" ;
+        this.professor = "" ;
+        this.description = "" ;
+        announcements = new Manager<String, Announcement>() ;
     }
 
     public Course(String code, String name, String professor, String description)
