@@ -97,11 +97,11 @@ public class ViewSubmissionTab extends JPanel {
 		usernameLabel.setFont(LABEL_FONT) ;
 		labelPanel.add(usernameLabel, JPanel.LEFT_ALIGNMENT) ;
 		labelPanel.setBorder(new EtchedBorder()) ;
-//		firstnameField = new JHintTextField("First name") ;
-//		lastnameField = new JHintTextField("Last name") ;
+		firstnameField = new JHintTextField("First name") ;
+		lastnameField = new JHintTextField("Last name") ;
 		userEditor.add(labelPanel) ;
-//		userEditor.add(firstnameField) ;
-//		userEditor.add(lastnameField) ;
+		userEditor.add(firstnameField) ;
+		userEditor.add(lastnameField) ;
 		
 		panel1 = new JPanel();
 		panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
