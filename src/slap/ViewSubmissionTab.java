@@ -34,11 +34,15 @@ public class ViewSubmissionTab extends JPanel {
 	private JPanel panel1;		//panel contains "name" jLabel, "name" jComboBox, "grade" label, "grade" jTextField
 	private JLabel studentNameLabel;
 	private JComboBox studentNameComboBox;
+	private String defaultComboBoxString = "---select student---";
 	private JLabel gradeLabel;
 	private JTextField gradeTextField;
 	
 	private JPanel panel2; 	//panel contains horizontal glue, "save" jButton
-	//private JP
+	private JButton saveButton;
+	
+	private JPanel panel3;
+	private JTextArea submisssionTextArea;
 	
 	
 	private JScrollPane scrollPane ;
@@ -53,7 +57,7 @@ public class ViewSubmissionTab extends JPanel {
 	private JPanel buttonPanel ;
 	private JHintTextField usernameField ;
 	private JButton addButton ;
-	private JButton saveButton ;
+	//private JButton saveButton ;
 	private JButton editButton ;
 	private JButton removeButton ;
 	
@@ -93,18 +97,29 @@ public class ViewSubmissionTab extends JPanel {
 		usernameLabel.setFont(LABEL_FONT) ;
 		labelPanel.add(usernameLabel, JPanel.LEFT_ALIGNMENT) ;
 		labelPanel.setBorder(new EtchedBorder()) ;
-		firstnameField = new JHintTextField("First name") ;
-		lastnameField = new JHintTextField("Last name") ;
+//		firstnameField = new JHintTextField("First name") ;
+//		lastnameField = new JHintTextField("Last name") ;
 		userEditor.add(labelPanel) ;
-		userEditor.add(firstnameField) ;
-		userEditor.add(lastnameField) ;
-		setInfoEnabled(false) ;
-		panel.add(userEditor, BorderLayout.SOUTH) ;
+//		userEditor.add(firstnameField) ;
+//		userEditor.add(lastnameField) ;
 		
 		panel1 = new JPanel();
 		panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
 		panel1.setBorder(new EtchedBorder());
+		studentNameLabel = new JLabel("Student Name", JLabel.LEFT);
+		studentNameComboBox = new JComboBox();
+		studentNameComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { defaultComboBoxString }));
+		gradeLabel = new JLabel("View Submission", JLabel.LEFT);
+		gradeTextField = new JTextField("");
+		panel1.add(studentNameLabel);
+		panel1.add(studentNameComboBox);
+		panel1.add(Box.createHorizontalGlue());
+		panel1.add(gradeLabel);
+		panel1.add(gradeTextField);
+		userEditor.add(panel1);
 		
+		setInfoEnabled(false) ;
+		panel.add(userEditor, BorderLayout.SOUTH) ;
 	}
 	
 	private void setupList(JPanel panel) {
