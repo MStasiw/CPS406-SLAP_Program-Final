@@ -54,7 +54,7 @@ public class SubmitAssignUI extends javax.swing.JPanel {
         jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         jLabel1.setMaximumSize(new java.awt.Dimension(150, 20));
         jLabel1.setMinimumSize(new java.awt.Dimension(100, 20));
-        jLabel1.setPreferredSize(new java.awt.Dimension(120, 20));
+        jLabel1.setPreferredSize(new java.awt.Dimension(100, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -67,7 +67,7 @@ public class SubmitAssignUI extends javax.swing.JPanel {
         jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         jLabel2.setMaximumSize(new java.awt.Dimension(150, 20));
         jLabel2.setMinimumSize(new java.awt.Dimension(100, 20));
-        jLabel2.setPreferredSize(new java.awt.Dimension(120, 20));
+        jLabel2.setPreferredSize(new java.awt.Dimension(100, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -80,7 +80,7 @@ public class SubmitAssignUI extends javax.swing.JPanel {
         jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         jLabel3.setMaximumSize(new java.awt.Dimension(150, 20));
         jLabel3.setMinimumSize(new java.awt.Dimension(100, 20));
-        jLabel3.setPreferredSize(new java.awt.Dimension(120, 20));
+        jLabel3.setPreferredSize(new java.awt.Dimension(100, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -89,7 +89,7 @@ public class SubmitAssignUI extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         add(jLabel3, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { defaultComboBoxString }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -147,6 +147,7 @@ public class SubmitAssignUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void initComponents2() {
+		
         class SubmitButtonListener implements ActionListener{
             public void actionPerformed (ActionEvent evt){
                 if(jTextField1.getText().equals("") )
@@ -178,19 +179,34 @@ public class SubmitAssignUI extends javax.swing.JPanel {
     }
     
     protected void refresh() {
-    	Course course = slap.getCurrentCourse() ;
+    	Course currentCourse = slap.getCurrentCourse() ;
         Account user = slap.getCurrentUser();
+		Managable[] assignmentList;
+		Comparable[] idList;
+		SLAPDocument doc;
         
-    	if(course != null) {
+    	if(currentCourse != null) {
             if(user.getRole() == Role.student){
-                String courseName = course.getName() ;
+                String courseName = currentCourse.getName() ;
                 jLabel1.setText(courseName);
                 //retrieve user's unsubmitted assignments and add them to jComboBox1's item list
-            }
+				//clear item list in combo box first
+				jComboBox1.removeAllItems();
+				//query currentCourse in slap (check for null) and load them into jComboBox 
+				jComboBox1.addItem(defaultComboBoxString);
+				assignmentList = currentCourse.assignments.getItemArray();
+//				idList = currentCourse.assignments.getIDArray();
+//				for(Comparable c: idList){
+				for(Managable m: assignmentList){
+//					jComboBox1.addItem(c.toString());
+					jComboBox1.addItem(m);
+				}
+           }
     	}
     	else {
     		clearFields();
     	}
+		
     }
     
     private void clearFields(){
@@ -209,6 +225,7 @@ public class SubmitAssignUI extends javax.swing.JPanel {
     private String blankTopicErrorMessage = "Assignment Topic cannot be blank.";
     private String blankBodyErrorMessage = "Assignment Body cannot be blank.";
     private String assignmentSubmittedMessage = "Assignment has been submitted.";
+    private String defaultComboBoxString = "---Choose an assignment---";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
