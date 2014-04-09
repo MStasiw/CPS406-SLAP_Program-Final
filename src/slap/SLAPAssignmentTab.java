@@ -22,14 +22,14 @@ public class SLAPAssignmentTab extends JPanel{
 	private JPanel selectAssign;
 	private JTabbedPane selectDisplay;
 	
-	private SLAPAssignInstructionsStudentTab studentInstruct;
+	private SLAPAssignInstructionsTab instruct;
 	
 	public SLAPAssignmentTab(SLAPFrame sframe, SLAP s) {
 		this.slap = s;
 		this.frame = sframe;
 		
 		mainPanel = new JPanel();
-		studentInstruct = new SLAPAssignInstructionsStudentTab(slap, frame);
+		instruct = new SLAPAssignInstructionsTab(slap, frame, this);
 		
 		setLayout(new BorderLayout());
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -59,7 +59,7 @@ public class SLAPAssignmentTab extends JPanel{
 	
 	private void setupStudentAssignmentGUI() {
 		SLAPAdminUserTab userTab = new SLAPAdminUserTab(slap, frame) ;
-		selectDisplay.addTab("Instructions", studentInstruct);
+		selectDisplay.addTab("Instructions", instruct);
 		selectDisplay.addTab("Submit", userTab);
 		mainPanel.add(Box.createVerticalStrut(10));
 		mainPanel.add(selectAssign);
@@ -69,7 +69,14 @@ public class SLAPAssignmentTab extends JPanel{
 	}
 	
 	private void setupInstructorAssignmentGUI() {
+		SLAPAdminUserTab userTab = new SLAPAdminUserTab(slap, frame) ;
+		selectDisplay.addTab("Instructions", instruct);
 		
+		mainPanel.add(Box.createVerticalStrut(10));
+		mainPanel.add(selectAssign);
+		mainPanel.add(Box.createVerticalStrut(10));
+		mainPanel.add(selectDisplay);
+		add(mainPanel, BorderLayout.CENTER);
 	}
 	
 	private void setupAdministratorAssignmentGUI() {
@@ -96,5 +103,6 @@ public class SLAPAssignmentTab extends JPanel{
 		
 		this.validate();
 		frame.refresh();
+		instruct.refresh();
 	}
 }
