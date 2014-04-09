@@ -148,11 +148,11 @@ public class SLAPFrame extends JFrame implements KeyListener, WindowListener {
 		tabbedPane.addTab("Announcements", announcementTab) ;
 		//announcementTab.addItem(new SLAPTabItem()) ;
 		//
-		tabbedPane.addTab("Documents", new SLAPTab(slap)) ;
+		//tabbedPane.addTab("Documents", new SLAPTab(slap)) ;
 		
 		assignmentTab = new SLAPAssignmentTab(this, slap);
 		tabbedPane.addTab("Assignments", assignmentTab) ;
-		tabbedPane.addTab("Submit Assignments", new SubmitAssignUI(slap)) ;
+		//tabbedPane.addTab("Submit Assignments", new SubmitAssignUI(slap)) ;
 		
 		//tabbedPane.addTab("Grades", new SLAPTab(slap)) ;
 		
