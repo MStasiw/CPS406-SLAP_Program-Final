@@ -145,5 +145,6 @@ public class SLAPAssignmentTab extends JPanel{
 		this.validate();
 		frame.refresh();
 		instruct.refresh();
+		viewsubs.refresh();
 	}
 }
