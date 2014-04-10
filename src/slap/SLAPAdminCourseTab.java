@@ -348,6 +348,7 @@ public class SLAPAdminCourseTab extends JPanel {
 		else {
 			listModel.removeAllElements() ;
 		}
+		profComboBox.setSelectedItem(null) ;
 		courseList.validate() ;
 		frame.refresh() ;
 	}

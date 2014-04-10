@@ -26,7 +26,7 @@ public class DefaultData {
 		
 		Account hamid = new Account("Hamid", "Timorabadi", "htimorab", "htimorab", Role.instructor) ;
 		Account misic = new Account("Vojislav", "Misic", "vmisic", "vmisic", Role.instructor) ;
-		Account woit = new Account("Denise", "Woid", "dwoit", "dwoit", Role.instructor) ;
+		Account woit = new Account("Denise", "Woit", "dwoit", "dwoit", Role.instructor) ;
 		Account debbie = new Account("Deborah", "de Lange", "ddelange", "ddelange", Role.instructor) ;
 		Account escobar = new Account("Marcos", "Escobar-Anel", "mescobar", "mescobar", Role.instructor) ;
 		AccountManager.getAccountMap().addAccount(hamid) ;

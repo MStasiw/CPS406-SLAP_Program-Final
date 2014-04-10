@@ -145,7 +145,7 @@ public class Email extends javax.swing.JPanel {
         body=jTextArea1.getText();
 	//check if emails blank
 	if(jTextArea1.getText().trim().length() == 0) 
-            JOptionPane.showMessageDialog(null, "EMAIL NOT SENT! Body is blank!","EMAIL ERROR",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "EMAIL NOT SENT! Body is blank!","EMAIL ERROR",JOptionPane.WARNING_MESSAGE);
 	//emails not blank so lets store everything
         else{
             //assign role to constructor
@@ -158,7 +158,7 @@ public class Email extends javax.swing.JPanel {
             if(slap.getCurrentUser() != null) {
                 slap.getCurrentUser().emails.add(mail.getID(), mail) ;
             }
-            JOptionPane.showMessageDialog(null, "Email sent.");
+            JOptionPane.showMessageDialog(this, "Email sent.");
             clearEmail();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
