@@ -37,6 +37,8 @@ public class SLAPAdminUserTab extends JPanel {
 	
 	private JPanel buttonPanel ;
 	private JHintTextField usernameField ;
+	private JHintTextField passwordField ;
+	private JComboBox<String> roleBox ;
 	private JButton addButton ;
 	private JButton saveButton ;
 	private JButton editButton ;
@@ -44,31 +46,32 @@ public class SLAPAdminUserTab extends JPanel {
 	
 	private boolean isEditable ;
 	
-	//private Course selectedCourse ;
+	private final String STUDENT = "student" ;
+	private final String INSTRUCTOR = "instructor" ;
+	private final String ADMINISTRATOR = "administrator" ;
 	
 	public SLAPAdminUserTab(SLAP slap, SLAPFrame frame) {
 		this.slap = slap ;
 		this.frame = frame ;
-		//selectedCourse = null ;
 		initialize() ;
 	}
 	
 	private void initialize() {
 		setLayout(new BorderLayout()) ;
-		setupCourses(this) ;
+		setupUsers(this) ;
 		setupButtons(this) ;
 		refresh() ;
 	}
 	
-	private void setupCourses(JPanel panel) {
+	private void setupUsers(JPanel panel) {
 		userPanel = new JPanel() ;
 		userPanel.setLayout(new BorderLayout()) ;
-		setupCourseEditor(userPanel) ;
+		setupUserEditor(userPanel) ;
 		setupList(userPanel) ;
 		panel.add(userPanel, BorderLayout.CENTER) ;
 	}
 	
-	private void setupCourseEditor(JPanel panel) {
+	private void setupUserEditor(JPanel panel) {
 		userEditor = new JPanel() ;
 		userEditor.setLayout(new BoxLayout(userEditor, BoxLayout.Y_AXIS)) ;
 		userEditor.setBorder(new EtchedBorder()) ;
@@ -90,25 +93,25 @@ public class SLAPAdminUserTab extends JPanel {
 		listModel = new DefaultListModel<String>() ;
 		userList = new JList<String>(listModel) ;
 		userList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION) ;
-		class CourseListener implements ListSelectionListener {
+		class UserListener implements ListSelectionListener {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				setInfoEnabled(false) ;
 				if (e.getValueIsAdjusting() == false) {
 			        if (userList.getSelectedIndex() == -1) {
-			        	setCourseInfo(null) ;
+			        	setUserInfo(null) ;
 			        	setButtonsEnabled(false) ;
 			        } 
 			        else {
 			        	setButtonsEnabled(true) ;
-			        	String code = userList.getSelectedValue() ;
-			        	Course course = (Course) slap.getCourseManager().get(code) ;
-			        	//setCourseInfo(course) ;
+			        	String username = userList.getSelectedValue() ;
+			        	Account account = AccountManager.getAccountObj(username) ;
+			        	setUserInfo(account) ;
 			        }
 			    }
 			}	
 		}
-		userList.addListSelectionListener(new CourseListener()) ;
+		userList.addListSelectionListener(new UserListener()) ;
 		scrollPane = new JScrollPane(userList) ;
 		panel.add(scrollPane, BorderLayout.CENTER) ;
 	}
@@ -118,15 +121,20 @@ public class SLAPAdminUserTab extends JPanel {
 		main.setLayout(new BorderLayout()) ;
 		buttonPanel = new JPanel() ;
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS)) ;	
-		usernameField = new JHintTextField("Username", 10) ;			
+		usernameField = new JHintTextField("Username", 10) ;
+		passwordField = new JHintTextField("Password", 10) ;
+		roleBox = new JComboBox<String>(new String[] {STUDENT, INSTRUCTOR, ADMINISTRATOR}) ;
 		addButton = new JButton("Add") ;		
 		saveButton = new JButton("Save") ;		
 		editButton = new JButton("Edit") ;	
 		removeButton = new JButton("Remove") ;	
 		//
-		JPanel codePanel = new JPanel() ;
-		codePanel.setLayout(new BorderLayout()) ; 
-		codePanel.add(usernameField, BorderLayout.CENTER) ;
+		JPanel usernamePanel = new JPanel() ;
+		usernamePanel.setLayout(new BorderLayout()) ; 
+		usernamePanel.add(usernameField, BorderLayout.CENTER) ;
+		JPanel passwordPanel = new JPanel() ;
+		passwordPanel.setLayout(new BorderLayout()) ; 
+		passwordPanel.add(passwordField, BorderLayout.CENTER) ; 
 		JPanel addPanel = new JPanel() ;
 		addPanel.setLayout(new BorderLayout()) ; 
 		addPanel.add(addButton, BorderLayout.CENTER) ;
@@ -155,21 +163,28 @@ public class SLAPAdminUserTab extends JPanel {
 			@Override
 			public void keyReleased(KeyEvent e) {}
 		}
-		usernameField.addKeyListener(new AddListener());
+		AddListener listener = new AddListener() ;
+		usernameField.addKeyListener(listener) ;
+		passwordField.addKeyListener(listener) ;
 		//
 		class ButtonListener implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JButton button = (JButton) e.getSource() ;
 				if(button.equals(addButton)) {
-					if(! usernameField.getText().equals("")) {
+					if(! usernameField.getText().equals("") && ! passwordField.getText().equals("")) {
 						String username = usernameField.getText() ;
+						String password = passwordField.getText();
 						if(! slap.getAccountMap().userExists(username)) {
-							/*Account account = new Account(username, ) ;
-							slap.getAccountMap().add(course.getID(), course) ;
+							Role role ;
+							if(roleBox.getSelectedItem().equals(INSTRUCTOR)) role = Role.instructor ;
+							else if(roleBox.getSelectedItem().equals(ADMINISTRATOR)) role = Role.administrator ;
+							else role = Role.student ;
+							Account account = new Account("", "", username, password, role) ;
+							slap.getAccountMap().addAccount(account) ;
 							refresh() ;
-							userList.setSelectedValue(code, true) ;
-							setInfoEnabled(true) ;*/
+							userList.setSelectedValue(username, true) ;
+							setInfoEnabled(true) ;
 						}
 						else {
 							frame.displayError("Username " + username + " is already registered.") ;
@@ -181,9 +196,9 @@ public class SLAPAdminUserTab extends JPanel {
 				}
 				else if(button.equals(saveButton)) {
 					if(userList.getSelectedIndex() != -1 && isEditable) {
-						//Course course = (Course) slap.getCourseManager().get(userList.getSelectedValue()) ;
-						//course.setName(nameField.getText()) ;
-						//course.setProfessor(profField.getText()) ;
+						Account account = AccountManager.getAccountObj(userList.getSelectedValue()) ;
+						account.setFirstName(firstnameField.getText()) ;
+						account.setLastName(lastnameField.getText()) ;
 						frame.coursesRefresh() ;
 						frame.refresh() ;
 					}
@@ -196,21 +211,28 @@ public class SLAPAdminUserTab extends JPanel {
 				}
 				else if(button.equals(removeButton)) {
 					if(userList.getSelectedIndex() != -1) {
-						setInfoEnabled(false) ;
-						setCourseInfo(null) ;
-						slap.getCourseManager().remove(userList.getSelectedValue()) ;
-						frame.coursesRefresh() ;
-						refresh() ;
+						if(! AccountManager.getAccountObj(userList.getSelectedValue()).equals(slap.getCurrentUser())) {
+							setInfoEnabled(false) ;
+							setUserInfo(null) ;
+							AccountManager.getAccountMap().removeAccount(userList.getSelectedValue()) ;
+							frame.coursesRefresh() ;
+							refresh() ;
+						}
+						else {
+							frame.displayError("Unable to remove an account that is logged in.") ;
+						}
 					}
 				}
 			}
 		}
-		ButtonListener listener = new ButtonListener() ;
- 		addButton.addActionListener(listener) ;
- 		saveButton.addActionListener(listener) ;
- 		editButton.addActionListener(listener) ;
- 		removeButton.addActionListener(listener) ;
- 		buttonPanel.add(codePanel) ;
+		ButtonListener buttonListener = new ButtonListener() ;
+ 		addButton.addActionListener(buttonListener) ;
+ 		saveButton.addActionListener(buttonListener) ;
+ 		editButton.addActionListener(buttonListener) ;
+ 		removeButton.addActionListener(buttonListener) ;
+ 		buttonPanel.add(usernamePanel) ;
+ 		buttonPanel.add(passwordPanel) ;
+ 		buttonPanel.add(roleBox) ;
  		buttonPanel.add(addPanel) ;
  		buttonPanel.add(savePanel) ;
  		buttonPanel.add(editPanel) ;
@@ -222,7 +244,7 @@ public class SLAPAdminUserTab extends JPanel {
  		setButtonsEnabled(false) ;
 	}
 	
-	private void setCourseInfo(Account account) {
+	private void setUserInfo(Account account) {
 		if(account != null) {
 			usernameLabel.setText(account.getUsername()) ;
 			firstnameField.setText(account.getFirstName()) ;
@@ -263,12 +285,12 @@ public class SLAPAdminUserTab extends JPanel {
 		if(slap.getCurrentUser() == null) {
 			setInfoEnabled(false) ;
 		}
-		AccountMap map = slap.getAccountMap() ;
+		AccountMap map = AccountManager.getAccountMap() ;
 		if(map != null) {
 			listModel.removeAllElements() ;
-			/*for(Account account : map.) { // Need array returned for accounts
+			for(Account account : map.getAccounts()) { // Need array returned for accounts
 				listModel.addElement(account.getUsername()) ;
-			}*/
+			}
 		}
 		else {
 			listModel.removeAllElements() ;

@@ -6,6 +6,7 @@ package slap;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -49,6 +50,19 @@ public class AccountMap implements Serializable {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * remove a user
+	 * @param username the account to remove
+	 * @return whether or not the account was removed successfully
+	 */
+	protected boolean removeAccount(String username) {
+		if(this.userExists(username)) {
+			map.remove(username) ;
+			return true ;
+		}
+		return false ;
 	}
 	
 	/**
@@ -150,6 +164,20 @@ public class AccountMap implements Serializable {
 	protected void reset() {
 		if (!map.isEmpty())
 			map.clear();
+	}
+	
+	/**
+	 * Get an array of all accounts
+	 * @return accounts the array of accounts
+	 */
+	protected Account[] getAccounts() {
+		Account[] accounts = new Account[map.size()] ;
+		int count = 0 ;
+        for(Map.Entry<String, Account> entry : map.entrySet()) 
+        {
+            accounts[count++] = entry.getValue() ;
+        }
+        return accounts ;
 	}
 	
 	/*
