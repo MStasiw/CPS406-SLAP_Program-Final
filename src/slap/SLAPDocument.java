@@ -14,11 +14,13 @@ public class SLAPDocument implements Managable, Serializable {
 	private String info ;
 	private String filename ;
 	private File file ;
+	private Double grade;
 	
 	public SLAPDocument(String title, String info) {
 		time = Calendar.getInstance().getTime() ;
 		this.title = title ;
 		this.info = info ;
+		grade = null ;
 		id = getTitle() + " " + Long.toString(time.getTime()) ;		
 	}
 	
@@ -48,6 +50,18 @@ public class SLAPDocument implements Managable, Serializable {
 	
 	public File getFile() {
 		return file ;
+	}
+	
+	public Double getGrade() {
+		return grade;
+	}
+	
+	public boolean setGrade(Double mark) {
+		if(mark != null && mark.doubleValue() >= 0 && mark.doubleValue() <= 100) {
+			grade = mark ;
+			return true ;
+		}
+		return false ;
 	}
 	
 	@Override

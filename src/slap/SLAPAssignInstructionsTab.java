@@ -182,19 +182,14 @@ public class SLAPAssignInstructionsTab extends JPanel{
 			itemVisibility = false ;
 		}
 		
-		instructionText.setForeground(Color.BLACK);
+
 		if(slap.getCurrentCourse() == null) {
 			setButtonsEnabled(false);
-			instructionText.setForeground(Color.RED);
 			instructionText.setText("Please select a course!");
 		} else {
 			setButtonsEnabled(true);
-			if(sat.getComboBox().getSelectedItem() == null) {
-				instructionText.setForeground(Color.RED);
+			if(sat.getComboBox().getSelectedItem() == null)
 				instructionText.setText("Please select an assignment!");
-			} else {
-				instructionText.setForeground(Color.BLACK);
-			}
 		}
 		
 		this.validate();

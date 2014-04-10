@@ -113,7 +113,7 @@ public class SLAPAssignmentTab extends JPanel{
 			public void itemStateChanged(ItemEvent item) {
 				if (item.getStateChange() == ItemEvent.SELECTED) {
 					SLAPDocument doc = (SLAPDocument) selectCombo.getSelectedItem() ;
-		
+					
 					instruct.getInstructionText().setText(doc.getInfo()) ;
 					instruct.setButtonsEnabled(true) ;
 				}
@@ -212,12 +212,12 @@ public class SLAPAssignmentTab extends JPanel{
 			//
 		}
 		
-		selectCombo.setSelectedItem(null);
 		instruct.getInstructionText().setText("");
+		selectCombo.setSelectedItem(null);
 		
 		this.validate();
 		//frame.refresh();
-		instruct.refresh();
 		viewsubs.refresh();
+		instruct.refresh();
 	}
 }
