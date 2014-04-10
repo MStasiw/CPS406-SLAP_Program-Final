@@ -60,9 +60,8 @@ public class SLAPAssignmentTab extends JPanel{
 	}
 	
 	private void setupStudentAssignmentGUI() {
-		SLAPAdminUserTab userTab = new SLAPAdminUserTab(slap, frame) ;
 		selectDisplay.addTab("Instructions", instruct);
-		selectDisplay.addTab("Submit", userTab);
+		selectDisplay.addTab("Submit", instruct);
 		mainPanel.add(Box.createVerticalStrut(10));
 		mainPanel.add(selectAssign);
 		mainPanel.add(Box.createVerticalStrut(10));
