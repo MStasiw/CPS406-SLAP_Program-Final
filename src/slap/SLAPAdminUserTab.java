@@ -164,16 +164,16 @@ public class SLAPAdminUserTab extends JPanel {
 				if(button.equals(addButton)) {
 					if(! usernameField.getText().equals("")) {
 						String username = usernameField.getText() ;
-						//if(! slap.getAccountMap().contains(username)) {
+						if(! slap.getAccountMap().userExists(username)) {
 							/*Account account = new Account(username, ) ;
 							slap.getAccountMap().add(course.getID(), course) ;
 							refresh() ;
 							userList.setSelectedValue(code, true) ;
 							setInfoEnabled(true) ;*/
-						//}
-						/*else {
+						}
+						else {
 							frame.displayError("Username " + username + " is already registered.") ;
-						}*/
+						}
 					}
 					else {
 						frame.displayError("Please enter the username and password for the user to be added.") ;

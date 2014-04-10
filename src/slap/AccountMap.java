@@ -56,7 +56,7 @@ public class AccountMap implements Serializable {
 	 * @param username
 	 * @return true if exists, false if does not exist
 	 */
-	private boolean userExists(String username) {
+	protected boolean userExists(String username) {
 		if (username.equals(null) || username.isEmpty()) {
 			System.err.println("Error: username cannot be blank");
 			return false;
