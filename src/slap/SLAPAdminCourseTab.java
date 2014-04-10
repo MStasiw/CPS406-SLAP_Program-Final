@@ -5,8 +5,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.* ;
 import javax.swing.border.EmptyBorder;
@@ -35,7 +38,7 @@ public class SLAPAdminCourseTab extends JPanel {
 	private JPanel courseEditor ;
 	private JLabel codeLabel ;
 	private JHintTextField nameField ;
-	private JHintTextField profField ;
+	private JComboBox<String> profComboBox ;
 	private JTextArea descArea ;
 	
 	private JPanel buttonPanel ;
@@ -82,14 +85,36 @@ public class SLAPAdminCourseTab extends JPanel {
 		labelPanel.add(codeLabel, JPanel.LEFT_ALIGNMENT) ;
 		labelPanel.setBorder(new EtchedBorder()) ;
 		nameField = new JHintTextField("Name") ;
-		profField = new JHintTextField("Professor") ;
+		//
+		profComboBox = new JComboBox<String>() ;
+		class ProfListener implements ItemListener {
+			@Override
+			public void itemStateChanged(ItemEvent event) {
+				if (event.getStateChange() == ItemEvent.SELECTED) {
+					String prof = (String) event.getItem() ;
+					if(courseList.getSelectedIndex() != -1 && ! prof.equals("")) {
+						String code = courseList.getSelectedValue() ;
+			        	Course course = (Course) slap.getCourseManager().get(code) ;
+			        	Account profAccount = AccountManager.getAccountObj(prof) ;
+			        	course.setProfessor(profAccount);
+			        	frame.coursesRefresh() ;
+					}
+			    }
+				else {
+			        //
+			    }
+
+			}
+		}
+		profComboBox.addItemListener(new ProfListener()) ;
+		//
 		descArea = new JTextArea() ;
 		descArea.setLineWrap(true) ;
 		descArea.setWrapStyleWord(true) ;
 		descArea.setBorder(new EmptyBorder(5, 5, 5, 5)) ;
 		courseEditor.add(labelPanel) ;
 		courseEditor.add(nameField) ;
-		courseEditor.add(profField) ;
+		courseEditor.add(profComboBox) ;
 		courseEditor.add(descArea) ;
 		setInfoEnabled(false) ;
 		panel.add(courseEditor, BorderLayout.SOUTH) ;
@@ -193,7 +218,7 @@ public class SLAPAdminCourseTab extends JPanel {
 					if(courseList.getSelectedIndex() != -1 && isEditable) {
 						Course course = (Course) slap.getCourseManager().get(courseList.getSelectedValue()) ;
 						course.setName(nameField.getText()) ;
-						course.setProfessor(profField.getText()) ;
+						course.setProfessor(AccountManager.getAccountObj(profComboBox.getSelectedItem().toString())) ;
 						course.setDescription(descArea.getText()) ;
 						frame.coursesRefresh() ;
 						frame.refresh() ;
@@ -238,13 +263,13 @@ public class SLAPAdminCourseTab extends JPanel {
 		if(course != null) {
 			codeLabel.setText(course.getCode()) ;
 			nameField.setText(course.getName()) ;
-			profField.setText(course.getProfessor()) ;
+			profComboBox.setSelectedItem(course.getProfessor().getUsername()) ;
 			descArea.setText(course.getDescription()) ;
 		}
 		else {
 			codeLabel.setText("") ;
 			nameField.setText("") ;
-			profField.setText("") ;
+			profComboBox.setSelectedItem(null) ;
 			descArea.setText("") ;
 		}
 	}
@@ -257,7 +282,7 @@ public class SLAPAdminCourseTab extends JPanel {
 	
 	private void setInfoEnabled(Boolean enabled) {
 		nameField.setEditable(enabled) ;
-		profField.setEditable(enabled) ;
+		profComboBox.setEditable(enabled) ;
 		descArea.setEditable(enabled) ;
 		if(enabled) {
 			setFieldBackgrounds(EDIT_COLOUR) ;
@@ -274,7 +299,7 @@ public class SLAPAdminCourseTab extends JPanel {
 	
 	private void setFieldBackgrounds(Color colour) {
 		nameField.setBackground(colour) ;
-		profField.setBackground(colour) ;
+		//profComboBox.setBackground(colour) ;
 		descArea.setBackground(colour);
 	}
 	
@@ -296,6 +321,22 @@ public class SLAPAdminCourseTab extends JPanel {
 	protected void refresh() {
 		if(slap.getCurrentUser() == null) {
 			setInfoEnabled(false) ;
+			profComboBox.setSelectedItem(null) ;
+			
+		}
+		else {
+			AccountMap map = slap.getAccountMap() ;
+			if(map != null) {
+				ArrayList<Account> accounts = map.getAccounts(Role.instructor) ;
+				String[] usernames = new String[accounts.size()] ;
+				for(int i = 0 ; i < accounts.size() ; i++) {
+					usernames[i] = accounts.get(i).getUsername() ;
+				}
+				profComboBox.setModel(new DefaultComboBoxModel<String>(usernames));
+			}
+			else {
+				profComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {})) ;
+			}
 		}
 		Manager<String, Course> cm = slap.getCourseManager() ;
 		if(cm != null) {

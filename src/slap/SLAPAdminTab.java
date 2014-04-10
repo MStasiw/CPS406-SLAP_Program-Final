@@ -6,6 +6,8 @@ import javax.swing.* ;
 
 public class SLAPAdminTab extends JPanel {
 	
+	private SLAP slap ;
+	
 	private ImageIcon logoIcon ;
 	private final String LOGO_ICON_PATH = "/resources/SLAP_LOGO_II.png" ;
 	private final int LOGO_ICON_WIDTH = 128 ;
@@ -16,6 +18,7 @@ public class SLAPAdminTab extends JPanel {
 	private SLAPAdminCourseTab courseTab ;
 	
 	public SLAPAdminTab(SLAP slap, SLAPFrame frame) {
+		this.slap = slap ;
 		ImageIcon logo = getLogo() ;
 		setLayout(new BorderLayout()) ;
 		tabbedPane = new JTabbedPane(JTabbedPane.LEFT, JTabbedPane.SCROLL_TAB_LAYOUT) ;
@@ -42,6 +45,9 @@ public class SLAPAdminTab extends JPanel {
 	}
 	
 	protected void refresh() {
+		if(slap.getCurrentUser() == null) {
+			tabbedPane.setSelectedComponent(userTab) ;
+		}
 		userTab.refresh() ;
 		courseTab.refresh() ;
 	}
