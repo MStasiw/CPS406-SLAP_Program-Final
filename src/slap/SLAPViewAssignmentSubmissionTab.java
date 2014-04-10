@@ -21,7 +21,7 @@ import javax.swing.event.ListSelectionListener;
  * @author STS-i5
  *
  */
-public class ViewSubmissionTab extends JPanel {
+public class SLAPViewAssignmentSubmissionTab extends JPanel {
 	
 	private SLAP slap ;
 	private SLAPFrame frame ;
@@ -67,7 +67,7 @@ public class ViewSubmissionTab extends JPanel {
 	
 	//private Course selectedCourse ;
 	
-	public ViewSubmissionTab(SLAP slap, SLAPFrame frame){
+	public SLAPViewAssignmentSubmissionTab(SLAP slap, SLAPFrame frame){
 		
 		this.slap = slap ;
 		this.frame = frame ;
