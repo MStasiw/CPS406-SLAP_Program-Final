@@ -12,7 +12,8 @@ public class Course implements Managable, Serializable
 	
 	private String code ;
     private String name ;
-    private String professor ;
+    //private String professor ;
+    private Account professor ;
     private String description ;
 
     public ArrayList<String> students ;
@@ -24,7 +25,7 @@ public class Course implements Managable, Serializable
     {
         this.code = "code" ;
         this.name = "name" ;
-        this.professor = "professor" ;
+        this.professor = null ;
         this.description = "description" ;
         announcements = new Manager<String, Announcement>() ;
         assignments = new Manager<String, SLAPDocument>() ;
@@ -35,14 +36,14 @@ public class Course implements Managable, Serializable
     public Course(String code) {
     	this.code = code ;
         this.name = "" ;
-        this.professor = "" ;
+        this.professor = null ;
         this.description = "" ;
         announcements = new Manager<String, Announcement>() ;
         assignments = new Manager<String, SLAPDocument>() ;
         documents = new Manager<String, SLAPDocument>() ;
     }
 
-    public Course(String code, String name, String professor, String description)
+    public Course(String code, String name, Account professor, String description)
     {
         this.code = code ;
         this.name = name ;
@@ -54,7 +55,7 @@ public class Course implements Managable, Serializable
         //students = new ArrayList<String>() ;
     }
     
-    public Course(String code, String name, String professor, String description, Manager<String, Announcement> announcements)
+    public Course(String code, String name, Account professor, String description, Manager<String, Announcement> announcements)
     {
         this.code = code ;
         this.name = name ;
@@ -81,7 +82,7 @@ public class Course implements Managable, Serializable
         return name ;
     }
 
-    public String getProfessor()
+    public Account getProfessor()
     {
         return professor ;
     }
@@ -110,7 +111,7 @@ public class Course implements Managable, Serializable
         this.name = name ;
     }
 
-    protected void setProfessor(String professor)
+    protected void setProfessor(Account professor)
     {
         this.professor = professor ;   
     }
@@ -123,6 +124,7 @@ public class Course implements Managable, Serializable
     @Override
     public String toString()
     {
-        return "Code: " + getCode() + "\nName: " + getName() + "\nProfessor: " + getProfessor() ;
+        return "Code: " + getCode() + "\nName: " + getName() + "\nProfessor: " 
+        		+ getProfessor().getLastName() + ", " + getProfessor().getFirstName() ;
     }
 }

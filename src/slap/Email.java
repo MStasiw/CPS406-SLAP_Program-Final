@@ -20,7 +20,7 @@ public class Email extends javax.swing.JPanel {
 	private String username;
         private String subject;
         private String body;
-	private String prof;       
+	private Account prof;       
     /**
      * Creates new form Email
      */
