@@ -189,6 +189,7 @@ public class SLAPAdminUserTab extends JPanel {
 							frame.userRefresh() ;
 							userList.setSelectedValue(username, true) ;
 							setInfoEnabled(true) ;
+							clearFields() ;
 						}
 						else {
 							frame.displayError("Username " + username + " is already registered.") ;
@@ -278,6 +279,11 @@ public class SLAPAdminUserTab extends JPanel {
 			setFieldBackgrounds(SAVE_COLOUR) ;
 		}
 		isEditable = enabled ;
+	}
+	
+	private void clearFields() {
+		usernameField.clearText() ;
+		passwordField.clearText() ;
 	}
 	
 	private void setFieldBackgrounds(Color colour) {

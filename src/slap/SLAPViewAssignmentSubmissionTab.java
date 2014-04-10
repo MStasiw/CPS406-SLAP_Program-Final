@@ -262,10 +262,10 @@ public class SLAPViewAssignmentSubmissionTab extends JPanel {
 			for(int i = 0 ; i < accounts.size() ; i++) {
 				usernames[i] = accounts.get(i).getUsername() ;
 			}
-			studentNameComboBox.setModel(new DefaultComboBoxModel(usernames));
+			studentNameComboBox.setModel(new DefaultComboBoxModel<String>(usernames));
 		}
 		else {
-			studentNameComboBox.setModel(new DefaultComboBoxModel(new String[] {})) ;
+			studentNameComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {})) ;
 		}
 		
 	
