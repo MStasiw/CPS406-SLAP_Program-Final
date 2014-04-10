@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -95,9 +97,16 @@ public class SLAPAssignInstructionsTab extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				JButton button = (JButton) e.getSource() ;
 				if(button.equals(saveButton)) {
-					//frame.coursesRefresh() ;
-					frame.refresh() ;
-					setInfoEnabled(false) ;
+					if( sat.getComboBox().getSelectedItem() == null ) {
+						
+					}
+					else {
+						SLAPDocument doc = (SLAPDocument) sat.getComboBox().getSelectedItem() ;
+						doc.setInfo(instructionText.getText()) ;
+						//frame.coursesRefresh() ;
+						frame.refresh() ;
+						setInfoEnabled(false) ;
+					}				
 				}
 				else if(button.equals(editButton)) {
 					if(!isEditable) {
@@ -119,12 +128,12 @@ public class SLAPAssignInstructionsTab extends JPanel{
  		//setButtonsEnabled(false) ;
 	}
 	
-	private void setButtonsEnabled(Boolean enabled) {
+	protected void setButtonsEnabled(Boolean enabled) {
 		saveButton.setEnabled(enabled);
 		editButton.setEnabled(enabled);
 	}
 	
-	private void setInfoEnabled(Boolean enabled) {
+	protected void setInfoEnabled(Boolean enabled) {
 		instructionText.setEditable(enabled) ;
 		if(enabled) {
 			setFieldBackgrounds(EDIT_COLOUR);
@@ -137,6 +146,10 @@ public class SLAPAssignInstructionsTab extends JPanel{
 	
 	private void setFieldBackgrounds(Color colour) {
 		instructionText.setBackground(colour) ;
+	}
+	
+	protected JTextArea getInstructionText() {
+		return instructionText;
 	}
 	
 	/**
