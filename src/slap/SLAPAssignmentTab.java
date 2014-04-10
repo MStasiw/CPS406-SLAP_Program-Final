@@ -108,8 +108,17 @@ public class SLAPAssignmentTab extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				JButton button = (JButton) e.getSource() ;
 				if(button.equals(add)) {
+					if(slap.getCurrentCourse() == null) {
+						JOptionPane.showMessageDialog(frame,"Please select a course.", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					else {					
 					String name = (String) JOptionPane.showInputDialog(frame, "Enter Assignment Name:", "New Assignment", 
 							JOptionPane.INFORMATION_MESSAGE, null, null, null);
+					
+					SLAPDocument assign = new SLAPDocument(name, "");
+					
+					slap.getCurrentCourse().assignments.add(assign.getID(), assign);
+					}
 				}
 				else if(button.equals(remove)) {
 					
@@ -143,7 +152,7 @@ public class SLAPAssignmentTab extends JPanel{
 		}
 		
 		this.validate();
-		frame.refresh();
+		//frame.refresh();
 		instruct.refresh();
 		viewsubs.refresh();
 	}
