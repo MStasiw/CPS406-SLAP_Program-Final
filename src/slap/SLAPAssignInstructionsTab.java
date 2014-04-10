@@ -165,7 +165,14 @@ public class SLAPAssignInstructionsTab extends JPanel{
 			}
 		}
 		else {
+			setButtonsEnabled(false);
 			itemVisibility = false ;
+		}
+		
+		if(slap.getCurrentCourse() == null) {
+			setButtonsEnabled(false);
+		} else {
+			setButtonsEnabled(true);
 		}
 		
 		this.validate();

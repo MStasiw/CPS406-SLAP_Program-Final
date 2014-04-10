@@ -49,4 +49,9 @@ public class SLAPDocument implements Managable, Serializable {
 	public File getFile() {
 		return file ;
 	}
+	
+	@Override
+	public String toString() {
+		return title ;
+	}
 }

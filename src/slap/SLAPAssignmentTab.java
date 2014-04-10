@@ -24,12 +24,14 @@ public class SLAPAssignmentTab extends JPanel{
 	private JPanel selectAssign;
 	private JTabbedPane selectDisplay;
 	
+	private JComboBox<SLAPDocument> selectCombo;
+	
 	private JButton add;
 	private JButton remove;
 	
 	private SLAPAssignInstructionsTab instruct;
 	private SLAPViewAssignmentSubmissionTab viewsubs;
-	
+		
 	public SLAPAssignmentTab(SLAPFrame sframe, SLAP s) {
 		this.slap = s;
 		this.frame = sframe;
@@ -50,8 +52,7 @@ public class SLAPAssignmentTab extends JPanel{
 		selectAssign.setLayout(new BoxLayout(selectAssign, BoxLayout.X_AXIS));
 		JLabel comboLabel = new JLabel();
 		comboLabel.setText("Select an Assignment: ");
-		@SuppressWarnings("rawtypes")
-		JComboBox selectCombo = new JComboBox();
+		selectCombo = new JComboBox<SLAPDocument>() ;
 		
 		selectCombo.setPreferredSize(new Dimension(300, 25));
 		selectCombo.setMaximumSize(selectCombo.getPreferredSize());
@@ -112,16 +113,29 @@ public class SLAPAssignmentTab extends JPanel{
 						JOptionPane.showMessageDialog(frame,"Please select a course.", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 					else {					
-					String name = (String) JOptionPane.showInputDialog(frame, "Enter Assignment Name:", "New Assignment", 
+						String name = (String) JOptionPane.showInputDialog(frame, "Enter Assignment Name:", "New Assignment", 
 							JOptionPane.INFORMATION_MESSAGE, null, null, null);
+						if(!name.equals("")) {
+							SLAPDocument assign = new SLAPDocument(name, "");
 					
-					SLAPDocument assign = new SLAPDocument(name, "");
+							if(slap.getCurrentCourse().assignments == null) {
+								JOptionPane.showMessageDialog(frame,"Assignments is null", "Error", JOptionPane.ERROR_MESSAGE);
+							}
 					
-					slap.getCurrentCourse().assignments.add(assign.getID(), assign);
+							slap.getCurrentCourse().assignments.add(assign.getID(), assign);
+						
+						}
+						else {
+							JOptionPane.showMessageDialog(frame,"Cannot have an empty title.", "Error", JOptionPane.ERROR_MESSAGE);
+						}
 					}
+					frame.coursesRefresh();					
 				}
 				else if(button.equals(remove)) {
-					
+					if(slap.getCurrentCourse() != null && selectCombo.getSelectedIndex() != -1) {
+						slap.getCurrentCourse().assignments.remove(((SLAPDocument) selectCombo.getSelectedItem()).getID()) ;
+						frame.coursesRefresh();
+					}
 				}
 			}
 		}
@@ -141,6 +155,18 @@ public class SLAPAssignmentTab extends JPanel{
 		
 		setUpMainAssignmentGUI();
 		
+		if(slap.getCurrentCourse() != null) {
+			Managable[] array = slap.getCurrentCourse().assignments.getItemArray() ;
+			SLAPDocument[] assigns = new SLAPDocument[array.length] ;
+			for(int i = 0 ; i < array.length ; i++) {
+				assigns[i] = (SLAPDocument) array[i] ;
+			}
+			selectCombo.setModel(new DefaultComboBoxModel<SLAPDocument>(assigns)) ;
+		}
+		else {
+			selectCombo.setModel(new DefaultComboBoxModel<SLAPDocument>()) ;
+		}
+		
 		if(slap.getCurrentUser() != null) { //check if user is null, if so, there isn't anyone logged in
 			if(slap.getCurrentUser().getRole() == Role.student) {
 				setupStudentAssignmentGUI();
@@ -149,6 +175,9 @@ public class SLAPAssignmentTab extends JPanel{
 			} else if(slap.getCurrentUser().getRole() == Role.administrator) {
 				setupAdministratorAssignmentGUI();
 			}
+		}
+		else {
+			//
 		}
 		
 		this.validate();
