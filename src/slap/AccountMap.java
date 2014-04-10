@@ -4,6 +4,7 @@
 package slap;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
@@ -178,6 +179,16 @@ public class AccountMap implements Serializable {
             accounts[count++] = entry.getValue() ;
         }
         return accounts ;
+	}
+	
+	protected ArrayList<Account> getAccounts(Role role) {
+		ArrayList<Account> accounts = new ArrayList<Account>() ;
+		for(Map.Entry<String, Account> entry : map.entrySet()) {
+			if(entry.getValue().getRole() == role) {
+				accounts.add(entry.getValue()) ;
+			}
+		}
+		return accounts ;
 	}
 	
 	/*
