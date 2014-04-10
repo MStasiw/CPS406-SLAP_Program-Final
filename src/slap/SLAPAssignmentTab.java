@@ -139,22 +139,25 @@ public class SLAPAssignmentTab extends JPanel{
 					else {					
 						String name = (String) JOptionPane.showInputDialog(frame, "Enter Assignment Name:", "New Assignment", 
 							JOptionPane.INFORMATION_MESSAGE, null, null, null);
-						if(!name.equals("")) {
-							assign = new SLAPDocument(name, "");
+						if(name != null) {
+							if (! name.equals("")) {
+						
+								assign = new SLAPDocument(name, "");
 					
-							if(slap.getCurrentCourse().assignments == null) {
-								JOptionPane.showMessageDialog(frame,"Assignments is null", "Error", JOptionPane.ERROR_MESSAGE);
-							}
-					
-							slap.getCurrentCourse().assignments.add(assign.getID(), assign);
-							instruct.setInfoEnabled(true);
+								if(slap.getCurrentCourse().assignments == null) {
+									JOptionPane.showMessageDialog(frame,"Assignments is null", "Error", JOptionPane.ERROR_MESSAGE);
+								}
+								
+								slap.getCurrentCourse().assignments.add(assign.getID(), assign);
+								instruct.setInfoEnabled(true);
 							
-							refresh() ;
-							selectCombo.setSelectedItem(assign);
-						}
-						else {
-							JOptionPane.showMessageDialog(frame,"Cannot have an empty title.", "Error", JOptionPane.ERROR_MESSAGE);
-							refresh() ;
+								refresh() ;
+								selectCombo.setSelectedItem(assign);
+							}
+							else {
+								JOptionPane.showMessageDialog(frame,"Cannot have an empty title.", "Error", JOptionPane.ERROR_MESSAGE);
+								refresh() ;
+							}
 						}
 					}
 					//frame.coursesRefresh();
