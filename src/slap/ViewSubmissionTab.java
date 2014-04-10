@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.Dimension;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -27,10 +28,11 @@ public class ViewSubmissionTab extends JPanel {
 	
 	private final Color SAVE_COLOUR = Color.WHITE ;
 	private final Color EDIT_COLOUR = Color.PINK ;
-	private final Font LABEL_FONT = new Font("Helvetica", Font.BOLD, 22) ;
+	private final Font LABEL_FONT = new Font("Helvetica", Font.PLAIN, 14) ;
 	private JPanel userPanel ;
 
 	//Box.createHorizontalGlue(), Box.createVerticalStrut(10)
+	private JPanel mainSubmissionPanel;
 	private JPanel panel1;		//panel contains "name" jLabel, "name" jComboBox, "grade" label, "grade" jTextField
 	private JLabel studentNameLabel;
 	private JComboBox studentNameComboBox;
@@ -39,10 +41,10 @@ public class ViewSubmissionTab extends JPanel {
 	private JTextField gradeTextField;
 	
 	private JPanel panel2; 	//panel contains horizontal glue, "save" jButton
-	private JButton saveButton;
+	private JButton saveButton1;
 	
 	private JPanel panel3;
-	private JTextArea submisssionTextArea;
+	private JTextArea submissionTextArea;
 	
 	
 	private JScrollPane scrollPane ;
@@ -57,7 +59,7 @@ public class ViewSubmissionTab extends JPanel {
 	private JPanel buttonPanel ;
 	private JHintTextField usernameField ;
 	private JButton addButton ;
-	//private JButton saveButton ;
+	private JButton saveButton ;
 	private JButton editButton ;
 	private JButton removeButton ;
 	
@@ -75,9 +77,71 @@ public class ViewSubmissionTab extends JPanel {
 	
 	private void initialize() {
 		setLayout(new BorderLayout()) ;
-		setupCourses(this) ;
-		setupButtons(this) ;
+		//setupCourses(this) ;
+		//setupButtons(this) ;
+		
+		setupAssignments(this);
 		refresh() ;
+	}
+	
+	private void setupAssignments(JPanel panel){
+		mainSubmissionPanel = new JPanel();
+		mainSubmissionPanel.setLayout(new BoxLayout(mainSubmissionPanel, BoxLayout.Y_AXIS));
+		setupAssignmentsViewer(mainSubmissionPanel);
+		panel.add(mainSubmissionPanel, BorderLayout.CENTER);
+	}
+	
+	private void setupAssignmentsViewer(JPanel mPanel){
+		panel1 = new JPanel();
+		panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
+		panel1.setBorder(new EtchedBorder());
+		studentNameLabel = new JLabel("Student Name", JLabel.LEFT);
+		studentNameLabel.setFont(LABEL_FONT) ;
+
+		studentNameComboBox = new JComboBox();
+		studentNameComboBox.setModel(new DefaultComboBoxModel(new String[] { defaultComboBoxString }));
+		studentNameComboBox.setMinimumSize(new Dimension(150, 23));
+		studentNameComboBox.setPreferredSize(new Dimension(200, 23));
+		studentNameComboBox.setMaximumSize(new Dimension(200, 23));
+		studentNameComboBox.setFont(LABEL_FONT) ;
+		gradeLabel = new JLabel("Grade", JLabel.LEFT);
+		gradeLabel.setFont(LABEL_FONT) ;
+		gradeTextField = new JTextField("");
+		gradeTextField.setMinimumSize(new Dimension(50, 23));
+		gradeTextField.setPreferredSize(new Dimension(50, 23));
+		gradeTextField.setMaximumSize(new Dimension(50, 23));
+		gradeTextField.setFont(LABEL_FONT) ;
+		//panel1.add(Box.createHorizontalGlue());
+		panel1.add(studentNameLabel);
+		panel1.add(Box.createHorizontalStrut(10));
+		panel1.add(studentNameComboBox);
+		panel1.add(Box.createHorizontalGlue());
+		panel1.add(gradeLabel);
+		panel1.add(Box.createHorizontalStrut(10));
+		panel1.add(gradeTextField);
+		//panel1.add(Box.createHorizontalGlue());
+		mPanel.add(panel1);
+		//mPanel.add(Box.createVerticalStrut(2));
+		
+		panel2 = new JPanel();
+		panel2.setLayout(new BoxLayout(panel2, BoxLayout.X_AXIS));
+		panel2.setBorder(new EtchedBorder());
+		saveButton1 = new JButton("Save");
+		saveButton1.setFont(LABEL_FONT) ;
+		panel2.add(Box.createHorizontalGlue());
+		panel2.add(saveButton1);
+		mPanel.add(panel2);
+		//mPanel.add(Box.createVerticalStrut(2));
+
+		panel3 = new JPanel();
+		panel3.setLayout(new BorderLayout());
+		panel3.setBorder(new EtchedBorder());
+		submissionTextArea = new JTextArea();
+		JScrollPane textAreaScroll = new JScrollPane(submissionTextArea);
+		panel3.add(textAreaScroll, BorderLayout.CENTER);
+		mPanel.add(panel3);
+		
+		
 	}
 	
 	private void setupCourses(JPanel panel) {
@@ -103,20 +167,7 @@ public class ViewSubmissionTab extends JPanel {
 		userEditor.add(firstnameField) ;
 		userEditor.add(lastnameField) ;
 		
-		panel1 = new JPanel();
-		panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
-		panel1.setBorder(new EtchedBorder());
-		studentNameLabel = new JLabel("Student Name", JLabel.LEFT);
-		studentNameComboBox = new JComboBox();
-		studentNameComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { defaultComboBoxString }));
-		gradeLabel = new JLabel("View Submission", JLabel.LEFT);
-		gradeTextField = new JTextField("");
-		panel1.add(studentNameLabel);
-		panel1.add(studentNameComboBox);
-		panel1.add(Box.createHorizontalGlue());
-		panel1.add(gradeLabel);
-		panel1.add(gradeTextField);
-		userEditor.add(panel1);
+		
 		
 		setInfoEnabled(false) ;
 		panel.add(userEditor, BorderLayout.SOUTH) ;
@@ -278,7 +329,7 @@ public class ViewSubmissionTab extends JPanel {
 	}
 	
 	private void setInfoEnabled(Boolean enabled) {
-		firstnameField.setEditable(enabled) ;
+/*		firstnameField.setEditable(enabled) ;
 		lastnameField.setEditable(enabled) ;
 		if(enabled) {
 			setFieldBackgrounds(EDIT_COLOUR) ;
@@ -287,6 +338,7 @@ public class ViewSubmissionTab extends JPanel {
 			setFieldBackgrounds(SAVE_COLOUR) ;
 		}
 		isEditable = enabled ;
+*/		
 	}
 	
 	private void setFieldBackgrounds(Color colour) {
@@ -296,20 +348,23 @@ public class ViewSubmissionTab extends JPanel {
 	
 	@SuppressWarnings("rawtypes")
 	protected void refresh() {
-		if(slap.getCurrentUser() == null) {
+/*		if(slap.getCurrentUser() == null) {
 			setInfoEnabled(false) ;
 		}
 		AccountMap map = slap.getAccountMap() ;
 		if(map != null) {
 			listModel.removeAllElements() ;
-			/*for(Account account : map.) { // Need array returned for accounts
+			//for(Account account : map.) { // Need array returned for accounts
 				listModel.addElement(account.getUsername()) ;
-			}*/
+			}//
 		}
 		else {
 			listModel.removeAllElements() ;
 		}
-		userList.validate() ;
+		
+*/		
+		//userList.validate() ;
+		mainSubmissionPanel.validate();
 		frame.refresh() ;
 	}	
 	
