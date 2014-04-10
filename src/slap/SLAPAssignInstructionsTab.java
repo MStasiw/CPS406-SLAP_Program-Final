@@ -30,6 +30,7 @@ public class SLAPAssignInstructionsTab extends JPanel{
 	private JTextArea instructionText;
 	private JScrollPane sp;
 	
+	JPanel main;
 	private JPanel buttonPanel;
 	private JButton saveButton;
 	private JButton editButton;
@@ -58,35 +59,24 @@ public class SLAPAssignInstructionsTab extends JPanel{
 		
 		instructionText = new JTextArea() ;
 		instructionText.setBackground(FIELD_COLOUR) ;
-		//instructionText.setFont(FIELD_FONT) ;
+		
 		instructionText.setLineWrap(true) ;
 		instructionText.setWrapStyleWord(true) ;
-		//instructionText.setBorder(new EmptyBorder(5, 5, 5, 5)) ;
 		
 		sp = new JScrollPane(instructionText);
 		
-		setUpButtons(this);
 		refresh();
 	}
 	
 	private void setUp() {
-		
-		//textPanel.add(Box.createHorizontalGlue());
-		//textPanel.add(Box.createHorizontalStrut(10));
 		textPanel.add(sp);
-		//textPanel.add(Box.createHorizontalStrut(10));
-		//textPanel.add(Box.createHorizontalGlue());
-		
-		//mainPanel.add(Box.createVerticalGlue());
-		//mainPanel.add(Box.createVerticalStrut(10));
 		mainPanel.add(textPanel);
-		//mainPanel.add(Box.createVerticalStrut(10));
-		//mainPanel.add(Box.createVerticalGlue());
+		
 		this.add(mainPanel, BorderLayout.CENTER);
 	}
 	
 	private void setUpButtons(JPanel panel) {
-		JPanel main = new JPanel() ;
+		main = new JPanel() ;
 		main.setLayout(new BorderLayout()) ;
 		buttonPanel = new JPanel() ;
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS)) ;				
@@ -159,24 +149,25 @@ public class SLAPAssignInstructionsTab extends JPanel{
 		
 		removeAll() ;
 		
-		/*Account user = slap.getCurrentUser() ;
+		setUp();
+		setUpButtons(this);
+		
+		//Check if user has selected an assignment
+		setButtonsEnabled(true);
+		
+		Account user = slap.getCurrentUser() ;
 		if(user != null) {
 			switch(user.getRole()) {
-				case student: itemVisibility = false ; //saveButton.setVisible(itemVisibility) ; break ;
-				case instructor: itemVisibility = true ; //saveButton.setVisible(itemVisibility) ; break ;
-				case administrator: itemVisibility = true ; //saveButton.setVisible(itemVisibility) ; break ;
-				default: itemVisibility = false ; //saveButton.setVisible(itemVisibility) ; break ;
+				case student: itemVisibility = false ; main.setVisible(itemVisibility) ; setButtonsEnabled(false); setInfoEnabled(false); break ;
+				case instructor: itemVisibility = true ; main.setVisible(itemVisibility) ; break ;
+				case administrator: itemVisibility = true ; main.setVisible(itemVisibility) ; break ;
+				default: itemVisibility = false ; main.setVisible(itemVisibility) ; break ;
 			}
 		}
 		else {
 			itemVisibility = false ;
-		}*/
+		}
 		
-		//Check if user has selected an assignment
-		setButtonsEnabled(true);
-
-		setUp();
-		setUpButtons(this);
 		this.validate();
 		frame.refresh();
 	}
