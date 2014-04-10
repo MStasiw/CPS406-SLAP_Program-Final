@@ -61,7 +61,7 @@ public class Course implements Managable, Serializable
         this.professor = professor ;
         this.description = description ;   
         this.announcements = announcements ;
-        assignments = new Manager<String, SLAPDocument>() ; /
+        assignments = new Manager<String, SLAPDocument>() ; //
         documents = new Manager<String, SLAPDocument>() ; //
         //students = new ArrayList<String>() ;
     }
