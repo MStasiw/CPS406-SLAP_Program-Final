@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -35,7 +36,7 @@ public class SLAPViewAssignmentSubmissionTab extends JPanel {
 	private JPanel mainSubmissionPanel;
 	private JPanel panel1;		//panel contains "name" jLabel, "name" jComboBox, "grade" label, "grade" jTextField
 	private JLabel studentNameLabel;
-	private JComboBox studentNameComboBox;
+	private JComboBox<String> studentNameComboBox;
 	private String defaultComboBoxString = "---select student---";
 	private JLabel gradeLabel;
 	private JTextField gradeTextField;
@@ -98,7 +99,7 @@ public class SLAPViewAssignmentSubmissionTab extends JPanel {
 		studentNameLabel = new JLabel("Student Name", JLabel.LEFT);
 		studentNameLabel.setFont(LABEL_FONT) ;
 
-		studentNameComboBox = new JComboBox();
+		studentNameComboBox = new JComboBox<String>();
 		studentNameComboBox.setModel(new DefaultComboBoxModel(new String[] { defaultComboBoxString }));
 		studentNameComboBox.setMinimumSize(new Dimension(150, 23));
 		studentNameComboBox.setPreferredSize(new Dimension(200, 23));
@@ -253,19 +254,21 @@ public class SLAPViewAssignmentSubmissionTab extends JPanel {
 	protected void refresh() {
 /*		if(slap.getCurrentUser() == null) {
 			setInfoEnabled(false) ;
-		}
+		}*/
 		AccountMap map = slap.getAccountMap() ;
 		if(map != null) {
-			listModel.removeAllElements() ;
-			//for(Account account : map.) { // Need array returned for accounts
-				listModel.addElement(account.getUsername()) ;
-			}//
+			ArrayList<Account> accounts = map.getAccounts(Role.student) ;
+			String[] usernames = new String[accounts.size()] ;
+			for(int i = 0 ; i < accounts.size() ; i++) {
+				usernames[i] = accounts.get(i).getUsername() ;
+			}
+			studentNameComboBox.setModel(new DefaultComboBoxModel(usernames));
 		}
 		else {
-			listModel.removeAllElements() ;
+			studentNameComboBox.setModel(new DefaultComboBoxModel(new String[] {})) ;
 		}
 		
-*/		
+	
 		//userList.validate() ;
 		mainSubmissionPanel.validate();
 		frame.refresh() ;
