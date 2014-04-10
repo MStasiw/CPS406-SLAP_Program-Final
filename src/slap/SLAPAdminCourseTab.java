@@ -263,13 +263,33 @@ public class SLAPAdminCourseTab extends JPanel {
 		if(course != null) {
 			codeLabel.setText(course.getCode()) ;
 			nameField.setText(course.getName()) ;
-			profComboBox.setSelectedItem(course.getProfessor().getUsername()) ;
+			//
+			AccountMap map = slap.getAccountMap() ;
+			if(map != null) {
+				ArrayList<Account> accounts = map.getAccounts(Role.instructor) ;
+				String[] usernames = new String[accounts.size()] ;
+				for(int i = 0 ; i < accounts.size() ; i++) {
+					usernames[i] = accounts.get(i).getUsername() ;
+				}
+				profComboBox.setModel(new DefaultComboBoxModel<String>(usernames));
+			}
+			else {
+				profComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {})) ;
+			}
+			//
+			if(course.getProfessor() != null) {
+				profComboBox.setSelectedItem(course.getProfessor().getUsername()) ;
+			}
+			else {
+				profComboBox.setSelectedItem(null) ;
+			}
 			descArea.setText(course.getDescription()) ;
 		}
 		else {
 			codeLabel.setText("") ;
 			nameField.setText("") ;
 			profComboBox.setSelectedItem(null) ;
+			profComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {})) ;
 			descArea.setText("") ;
 		}
 	}
@@ -325,7 +345,7 @@ public class SLAPAdminCourseTab extends JPanel {
 			
 		}
 		else {
-			AccountMap map = slap.getAccountMap() ;
+			/*AccountMap map = slap.getAccountMap() ;
 			if(map != null) {
 				ArrayList<Account> accounts = map.getAccounts(Role.instructor) ;
 				String[] usernames = new String[accounts.size()] ;
@@ -336,7 +356,7 @@ public class SLAPAdminCourseTab extends JPanel {
 			}
 			else {
 				profComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {})) ;
-			}
+			}*/
 		}
 		Manager<String, Course> cm = slap.getCourseManager() ;
 		if(cm != null) {
@@ -348,6 +368,7 @@ public class SLAPAdminCourseTab extends JPanel {
 		else {
 			listModel.removeAllElements() ;
 		}
+		profComboBox.setSelectedItem(null) ;
 		courseList.validate() ;
 		frame.refresh() ;
 	}

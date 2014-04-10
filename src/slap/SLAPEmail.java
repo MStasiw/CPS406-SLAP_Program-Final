@@ -1,6 +1,7 @@
 
 package slap;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -8,7 +9,8 @@ import java.util.Date;
  * @author Michael
  *
  */
-public class SLAPEmail implements Managable {
+@SuppressWarnings("serial")
+public class SLAPEmail implements Managable, Serializable {
 
 	private String id ;
 	private Date sentTime ;
