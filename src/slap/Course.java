@@ -18,7 +18,7 @@ public class Course implements Managable, Serializable
     public ArrayList<String> students ;
     public Manager<String, Announcement> announcements ;
     public Manager<String, SLAPDocument> assignments ;
-    public Manager<String, SLAPDocument> document ;
+    public Manager<String, SLAPDocument> documents ;
 
     public Course()
     {
@@ -27,6 +27,8 @@ public class Course implements Managable, Serializable
         this.professor = "professor" ;
         this.description = "description" ;
         announcements = new Manager<String, Announcement>() ;
+        assignments = new Manager<String, SLAPDocument>() ;
+        documents = new Manager<String, SLAPDocument>() ;
         //students = new ArrayList<String>() ; 
     }
     
@@ -36,6 +38,8 @@ public class Course implements Managable, Serializable
         this.professor = "" ;
         this.description = "" ;
         announcements = new Manager<String, Announcement>() ;
+        assignments = new Manager<String, SLAPDocument>() ;
+        documents = new Manager<String, SLAPDocument>() ;
     }
 
     public Course(String code, String name, String professor, String description)
@@ -45,6 +49,8 @@ public class Course implements Managable, Serializable
         this.professor = professor ;
         this.description = description ;   
         announcements = new Manager<String, Announcement>() ;
+        assignments = new Manager<String, SLAPDocument>() ;
+        documents = new Manager<String, SLAPDocument>() ;
         //students = new ArrayList<String>() ;
     }
     
@@ -55,6 +61,8 @@ public class Course implements Managable, Serializable
         this.professor = professor ;
         this.description = description ;   
         this.announcements = announcements ;
+        assignments = new Manager<String, SLAPDocument>() ; /
+        documents = new Manager<String, SLAPDocument>() ; //
         //students = new ArrayList<String>() ;
     }
     
