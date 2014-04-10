@@ -179,6 +179,7 @@ public class SLAPAdminCourseTab extends JPanel {
 							refresh() ;
 							courseList.setSelectedValue(code, true) ;
 							setInfoEnabled(true) ;
+							clearFields() ;
 						}
 						else {
 							frame.displayError("Course code " + code + " is already registered.") ;
@@ -265,6 +266,10 @@ public class SLAPAdminCourseTab extends JPanel {
 			setFieldBackgrounds(SAVE_COLOUR) ;
 		}
 		isEditable = enabled ;
+	}
+	
+	private void clearFields() {
+		codeField.clearText() ;
 	}
 	
 	private void setFieldBackgrounds(Color colour) {
