@@ -6,6 +6,8 @@ package slap;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -33,7 +35,11 @@ public class SLAPAssignInstructionsTab extends JPanel{
 	private JButton editButton;
 	
 	private final Color FIELD_COLOUR = Color.WHITE ;
+	private final Color SAVE_COLOUR = Color.WHITE ;
+	private final Color EDIT_COLOUR = Color.PINK ;
 	//private final Font FIELD_FONT = new Font("Helvetica", Font.BOLD, 22) ;
+	
+	private boolean isEditable;
 	
 	public SLAPAssignInstructionsTab(SLAP slap, SLAPFrame frame, SLAPAssignmentTab sat) {
 		this.slap = slap;
@@ -60,6 +66,7 @@ public class SLAPAssignInstructionsTab extends JPanel{
 		sp = new JScrollPane(instructionText);
 		
 		setUpButtons(this);
+		refresh();
 	}
 	
 	private void setUp() {
@@ -73,10 +80,9 @@ public class SLAPAssignInstructionsTab extends JPanel{
 		//mainPanel.add(Box.createVerticalGlue());
 		//mainPanel.add(Box.createVerticalStrut(10));
 		mainPanel.add(textPanel);
-		mainPanel.add(saveButton);
 		//mainPanel.add(Box.createVerticalStrut(10));
 		//mainPanel.add(Box.createVerticalGlue());
-		add(mainPanel);
+		this.add(mainPanel, BorderLayout.CENTER);
 	}
 	
 	private void setUpButtons(JPanel panel) {
@@ -87,29 +93,91 @@ public class SLAPAssignInstructionsTab extends JPanel{
 		saveButton = new JButton("Save") ;		
 		editButton = new JButton("Edit") ;	
 		
+		JPanel savePanel = new JPanel() ;
+		savePanel.setLayout(new BorderLayout()) ; 
+		savePanel.add(saveButton, BorderLayout.CENTER) ;
+		JPanel editPanel = new JPanel() ;
+		editPanel.setLayout(new BorderLayout()) ; 
+		editPanel.add(editButton, BorderLayout.CENTER) ;
 		
+		class ButtonListener implements ActionListener {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JButton button = (JButton) e.getSource() ;
+				if(button.equals(saveButton)) {
+					//frame.coursesRefresh() ;
+					frame.refresh() ;
+					setInfoEnabled(false) ;
+				}
+				else if(button.equals(editButton)) {
+					if(!isEditable) {
+						setInfoEnabled(true);
+					}
+				}
+			}
+		}
+		ButtonListener listener = new ButtonListener() ;
+ 		saveButton.addActionListener(listener) ;
+ 		editButton.addActionListener(listener) ;
+
+ 		buttonPanel.add(savePanel) ;
+ 		buttonPanel.add(editPanel) ;
+ 		buttonPanel.add(Box.createVerticalGlue()) ;
+		
+ 		main.add(buttonPanel, BorderLayout.NORTH) ;
+ 		panel.add(main, BorderLayout.EAST) ;
+ 		//setButtonsEnabled(false) ;
+	}
+	
+	private void setButtonsEnabled(Boolean enabled) {
+		saveButton.setEnabled(enabled);
+		editButton.setEnabled(enabled);
+	}
+	
+	private void setInfoEnabled(Boolean enabled) {
+		instructionText.setEditable(enabled) ;
+		if(enabled) {
+			setFieldBackgrounds(EDIT_COLOUR);
+		}
+		else {
+			setFieldBackgrounds(SAVE_COLOUR);
+		}
+		isEditable = enabled ;
+	}
+	
+	private void setFieldBackgrounds(Color colour) {
+		instructionText.setBackground(colour) ;
 	}
 	
 	/**
 	 * Refresh the items in the tab
 	 */
 	protected void refresh() {
+		if(slap.getCurrentUser() == null) {
+			setInfoEnabled(false) ;
+		}
+		
 		removeAll() ;
 		
-		Account user = slap.getCurrentUser() ;
+		/*Account user = slap.getCurrentUser() ;
 		if(user != null) {
 			switch(user.getRole()) {
-				case student: itemVisibility = false ; saveButton.setVisible(itemVisibility) ; instructionText.setEditable(false); break ;
-				case instructor: itemVisibility = true ; saveButton.setVisible(itemVisibility) ; instructionText.setEditable(true);break ;
-				case administrator: itemVisibility = true ; saveButton.setVisible(itemVisibility) ; instructionText.setEditable(true);break ;
-				default: itemVisibility = false ; saveButton.setVisible(itemVisibility) ; break ;
+				case student: itemVisibility = false ; //saveButton.setVisible(itemVisibility) ; break ;
+				case instructor: itemVisibility = true ; //saveButton.setVisible(itemVisibility) ; break ;
+				case administrator: itemVisibility = true ; //saveButton.setVisible(itemVisibility) ; break ;
+				default: itemVisibility = false ; //saveButton.setVisible(itemVisibility) ; break ;
 			}
 		}
 		else {
 			itemVisibility = false ;
-		}
+		}*/
+		
+		//Check if user has selected an assignment
+		setButtonsEnabled(true);
 
 		setUp();
+		setUpButtons(this);
+		this.validate();
 		frame.refresh();
 	}
 }
