@@ -17,6 +17,8 @@ import javax.swing.event.ListSelectionListener;
 @SuppressWarnings("serial")
 public class SLAPAdminUserTab extends JPanel {
 
+	private ImageIcon logo ;
+	
 	private SLAP slap ;
 	private SLAPFrame frame ;
 	
@@ -50,7 +52,8 @@ public class SLAPAdminUserTab extends JPanel {
 	private final String INSTRUCTOR = "instructor" ;
 	private final String ADMINISTRATOR = "administrator" ;
 	
-	public SLAPAdminUserTab(SLAP slap, SLAPFrame frame) {
+	public SLAPAdminUserTab(SLAP slap, SLAPFrame frame, ImageIcon logo) {
+		this.logo = logo ;
 		this.slap = slap ;
 		this.frame = frame ;
 		initialize() ;
@@ -230,6 +233,7 @@ public class SLAPAdminUserTab extends JPanel {
  		saveButton.addActionListener(buttonListener) ;
  		editButton.addActionListener(buttonListener) ;
  		removeButton.addActionListener(buttonListener) ;
+ 		setLogo(buttonPanel, logo) ;
  		buttonPanel.add(usernamePanel) ;
  		buttonPanel.add(passwordPanel) ;
  		buttonPanel.add(roleBox) ;
@@ -279,6 +283,21 @@ public class SLAPAdminUserTab extends JPanel {
 		firstnameField.setBackground(colour) ;
 		lastnameField.setBackground(colour) ;
 	}
+	
+	/**
+	 * Sets the logo
+	 */
+	private void setLogo(JPanel panel, ImageIcon logo) {
+		try{
+			JPanel logoPanel = new JPanel() ;
+			logoPanel.add(new JLabel(logo, JLabel.LEFT)) ;
+			panel.add(logoPanel) ;
+		}
+		catch(Exception e) {
+			//
+		}
+	}
+
 	
 	@SuppressWarnings("rawtypes")
 	protected void refresh() {

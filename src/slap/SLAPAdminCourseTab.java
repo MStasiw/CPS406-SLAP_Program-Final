@@ -16,11 +16,8 @@ import javax.swing.event.ListSelectionListener;
 
 @SuppressWarnings("serial")
 public class SLAPAdminCourseTab extends JPanel {
-
-	private ImageIcon logoIcon ;
-	private final String LOGO_ICON_PATH = "/resources/SLAP_LOGO_II.png" ;
-	private final int LOGO_ICON_WIDTH = 128 ;
-	private final int LOGO_ICON_HEIGHT = 64 ;
+	
+	private ImageIcon logo ;
 	
 	private SLAP slap ;
 	private SLAPFrame frame ;
@@ -52,7 +49,8 @@ public class SLAPAdminCourseTab extends JPanel {
 	
 	//private Course selectedCourse ;
 	
-	public SLAPAdminCourseTab(SLAP slap, SLAPFrame frame) {
+	public SLAPAdminCourseTab(SLAP slap, SLAPFrame frame, ImageIcon logo) {
+		this.logo = logo ;
 		this.slap = slap ;
 		this.frame = frame ;
 		//selectedCourse = null ;
@@ -222,7 +220,7 @@ public class SLAPAdminCourseTab extends JPanel {
  		saveButton.addActionListener(listener) ;
  		editButton.addActionListener(listener) ;
  		removeButton.addActionListener(listener) ;
- 		setLogo(buttonPanel) ;
+ 		setLogo(buttonPanel, logo) ;
  		buttonPanel.add(codePanel) ;
  		buttonPanel.add(addPanel) ;
  		buttonPanel.add(savePanel) ;
@@ -278,16 +276,10 @@ public class SLAPAdminCourseTab extends JPanel {
 	/**
 	 * Sets the logo
 	 */
-	private void setLogo(JPanel panel) {
+	private void setLogo(JPanel panel, ImageIcon logo) {
 		try{
-			logoIcon = new ImageIcon(getClass().getResource(LOGO_ICON_PATH)) ;
-			logoIcon = new ImageIcon(
-					logoIcon.getImage().getScaledInstance(
-							LOGO_ICON_WIDTH, 
-							LOGO_ICON_HEIGHT, 
-							java.awt.Image.SCALE_SMOOTH));
 			JPanel logoPanel = new JPanel() ;
-			logoPanel.add(new JLabel(logoIcon, JLabel.LEFT)) ;
+			logoPanel.add(new JLabel(logo, JLabel.LEFT)) ;
 			panel.add(logoPanel) ;
 		}
 		catch(Exception e) {
