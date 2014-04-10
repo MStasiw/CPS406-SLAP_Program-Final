@@ -186,6 +186,7 @@ public class SLAPAdminUserTab extends JPanel {
 							Account account = new Account("", "", username, password, role) ;
 							slap.getAccountMap().addAccount(account) ;
 							refresh() ;
+							frame.userRefresh() ;
 							userList.setSelectedValue(username, true) ;
 							setInfoEnabled(true) ;
 						}
