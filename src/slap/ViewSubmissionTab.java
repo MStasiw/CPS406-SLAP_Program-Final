@@ -28,7 +28,7 @@ public class ViewSubmissionTab extends JPanel {
 	
 	private final Color SAVE_COLOUR = Color.WHITE ;
 	private final Color EDIT_COLOUR = Color.PINK ;
-	private final Font LABEL_FONT = new Font("Helvetica", Font.PLAIN, 14) ;
+	private final Font LABEL_FONT = new Font("Helvetica", Font.BOLD, 12) ;
 	private JPanel userPanel ;
 
 	//Box.createHorizontalGlue(), Box.createVerticalStrut(10)
@@ -108,8 +108,8 @@ public class ViewSubmissionTab extends JPanel {
 		gradeLabel.setFont(LABEL_FONT) ;
 		gradeTextField = new JTextField("");
 		gradeTextField.setMinimumSize(new Dimension(50, 23));
-		gradeTextField.setPreferredSize(new Dimension(50, 23));
-		gradeTextField.setMaximumSize(new Dimension(50, 23));
+		gradeTextField.setPreferredSize(new Dimension(65, 23));
+		gradeTextField.setMaximumSize(new Dimension(80, 23));
 		gradeTextField.setFont(LABEL_FONT) ;
 		//panel1.add(Box.createHorizontalGlue());
 		panel1.add(studentNameLabel);
@@ -144,106 +144,8 @@ public class ViewSubmissionTab extends JPanel {
 		
 	}
 	
-	private void setupCourses(JPanel panel) {
-		userPanel = new JPanel() ;
-		userPanel.setLayout(new BorderLayout()) ;
-		setupCourseEditor(userPanel) ;
-		setupList(userPanel) ;
-		panel.add(userPanel, BorderLayout.CENTER) ;
-	}
-	
-	private void setupCourseEditor(JPanel panel) {
-		userEditor = new JPanel() ;
-		userEditor.setLayout(new BoxLayout(userEditor, BoxLayout.Y_AXIS)) ;
-		userEditor.setBorder(new EtchedBorder()) ;
-		JPanel labelPanel = new JPanel() ;
-		usernameLabel = new JLabel("", JLabel.LEFT) ;
-		usernameLabel.setFont(LABEL_FONT) ;
-		labelPanel.add(usernameLabel, JPanel.LEFT_ALIGNMENT) ;
-		labelPanel.setBorder(new EtchedBorder()) ;
-		firstnameField = new JHintTextField("First name") ;
-		lastnameField = new JHintTextField("Last name") ;
-		userEditor.add(labelPanel) ;
-		userEditor.add(firstnameField) ;
-		userEditor.add(lastnameField) ;
-		
-		
-		
-		setInfoEnabled(false) ;
-		panel.add(userEditor, BorderLayout.SOUTH) ;
-	}
-	
-	private void setupList(JPanel panel) {
-		listModel = new DefaultListModel<String>() ;
-		userList = new JList<String>(listModel) ;
-		userList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION) ;
-		class CourseListener implements ListSelectionListener {
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				setInfoEnabled(false) ;
-				if (e.getValueIsAdjusting() == false) {
-			        if (userList.getSelectedIndex() == -1) {
-			        	setCourseInfo(null) ;
-			        	setButtonsEnabled(false) ;
-			        } 
-			        else {
-			        	setButtonsEnabled(true) ;
-			        	String code = userList.getSelectedValue() ;
-			        	Course course = (Course) slap.getCourseManager().get(code) ;
-			        	//setCourseInfo(course) ;
-			        }
-			    }
-			}	
-		}
-		userList.addListSelectionListener(new CourseListener()) ;
-		scrollPane = new JScrollPane(userList) ;
-		panel.add(scrollPane, BorderLayout.CENTER) ;
-	}
-	
-	private void setupButtons(JPanel panel) {
-		JPanel main = new JPanel() ;
-		main.setLayout(new BorderLayout()) ;
-		buttonPanel = new JPanel() ;
-		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS)) ;	
-		usernameField = new JHintTextField("Username", 10) ;			
-		addButton = new JButton("Add") ;		
-		saveButton = new JButton("Save") ;		
-		editButton = new JButton("Edit") ;	
-		removeButton = new JButton("Remove") ;	
-		//
-		JPanel codePanel = new JPanel() ;
-		codePanel.setLayout(new BorderLayout()) ; 
-		codePanel.add(usernameField, BorderLayout.CENTER) ;
-		JPanel addPanel = new JPanel() ;
-		addPanel.setLayout(new BorderLayout()) ; 
-		addPanel.add(addButton, BorderLayout.CENTER) ;
-		JPanel savePanel = new JPanel() ;
-		savePanel.setLayout(new BorderLayout()) ; 
-		savePanel.add(saveButton, BorderLayout.CENTER) ;
-		JPanel editPanel = new JPanel() ;
-		editPanel.setLayout(new BorderLayout()) ; 
-		editPanel.add(editButton, BorderLayout.CENTER) ;
-		JPanel removePanel = new JPanel() ;
-		removePanel.setLayout(new BorderLayout()) ; 
-		removePanel.add(removeButton, BorderLayout.CENTER) ;
-		//
-		class AddListener implements KeyListener {
-			@Override
-			public void keyTyped(KeyEvent e) {}
+		private void setupButtons(JPanel panel) {
 
-			@Override
-			public void keyPressed(KeyEvent e) {
-				int code = e.getKeyCode() ;
-				if(code == KeyEvent.VK_ENTER) {
-					addButton.doClick();
-				}
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {}
-		}
-		usernameField.addKeyListener(new AddListener());
-		//
 		class ButtonListener implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -293,7 +195,7 @@ public class ViewSubmissionTab extends JPanel {
 			}
 		}
 		ButtonListener listener = new ButtonListener() ;
- 		addButton.addActionListener(listener) ;
+/* 		addButton.addActionListener(listener) ;
  		saveButton.addActionListener(listener) ;
  		editButton.addActionListener(listener) ;
  		removeButton.addActionListener(listener) ;
@@ -307,6 +209,7 @@ public class ViewSubmissionTab extends JPanel {
  		main.add(buttonPanel, BorderLayout.NORTH) ;
  		panel.add(main, BorderLayout.EAST) ;
  		setButtonsEnabled(false) ;
+ */
 	}
 	
 	private void setCourseInfo(Account account) {
