@@ -7,6 +7,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.*;
 
@@ -53,6 +55,7 @@ public class SLAPAssignmentTab extends JPanel{
 		JLabel comboLabel = new JLabel();
 		comboLabel.setText("Select an Assignment: ");
 		selectCombo = new JComboBox<SLAPDocument>() ;
+		setUpComboListener() ;
 		
 		selectCombo.setPreferredSize(new Dimension(300, 25));
 		selectCombo.setMaximumSize(selectCombo.getPreferredSize());
@@ -103,10 +106,30 @@ public class SLAPAssignmentTab extends JPanel{
 		setupInstructorAssignmentGUI();
 	}
 
+	private void setUpComboListener() {
+		class AssignListener implements ItemListener {
+			@Override
+			public void itemStateChanged(ItemEvent item) {
+				if (item.getStateChange() == ItemEvent.SELECTED) {
+					SLAPDocument doc = (SLAPDocument) selectCombo.getSelectedItem() ;
+		
+					instruct.getInstructionText().setText(doc.getInfo()) ;
+					instruct.setButtonsEnabled(true) ;
+				}
+				else {
+					instruct.getInstructionText().setText("") ;
+					instruct.setButtonsEnabled(false) ;
+				}
+			}
+		}
+		selectCombo.addItemListener(new AssignListener()) ;
+	}
+	
 	private void setUpButtonListeners() {
 		class ButtonListener implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				SLAPDocument assign;
 				JButton button = (JButton) e.getSource() ;
 				if(button.equals(add)) {
 					if(slap.getCurrentCourse() == null) {
@@ -116,20 +139,24 @@ public class SLAPAssignmentTab extends JPanel{
 						String name = (String) JOptionPane.showInputDialog(frame, "Enter Assignment Name:", "New Assignment", 
 							JOptionPane.INFORMATION_MESSAGE, null, null, null);
 						if(!name.equals("")) {
-							SLAPDocument assign = new SLAPDocument(name, "");
+							assign = new SLAPDocument(name, "");
 					
 							if(slap.getCurrentCourse().assignments == null) {
 								JOptionPane.showMessageDialog(frame,"Assignments is null", "Error", JOptionPane.ERROR_MESSAGE);
 							}
 					
 							slap.getCurrentCourse().assignments.add(assign.getID(), assign);
-						
+							instruct.setInfoEnabled(true);
+							
+							refresh() ;
+							selectCombo.setSelectedItem(assign);
 						}
 						else {
 							JOptionPane.showMessageDialog(frame,"Cannot have an empty title.", "Error", JOptionPane.ERROR_MESSAGE);
+							refresh() ;
 						}
 					}
-					frame.coursesRefresh();					
+					//frame.coursesRefresh();
 				}
 				else if(button.equals(remove)) {
 					if(slap.getCurrentCourse() != null && selectCombo.getSelectedIndex() != -1) {
@@ -142,6 +169,10 @@ public class SLAPAssignmentTab extends JPanel{
 		ButtonListener listener = new ButtonListener() ;
  		add.addActionListener(listener) ;
  		remove.addActionListener(listener) ;
+	}
+	
+	protected JComboBox<SLAPDocument> getComboBox() {
+		return selectCombo;
 	}
 	
 	/**
@@ -179,6 +210,9 @@ public class SLAPAssignmentTab extends JPanel{
 		else {
 			//
 		}
+		
+		selectCombo.setSelectedItem(null);
+		instruct.getInstructionText().setText("");
 		
 		this.validate();
 		//frame.refresh();
