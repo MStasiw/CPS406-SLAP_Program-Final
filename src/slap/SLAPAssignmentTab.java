@@ -5,6 +5,8 @@ package slap;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -21,6 +23,9 @@ public class SLAPAssignmentTab extends JPanel{
 	private JPanel mainPanel;
 	private JPanel selectAssign;
 	private JTabbedPane selectDisplay;
+	
+	private JButton add;
+	private JButton remove;
 	
 	private SLAPAssignInstructionsTab instruct;
 	private SLAPViewAssignmentSubmissionTab viewsubs;
@@ -53,13 +58,14 @@ public class SLAPAssignmentTab extends JPanel{
 		selectAssign.add(Box.createHorizontalGlue()) ;
 		selectAssign.add(comboLabel);
 		selectAssign.add(selectCombo);
-		selectAssign.add(Box.createHorizontalGlue()) ;
 		
 		//Set up the JTabbedPane to the left
 		selectDisplay = new JTabbedPane(JTabbedPane.LEFT, JTabbedPane.SCROLL_TAB_LAYOUT);
 	}
 	
 	private void setupStudentAssignmentGUI() {
+		selectAssign.add(Box.createHorizontalGlue()) ;
+		
 		selectDisplay.addTab("Instructions", instruct);
 		//selectDisplay.addTab("Submit", instruct);
 		mainPanel.add(Box.createVerticalStrut(10));
@@ -73,6 +79,18 @@ public class SLAPAssignmentTab extends JPanel{
 		selectDisplay.addTab("Instructions", instruct);
 		selectDisplay.addTab("View Submissions", viewsubs);
 		
+		add = new JButton("New Assignment");
+		remove = new JButton("Remove");
+		
+		selectAssign.add(Box.createRigidArea(new Dimension(20, 1)));
+		selectAssign.add(remove);
+		selectAssign.add(Box.createHorizontalGlue());
+		//selectAssign.add(Box.createHorizontalStrut(10));
+		selectAssign.add(add);
+		selectAssign.add(Box.createRigidArea(new Dimension(5, 1)));
+		
+		setUpButtonListeners();
+		
 		mainPanel.add(Box.createVerticalStrut(10));
 		mainPanel.add(selectAssign);
 		mainPanel.add(Box.createVerticalStrut(10));
@@ -84,6 +102,25 @@ public class SLAPAssignmentTab extends JPanel{
 		setupInstructorAssignmentGUI();
 	}
 
+	private void setUpButtonListeners() {
+		class ButtonListener implements ActionListener {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JButton button = (JButton) e.getSource() ;
+				if(button.equals(add)) {
+					String name = (String) JOptionPane.showInputDialog(frame, "Enter Assignment Name:", "New Assignment", 
+							JOptionPane.INFORMATION_MESSAGE, null, null, null);
+				}
+				else if(button.equals(remove)) {
+					
+				}
+			}
+		}
+		ButtonListener listener = new ButtonListener() ;
+ 		add.addActionListener(listener) ;
+ 		remove.addActionListener(listener) ;
+	}
+	
 	/**
 	 * Refresh the items in the tab
 	 */
@@ -91,6 +128,9 @@ public class SLAPAssignmentTab extends JPanel{
 		removeAll();
 		mainPanel.removeAll();
 		selectDisplay.removeAll();
+		selectAssign.removeAll();
+		
+		setUpMainAssignmentGUI();
 		
 		if(slap.getCurrentUser() != null) { //check if user is null, if so, there isn't anyone logged in
 			if(slap.getCurrentUser().getRole() == Role.student) {
