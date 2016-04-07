@@ -3,7 +3,7 @@ CPS406-Iteration3_SLAP_Program
 CPS 406 - Iteration 3<br>
 Program Name: Student Learning Access Portal<br>
 <br>
-Java App<br>
+Java App
 <hr>
 Kevin Braunstein (@kevinbraunstein)       - Added<br>
 Alden Ozburn (@aldendino)                 - Added<br>
