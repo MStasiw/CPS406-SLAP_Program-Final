@@ -7,7 +7,7 @@ Program Name: Student Learning Access Portal</h3>
 Kevin Braunstein (@kevinbraunstein)       - Added<br>
 Alden Ozburn (@aldendino)                 - Added<br>
 Michael Stasiw (@mstasiw)<br>
-Sujeethan V. (@Sujeethan)<br>
+Sujeethan Vishnumoorthy (@Sujeethan)<br>
 Naveen Varna (@NaveenVarna)<br>
 Steniel Sy (@HaroMaru)<br>
 <br>
