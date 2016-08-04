@@ -1,3 +1,6 @@
+/**
+ * Driver file: Starts the SLAP application
+ */
 package slap;
 
 public class SLAPDriver {
