@@ -18,5 +18,5 @@ Assignment Instructions: [instructions_iteration234_xp.pdf] (https://github.com/
 - Sujeethan Vishnumoorthy (@Sujeethan)
 - Naveen Varna (@NaveenVarna)
 - Steniel Sy (@HaroMaru)
-<br>
+<br><br>
 - Brandon Rebelo-Furtado `Removed`
