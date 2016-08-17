@@ -1,9 +1,3 @@
-# Git config files & such
-.gitattributes  text
-.gitignore  text
-LICENSE  text
-README.md  text
-
 # Auto detect text files and perform LF normalization
 * text=auto
 
