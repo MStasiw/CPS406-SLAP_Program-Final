@@ -6,8 +6,8 @@ Assignment Instructions: [instructions_iteration234_xp.pdf] (https://github.com/
 
 <strong>Pre-built Executables:</strong>
 <ul>
-  <li><a href="//github.com/MStasiw/CPS406-SLAP_Program-Final/blob/master/bin/slap/SLAP.jar">SLAP.jar</a> : Final Compiled JAR</li>
-  <li><a href="//github.com/MStasiw/CPS406-SLAP_Program-Final/blob/master/bin/slap/CPS406_IT2_G16.jar">CPS406_IT2_G16.jar</a> : Previously submitted (Iteration 2) Compiled JAR</li>
+  <li><a href="//github.com/MStasiw/CPS406-SLAP_Program-Final/blob/master/bin/slap/SLAP.jar">/bin/slap/SLAP.jar</a> : Final Compiled JAR</li>
+  <li><a href="//github.com/MStasiw/CPS406-SLAP_Program-Iteration2/blob/master/bin/slap/CPS406_IT2_G16.jar">CPS406_IT2_G16.jar</a> : Previously submitted (Iteration 2) Compiled JAR</li>
 </ul>
 
 <hr>
